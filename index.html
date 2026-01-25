@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script> <!--defer serve para garantir que o html carregue primeiro-->
-    <title>Bullet Journey</title>
+    <title>Bullet Journal</title>
 </head>
 
 <body>
@@ -14,17 +14,17 @@
         <!--<img src="https://cdn-icons-png.flaticon.com/512/7216/7216128.png" alt="" class="menu-icon">-->
         <div class="combinacao-logo">
             <div class="logo-header"></div>
-            <h1><span class="bold">Bullet</span> Journey</h1>
+            <h1><span class="bold">Bullet</span> Journal</h1>
         </div>
 
     </header>
 
     <div class="menu">
-        <div class="option-menu diario">
+        <div class="option-menu diario-menu">
             <img src="https://cdn-icons-png.flaticon.com/512/624/624229.png" alt="" class="img">
             <h3 class="textMenu">Diário</h3>
         </div>
-        <div class="option-menu projeto">
+        <div class="option-menu projeto-menu">
             <img src="https://cdn-icons-png.flaticon.com/512/624/624229.png" alt="" class="img">
             <h3 class="textMenu">Projetos</h3>
         </div>
@@ -34,8 +34,8 @@
     <div class="main">
         <section class="diario">
             <div class="data">
-                <h2 class="day">21</h2>
-                <h3 class="mes-ano">Janeiro de 2026</h3>
+                <h2 class="day"></h2>
+                <h3 class="mes-ano"></h3>
             </div> <!-- .data -->
             <div class="legenda-div">
                 <p class="legenda leg1">legenda1</p>
@@ -43,15 +43,20 @@
                 <p class="legenda leg3">legenda3</p>
                 <p class="legenda leg4">legenda4</p>
             </div> <!-- .legenda -->
+            <label for="escrever">
+                <div class="input-tarefas">
+                    <select name="tarefa" id="tipo">
+                        <option value="tarefa" class="opcao">• Tarefa</option>
+                        <option value="evento" class="opcao">○ Evento</option>
+                        <option value="nota" class="opcao">— Nota</option>
+                    </select>
+                    <textarea type="text" placeholder="Escreva sua tarefa aqui..." id="escrever" wrap="hard" rows="5"
+                        cols="10" autofocus></textarea>
+                    <button class="save">Salvar</button>
+                </div> <!--.input-tarefas-->
+            </label> <!--.escrever-->
+            <hr>
 
-            <div class="input-tarefas">
-                <select name="tarefa" id="tipo">
-                    <option value="Amendoim">• Tarefa</option>
-                    <option value="Amendoim">○ Evento</option>
-                    <option value="Amendoim">— Nota</option>
-                </select>
-                <input type="text" placeholder="Amendoim" class="escrever">
-            </div> <!--.input-tarefas-->
         </section> <!--Diario-->
 
         <section class="projeto">
