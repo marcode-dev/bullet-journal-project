@@ -1,23 +1,6 @@
 const day = document.querySelector(".day");
 const mesAno = document.querySelector(".mes-ano");
 
-
-/*
-let menuAberto = false;
-menuButton.addEventListener('click', abrirMenu);
-
-function abrirMenu() {
-    menuAberto = !menuAberto;
-    if (!menuAberto) {
-        menu.style.width = '50px';
-        menuButton.setAttribute('src', 'https://cdn-icons-png.flaticon.com/512/7216/7216128.png');
-    } else {
-        menu.style.width = '250px';
-        menuButton.setAttribute('src', 'https://images.icon-icons.com/3871/PNG/512/menu_icon_244496.png');
-    }
-    menu.style.transition = '1s';
-}*/
-
 /*
 projetoPagina.addEventListener("click", () => {
     window.location.href = "pagina2.html"
@@ -41,29 +24,22 @@ console.log(idDia)
 mesAno.textContent = `de ${mesEscrito} de ${ano}`;
 console.log(mesEscrito, ano);
 
-
-//Coleta de Informações do Input
 const opcoes = document.getElementById("tipo");
 const texto = document.getElementById("escrever");
 const salvarTarefa = document.querySelector(".save");
+
 const diarioPagina = document.querySelector(".diario");
+const notasPagina = document.querySelector(".notas");
 
+const notaMenu = document.querySelector(".notas-menu");
+const diarioMenu = document.querySelector(".diario-menu");
 
-// Começar a contar do dia 0
-// Id: 24012026 => 0
-
-
-/* Ele tenta armazenar no dia atual, se der como null, cria um novo registro 
-*/
+notasPagina.style.display = "none";
 
 let worksTotal = JSON.parse(localStorage.getItem("tarefas")) || [];
-
-//if (!worksTotal) { localStorage.setItem("tarefas", JSON.stringify(worksTotal)) }
-
 let typeObject;
 
 criarElementos()
-
 
 function verificarElementos() { // Se tiver algo escrito no campo de texto e a pessoas salvar, vai criar automaticamente
     if (!texto.value) {
@@ -95,7 +71,6 @@ function salvarNoJSON(idDia, idElemento, typeObject, conteudo) {
     criarElementos();
 }
 
-
 function criarElementos() {
     console.log(worksTotal)
     console.log(typeof worksTotal)
@@ -107,6 +82,7 @@ function criarElementos() {
         if (worksTotal[i].idDia == idDia) {
             const tarefaDiv = document.createElement("div");
             tarefaDiv.classList.add("input-tarefas", "tarefa");
+            tarefaDiv.dataset.idElemento = worksTotal[i].idElemento
 
             if (worksTotal[i].tipo == "evento") {
                 const tipo = document.createElement("h4");
@@ -122,11 +98,31 @@ function criarElementos() {
             } else {
                 const select = document.createElement("select");
                 select.id = "tipo"
+                select.classList.add("tipo2");
                 select.innerHTML = `
-                    <option>• Tarefa</option>
-                    <option>>• Adiada</option>
-                    <option>×• Finalizada</option>
+                    <option value="normal">• Tarefa</option>
+                    <option value="adiada">>• Adiada</option>
+                    <option value="cancelar"><span class="sublinhado">Cancelar</span></option>
+                    <option value="finalizada">×• Finalizada</option>
                 `;
+                let linhaDeFora;
+                let Opacidade;
+                if (worksTotal[i].status == "adiada") {
+                    linhaDeFora = "2px solid yellow"
+                    Opacidade = "0.9"
+                    select.selectedIndex = 1
+                } else if (worksTotal[i].status == "cancelar") {
+                    linhaDeFora = "0px"
+                    Opacidade = "0.6"
+                    select.selectedIndex = 2
+                } else if (worksTotal[i].status == "finalizada") {
+                    linhaDeFora = "2px solid #88e788"
+                    Opacidade = "1"
+                    select.selectedIndex = 3
+                }
+                tarefaDiv.style.outline = linhaDeFora
+                tarefaDiv.style.opacity = Opacidade
+
                 tarefaDiv.appendChild(select);
             }
 
@@ -135,15 +131,14 @@ function criarElementos() {
 
             const apagar = document.createElement("img")
             apagar.classList.add("lixeira")
-            apagar.dataset.idElemento = worksTotal[i].idElemento
 
             apagar.addEventListener("click", function (e) {
                 if (confirm("Deseja mesmo apagar esse elemento?")) {
                     console.log(e.target)
+                    let id = Number(e.target.parentNode.dataset.idElemento)
                     e.target.parentNode.remove() //Seleciona o "elemento Pai"
-                    let id = Number(e.target.dataset.idElemento)
                     let index = worksTotal.findIndex(d => d.idElemento === id)
-                    if (index >= 0) { 
+                    if (index >= 0) {
                         worksTotal.splice(index, 1)
                         localStorage.setItem("tarefas", JSON.stringify(worksTotal))
                     }
@@ -151,8 +146,6 @@ function criarElementos() {
             })
 
             apagar.src = "https://cdn-icons-png.freepik.com/512/17/17167.png";
-
-
 
             tarefaDiv.appendChild(textoTarefa);
             tarefaDiv.appendChild(apagar);
@@ -164,5 +157,48 @@ function criarElementos() {
 
 salvarTarefa.addEventListener("click", verificarElementos);
 
+const selecaoMenu = document.querySelector(".selecao-menu");
+
+//Trocar a Aba
+diarioMenu.addEventListener("click", () => {
+    diarioPagina.style.display = "block";
+    notasPagina.style.display = "none";
+    selecaoMenu.style.top = "-93px";
+})
+notaMenu.addEventListener("click", () => {
+    diarioPagina.style.display = "none";
+    notasPagina.style.display = "block";
+    selecaoMenu.style.top = "-47px";
+});
 
 
+//Mudar estilo da tarefa de acordo com o status da mesma
+selectType = document.querySelectorAll(".tipo2");
+
+selectType.forEach(addEventListener("change", (event) => {
+    //normal, adiada, cancelar, finalizada
+    let chamada = event.target
+    let status;
+
+    if (chamada.value == "adiada") {status = "adiada"} 
+    else if (chamada.value == "cancelar") {status = "cancelar"} 
+    else if (chamada.value == "finalizada") {status = "finalizada"}
+
+    let index = worksTotal.findIndex(a => a.idElemento == chamada.parentNode.dataset.idElemento)
+    console.log(index, status)
+    worksTotal[index].status = status;
+    localStorage.setItem("tarefas", JSON.stringify(worksTotal))
+
+    criarElementos()
+}))
+
+/*
+- Adicionar funcionalidade de cancelar/editar elementos
+    - Personalizar um modal para exclusão de conteúdo
+- Uso do Enter para Salvamento de tarefas
+
+- Planejar layout das outras abas, dentro do planejamento(notas, projetos, analises, hábitos e calendário)
+- Futuramente... Adicionar a aba de configurações
+
+
+*/
