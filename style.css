@@ -23,45 +23,47 @@ header {
     width: 100vw;
     height: 100px;
     background-color: rgb(233, 233, 233);
-
-    .menu-icon {
-        position: absolute;
-        height: 40px;
-        width: 40px;
-        left: 20px;
-        cursor: pointer;
-    }
-
-    .combinacao-logo {
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-
-        .bold {
-            text-transform: uppercase;
-            font-family: 'League Spartan', sans-serif;
-            font-size: 26px;
-        }
-
-        h1 {
-            width: 50%;
-            font-family: 'Poppins', sans-serif;
-            font-size: 20px;
-            margin-left: 10px;
-            line-height: 18px;
-        }
-    }
-
-    .logo-header {
-        height: 50px;
-        width: 50px;
-        border-radius: 30px;
-        background-color: rgb(47, 47, 47);
-    }
 }
+
+.menu-icon {
+    position: absolute;
+    height: 40px;
+    width: 40px;
+    left: 20px;
+    cursor: pointer;
+}
+
+.combinacao-logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.bold {
+    text-transform: uppercase;
+    font-family: 'League Spartan', sans-serif;
+    font-size: 26px;
+}
+
+.combinacao-logo h1 {
+    width: 50%;
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    margin-left: 10px;
+    line-height: 18px;
+}
+
+
+.logo-header {
+    height: 50px;
+    width: 50px;
+    border-radius: 30px;
+    background-color: rgb(47, 47, 47);
+}
+
 
 .menu {
     position: fixed;
@@ -72,50 +74,52 @@ header {
     background-color: rgb(255, 255, 255);
     padding-top: 20px;
     padding-left: 10px;
-
-    .option-menu {
-        font-size: 15px;
-        margin-left: 6px;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        padding: 10px;
-        border-top-left-radius: 30px;
-        border-bottom-left-radius: 30px;
-
-        h3 {
-            margin-left: 10px;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 500;
-        }
-
-        .img {
-            height: 20px;
-            width: 20px;
-            box-sizing: content-box;
-            padding-left: 10px;
-        }
-    }
-
-    .option-menu:hover {
-        background-color: rgb(234, 234, 234);
-        cursor: pointer;
-        transition: 0.3s;
-    }
-
-    .selecao-menu {
-        width: calc(var(--option-menu-width) - 6px);
-        height: 46px;
-        margin-left: 6px;
-        background-color: var(--cor-main);
-        border-top-left-radius: 30px;
-        border-bottom-left-radius: 30px;
-        position: relative;
-        z-index: -1;
-        top: -93px;
-        transition: 0.5s;
-    }
 }
+
+.option-menu {
+    font-size: 15px;
+    margin-left: 6px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+}
+
+.option-menu h3 {
+    margin-left: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+}
+
+.option-menu .img {
+    height: 20px;
+    width: 20px;
+    box-sizing: content-box;
+    padding-left: 10px;
+}
+
+
+.option-menu:hover {
+    background-color: rgb(234, 234, 234);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.selecao-menu {
+    width: calc(var(--option-menu-width) - 6px);
+    height: 46px;
+    margin-left: 6px;
+    background-color: var(--cor-main);
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    position: relative;
+    z-index: -1;
+    top: -93px;
+    transition: 0.5s;
+}
+
 
 .main {
     background-color: var(--cor-main);
@@ -134,30 +138,31 @@ header {
 
 .diario {
     width: 97%;
-
-    .data {
-        display: flex;
-        flex-direction: row;
-        align-items: flex-end;
-        color: rgb(72, 72, 72);
-        font-family: "Poppins", sans-serif;
-
-        /*background-color: white;*/
-        h2 {
-            font-size: 80px;
-            font-weight: 700;
-            line-height: 94px;
-        }
-
-        h3 {
-            font-size: 60px;
-            font-weight: 400;
-            font-family: "League Spartan";
-            padding-bottom: 10px;
-            padding-left: 15px;
-        }
-    }
 }
+
+.data {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    color: rgb(72, 72, 72);
+    font-family: "Poppins", sans-serif;
+}
+
+/*background-color: white;*/
+.data h2 {
+    font-size: 80px;
+    font-weight: 700;
+    line-height: 94px;
+}
+
+.data h3 {
+    font-size: 60px;
+    font-weight: 400;
+    font-family: "League Spartan";
+    padding-bottom: 10px;
+    padding-left: 15px;
+}
+
 
 .legenda-div {
     display: flex;
@@ -166,20 +171,21 @@ header {
     /*background-color:rgb(216, 216, 216);*/
     justify-content: space-between;
     margin-bottom: 20px;
-
-    .legenda {
-        padding-right: 50px;
-        font-size: 15px;
-        font-family: "Poppins";
-        color: rgb(83, 83, 83);
-        border-right: 2px solid rgb(131, 131, 131);
-    }
-
-    .leg4 {
-        padding-right: 0;
-        border-right: 0;
-    }
 }
+
+.legenda {
+    padding-right: 50px;
+    font-size: 15px;
+    font-family: "Poppins";
+    color: rgb(83, 83, 83);
+    border-right: 2px solid rgb(131, 131, 131);
+}
+
+.leg4 {
+    padding-right: 0;
+    border-right: 0;
+}
+
 
 .input-tarefas {
     position: relative;
@@ -191,59 +197,60 @@ header {
     border-radius: 20px;
     border: solid 1px rgb(128, 128, 128);
     box-shadow: 2px 2px 5px rgb(173, 173, 173);
-
-    #tipo {
-        width: 90px;
-        height: 40px;
-        margin-left: 35px;
-        border-radius: 15px;
-        /*background-color: rgb(234, 234, 234);*/
-        border: 0;
-        cursor: pointer;
-        font-family: "Poppins";
-        font-size: 15px;
-    }
-
-    #tipo:focus {
-        appearance: none;
-        outline: none;
-    }
-
-    #escrever {
-        font-family: "Poppins";
-        margin-left: 20px;
-        align-content: center;
-        height: 50px;
-        width: 60%;
-        border: 0;
-        border-radius: 10px;
-        font-size: 17px;
-        padding-left: 30px;
-        white-space: pre-wrap;
-        padding-top: 5px;
-        resize: none;
-        font-weight: 400;
-    }
-
-    #escrever:focus {
-        outline: 0;
-    }
-
-    .save {
-        padding: 10px 30px;
-        background-color: rgb(156, 156, 156);
-        border-radius: 10px;
-        color: white;
-        border: 0;
-        font-family: "Poppins";
-        font-weight: 500;
-        box-shadow: 2px 2px 5px rgb(173, 173, 173);
-        cursor: pointer;
-        margin-right: auto;
-        position: absolute;
-        left: 89%;
-    }
 }
+
+#tipo {
+    width: 90px;
+    height: 40px;
+    margin-left: 35px;
+    border-radius: 15px;
+    /*background-color: rgb(234, 234, 234);*/
+    border: 0;
+    cursor: pointer;
+    font-family: "Poppins";
+    font-size: 15px;
+}
+
+#tipo:focus {
+    appearance: none;
+    outline: none;
+}
+
+#escrever {
+    font-family: "Poppins";
+    margin-left: 20px;
+    align-content: center;
+    height: 50px;
+    width: 60%;
+    border: 0;
+    border-radius: 10px;
+    font-size: 17px;
+    padding-left: 30px;
+    white-space: pre-wrap;
+    padding-top: 5px;
+    resize: none;
+    font-weight: 400;
+}
+
+#escrever:focus {
+    outline: 0;
+}
+
+.save {
+    padding: 10px 30px;
+    background-color: rgb(156, 156, 156);
+    border-radius: 10px;
+    color: white;
+    border: 0;
+    font-family: "Poppins";
+    font-weight: 500;
+    box-shadow: 2px 2px 5px rgb(173, 173, 173);
+    cursor: pointer;
+    margin-right: auto;
+    position: absolute;
+    left: 89%;
+}
+
 
 hr {
     margin-top: 15px;
@@ -257,26 +264,27 @@ hr {
     margin-top: 10px;
     align-items: center;
     padding: 10px;
-
-    h4 {
-        max-width: 600px;
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-        font-family: "Poppins";
-        font-weight: 400;
-        margin-left: 50px;
-    }
-
-    .tipo2 {
-        width: 110px;
-    }
-
-    .nota {
-        margin-left: 30px;
-        width: 35px;
-        height: 35px;
-    }
 }
+
+.tarefa h4 {
+    max-width: 600px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    font-family: "Poppins";
+    font-weight: 400;
+    margin-left: 50px;
+}
+
+.tipo2 {
+    width: 110px;
+}
+
+.nota {
+    margin-left: 30px;
+    width: 35px;
+    height: 35px;
+}
+
 
 .lixeira {
     width: auto;
@@ -296,37 +304,34 @@ hr {
     align-items: center;
     justify-content: end;
     z-index: 6;
-    padding: 0px 30px 30px 30px; 
-
-    /*background-color: rgba(170, 170, 170, 0.95);*/
-    img {
-        width: 25px;
-        height: 25px;
-        margin-left: 10px;
-    }
-
-    #linkedin {
-        transform: scale(1.6);
-        margin-right: 10px;
-    }
-
-    p {
-        font-size: 12px;
-        line-height: 12px;
-        color: rgba(91, 79, 60, 0.9);
-    }
-
-    .creditos {
-        margin-left: auto;
-        margin-right: 10px;
-        text-align: right;
-    }
+    padding: 0px 30px 30px 30px;
 }
 
+/*background-color: rgba(170, 170, 170, 0.95);*/
+.rodape img {
+    width: 25px;
+    height: 25px;
+    margin-left: 10px;
+}
 
-.notas {
-    h1 {
-        font-size: 25px;
-        font-weight: 400;
-    }
+#linkedin {
+    transform: scale(1.6);
+    margin-right: 10px;
+}
+
+.rodape p {
+    font-size: 12px;
+    line-height: 12px;
+    color: rgba(91, 79, 60, 0.9);
+}
+
+.creditos {
+    margin-left: auto;
+    margin-right: 10px;
+    text-align: right;
+}
+
+.notas h1 {
+    font-size: 25px;
+    font-weight: 400;
 }
