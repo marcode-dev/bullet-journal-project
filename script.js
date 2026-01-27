@@ -36,8 +36,25 @@ const diarioMenu = document.querySelector(".diario-menu");
 
 notasPagina.style.display = "none";
 
-let worksTotal = JSON.parse(localStorage.getItem("tarefas")) || [];
+let works = JSON.parse(localStorage.getItem("tarefas")) || [];
+let adiados = JSON.parse(localStorage.getItem("Adiados")) || [];
+let aindaAdiados = [];
 let typeObject;
+
+for (let i = 0; i < adiados.length; i++) {
+    if (adiados[i].idDia != idDia) {
+        adiados[i].status = "tarefa"
+        works.push(adiados[i])
+    } else {
+        aindaAdiados.push(adiados[i])
+    }
+}
+adiados = aindaAdiados;
+aindaAdiados = [];
+localStorage.setItem("Adiados", JSON.stringify(adiados));
+localStorage.setItem("tarefas", JSON.stringify(works));
+
+
 
 criarElementos()
 
@@ -58,37 +75,37 @@ function verificarElementos() { // Se tiver algo escrito no campo de texto e a p
 }
 
 function salvarNoJSON(idDia, idElemento, typeObject, conteudo) {
-    worksTotal = JSON.parse(localStorage.getItem("tarefas")) || []; // Lê o que tinha antes 
+    works = JSON.parse(localStorage.getItem("tarefas")) || []; // Lê o que tinha antes 
 
-    worksTotal.push({
+    works.push({
         idDia,
         idElemento,
         "tipo": typeObject,
         conteudo
     })
 
-    localStorage.setItem("tarefas", JSON.stringify(worksTotal))
+    localStorage.setItem("tarefas", JSON.stringify(works))
     criarElementos();
 }
 
 function criarElementos() {
-    console.log(worksTotal)
-    console.log(typeof worksTotal)
+    console.log(works)
+    console.log(typeof works)
 
     document.querySelectorAll(".tarefa").forEach(a => { a.remove() })
-    console.log(worksTotal.length)
-    for (let i = 0; i < worksTotal.length; i++) {
+    console.log(works.length)
+    for (let i = 0; i < works.length; i++) {
 
-        if (worksTotal[i].idDia == idDia) {
+        if (works[i].idDia == idDia) {
             const tarefaDiv = document.createElement("div");
             tarefaDiv.classList.add("input-tarefas", "tarefa");
-            tarefaDiv.dataset.idElemento = worksTotal[i].idElemento
+            tarefaDiv.dataset.idElemento = works[i].idElemento
 
-            if (worksTotal[i].tipo == "evento") {
+            if (works[i].tipo == "evento") {
                 const tipo = document.createElement("h4");
                 tipo.textContent = opcoes.value;
                 tarefaDiv.appendChild(tipo); // Tranfere o título para a Div Criada
-            } else if (worksTotal[i].tipo == "nota") {
+            } else if (works[i].tipo == "nota") {
                 const iconeNota = document.createElement("img");
                 iconeNota.classList.add("nota")
                 iconeNota.src = "https://images.icon-icons.com/1875/PNG/512/note_120060.png"
@@ -106,28 +123,28 @@ function criarElementos() {
                     <option value="finalizada">×• Finalizada</option>
                 `;
                 let linhaDeFora;
-                let Opacidade;
-                if (worksTotal[i].status == "adiada") {
+                let opacidade;
+                if (works[i].status == "adiada") {
                     linhaDeFora = "2px solid yellow"
-                    Opacidade = "0.9"
+                    opacidade = "0.9"
                     select.selectedIndex = 1
-                } else if (worksTotal[i].status == "cancelar") {
+                } else if (works[i].status == "cancelar") {
                     linhaDeFora = "0px"
-                    Opacidade = "0.6"
+                    opacidade = "0.6"
                     select.selectedIndex = 2
-                } else if (worksTotal[i].status == "finalizada") {
+                } else if (works[i].status == "finalizada") {
                     linhaDeFora = "2px solid #88e788"
-                    Opacidade = "1"
+                    opacidade = "1"
                     select.selectedIndex = 3
                 }
-                tarefaDiv.style.outline = linhaDeFora
-                tarefaDiv.style.opacity = Opacidade
+                tarefaDiv.style.outline = linhaDeFora;
+                tarefaDiv.style.opacity = opacidade;
 
                 tarefaDiv.appendChild(select);
             }
 
             const textoTarefa = document.createElement("h4");
-            textoTarefa.textContent = worksTotal[i].conteudo;
+            textoTarefa.textContent = works[i].conteudo;
 
             const apagar = document.createElement("img")
             apagar.classList.add("lixeira")
@@ -137,10 +154,10 @@ function criarElementos() {
                     console.log(e.target)
                     let id = Number(e.target.parentNode.dataset.idElemento)
                     e.target.parentNode.remove() //Seleciona o "elemento Pai"
-                    let index = worksTotal.findIndex(d => d.idElemento === id)
+                    let index = works.findIndex(d => d.idElemento === id)
                     if (index >= 0) {
-                        worksTotal.splice(index, 1)
-                        localStorage.setItem("tarefas", JSON.stringify(worksTotal))
+                        works.splice(index, 1)
+                        localStorage.setItem("tarefas", JSON.stringify(works))
                     }
                 }
             })
@@ -179,20 +196,38 @@ selectType.forEach(addEventListener("change", (event) => {
     //normal, adiada, cancelar, finalizada
     let chamada = event.target
     let status;
+    let dataIdElemento = chamada.parentNode.dataset.idElemento
+    let index = works.findIndex(a => a.idElemento == dataIdElemento)
 
-    if (chamada.value == "adiada") {status = "adiada"} 
-    else if (chamada.value == "cancelar") {status = "cancelar"} 
-    else if (chamada.value == "finalizada") {status = "finalizada"}
+    if (chamada.value == "adiada") {
+        status = "adiada";
+    }
+    else if (chamada.value == "cancelar") { status = "cancelar" }
+    else if (chamada.value == "finalizada") { status = "finalizada" }
 
-    let index = worksTotal.findIndex(a => a.idElemento == chamada.parentNode.dataset.idElemento)
     console.log(index, status)
-    worksTotal[index].status = status;
-    localStorage.setItem("tarefas", JSON.stringify(worksTotal))
+    works[index].status = status;
+    chamada.value = status
+    if (status == "adiada") {
+        adiados.push(works[index])
+        console.log(adiados)
+        localStorage.setItem("Adiados", JSON.stringify(adiados));
+    } else {
+        let indexAdiado = adiados.findIndex(b => b.idElemento == dataIdElemento)
+        adiados.splice(indexAdiado, 1) // Remove 1 elemento do índice indexAdiado
+        localStorage.setItem("Adiados", JSON.stringify(adiados))
+    }
+
+    localStorage.setItem("tarefas", JSON.stringify(works))
 
     criarElementos()
 }))
 
 /*
+- Para criar uma cópia de tarefas adiadas para serem implementadas no dia seguinte
+    - Guardar as informações do objeto em um JSON separado, para que, no dia seguinte, verifique se o idDia é diferente, 
+    se sim, ele coleta os objetos, insere em works e apaga o json de adiados.
+    No dia seguinte faz o mesmo processo de criar, coletar e apagar os registros do dia anterior
 - Adicionar funcionalidade de cancelar/editar elementos
     - Personalizar um modal para exclusão de conteúdo
 - Uso do Enter para Salvamento de tarefas
