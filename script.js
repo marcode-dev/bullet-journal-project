@@ -1,11 +1,6 @@
 const day = document.querySelector(".day");
 const mesAno = document.querySelector(".mes-ano");
 
-/*
-projetoPagina.addEventListener("click", () => {
-    window.location.href = "pagina2.html"
-})*/
-
 const agora = new Date();
 
 let dia = agora.getDate()
@@ -18,24 +13,30 @@ function zeroAEsquerda(valor) {
     return valor <= 9 ? `0${valor}` : String(valor); // condição ? retorne isso, senão : isso!
 }
 
-const idDia = ano + zeroAEsquerda(mesNum) + zeroAEsquerda(dia);
+let idDia = ano + zeroAEsquerda(mesNum) + zeroAEsquerda(dia);
 console.log(idDia)
 
 mesAno.textContent = `de ${mesEscrito} de ${ano}`;
 console.log(mesEscrito, ano);
-
+//Seleciona elementos relacionados a inserção de tarefas
 const opcoes = document.getElementById("tipo");
 const texto = document.getElementById("escrever");
+texto.addEventListener("keydown", (event) => {
+    if (event.key == "Enter" && !event.shiftKey){
+        event.preventDefault();
+        verificarElementos()
+    }
+})
 const salvarTarefa = document.querySelector(".save");
-
+//Seleciona as seções de cada tela/pagina
 const diarioPagina = document.querySelector(".diario");
 const notasPagina = document.querySelector(".notas");
-
+//Os itens do menu
 const notaMenu = document.querySelector(".notas-menu");
 const diarioMenu = document.querySelector(".diario-menu");
 
-notasPagina.style.display = "none";
-
+notasPagina.style.display = "none"; //Classifica inicialmente para que a tela inicial seja sempre DiarioPagina (Alterar esse método quando adicionar mais paginas)
+//Armazenamento/Recolimento de informações do localStorage
 let works = JSON.parse(localStorage.getItem("tarefas")) || [];
 let adiados = JSON.parse(localStorage.getItem("Adiados")) || [];
 let aindaAdiados = [];
@@ -43,10 +44,12 @@ let typeObject;
 
 for (let i = 0; i < adiados.length; i++) {
     if (adiados[i].idDia != idDia) {
-        adiados[i].status = "tarefa"
+        adiados[i].status = "normal"
         adiados[i].idDia = idDia;
         let index = works.findIndex(a => a.idElemento == adiados[i].idElemento)
-        works.splice(index, 1)
+        if (index >= 0) {
+            works.splice(index, 1)
+        }
         works.push(adiados[i])
     } else {
         aindaAdiados.push(adiados[i])
@@ -58,36 +61,32 @@ aindaAdiados = [];
 localStorage.setItem("Adiados", JSON.stringify(adiados));
 localStorage.setItem("tarefas", JSON.stringify(works));
 
-
-
+//Criar os elementos já criados para/no o dia
 criarElementos()
-
+// Uma verificação antes de criar uma tarefa nova, atualmente apenas confere o campo de texto, para não criar registros em branco
 function verificarElementos() { // Se tiver algo escrito no campo de texto e a pessoas salvar, vai criar automaticamente
     if (!texto.value) {
         alert("Preencha os campos corretamente!");
         return;
-    }
-    if (texto.value) {
+    } else {
         let idElemento = Date.now()
         typeObject = opcoes.value;
 
         salvarNoJSON(idDia, idElemento, typeObject, `${texto.value}`)
 
-        texto.value = ""; // Resetar o texto
-        texto.focus()
+        texto.value = ""; // Resetar o texto no campo de inserção
+        texto.focus() // foca no campo pra facilitar registros consecutivos
     }
 }
-
+//Guardar novos elementos no localStorage
 function salvarNoJSON(idDia, idElemento, typeObject, conteudo) {
     works = JSON.parse(localStorage.getItem("tarefas")) || []; // Lê o que tinha antes 
-
     works.push({
         idDia,
         idElemento,
         "tipo": typeObject,
         conteudo
     })
-
     localStorage.setItem("tarefas", JSON.stringify(works))
     criarElementos();
 }
@@ -197,11 +196,15 @@ notaMenu.addEventListener("click", () => {
 selectType = document.querySelectorAll(".tipo2");
 
 selectType.forEach(addEventListener("change", (event) => {
+    //A cada mudança, ele pode 
+    if (!event.target.classList.contains("tipo2")) return;
+
     //normal, adiada, cancelar, finalizada
     let chamada = event.target
     let status;
     let dataIdElemento = chamada.parentNode.dataset.idElemento
     let index = works.findIndex(a => a.idElemento == dataIdElemento)
+    if (index < 0) return;
 
     if (chamada.value == "adiada") {
         status = "adiada";
@@ -228,17 +231,11 @@ selectType.forEach(addEventListener("change", (event) => {
 }))
 
 /*
-- Para criar uma cópia de tarefas adiadas para serem implementadas no dia seguinte
-    - Guardar as informações do objeto em um JSON separado, para que, no dia seguinte, verifique se o idDia é diferente, 
-    se sim, ele coleta os objetos, insere em works e apaga o json de adiados.
-    No dia seguinte faz o mesmo processo de criar, coletar e apagar os registros do dia anterior
-- Adicionar funcionalidade de cancelar/editar elementos
+- Adicionar funcionalidade de editar elementos
     - Personalizar um modal para exclusão de conteúdo
-- Uso do Enter para Salvamento de tarefas
+- Tornar o sistema keyboard-first
 
 - Planejar layout das outras abas, dentro do planejamento(notas, projetos, analises, hábitos e calendário)
 - Futuramente... Adicionar a aba de configurações
 - Indíce de finalização de atividades no dia, com % de finalizadas e % adiadas.
-
-
 */

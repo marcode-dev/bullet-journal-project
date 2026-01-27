@@ -174,14 +174,14 @@ header {
 }
 
 .legenda {
-    padding-right: 50px;
+    padding-right: 30px;
     font-size: 15px;
     font-family: "Poppins";
     color: rgb(83, 83, 83);
     border-right: 2px solid rgb(131, 131, 131);
 }
 
-.leg4 {
+.leg3 {
     padding-right: 0;
     border-right: 0;
 }
