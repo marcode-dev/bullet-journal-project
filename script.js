@@ -18,7 +18,7 @@ function zeroAEsquerda(valor) {
     return valor <= 9 ? `0${valor}` : String(valor); // condição ? retorne isso, senão : isso!
 }
 
-let idDia = ano + zeroAEsquerda(mesNum) + zeroAEsquerda(dia);
+const idDia = ano + zeroAEsquerda(mesNum) + zeroAEsquerda(dia);
 console.log(idDia)
 
 mesAno.textContent = `de ${mesEscrito} de ${ano}`;
@@ -44,11 +44,15 @@ let typeObject;
 for (let i = 0; i < adiados.length; i++) {
     if (adiados[i].idDia != idDia) {
         adiados[i].status = "tarefa"
+        adiados[i].idDia = idDia;
+        let index = works.findIndex(a => a.idElemento == adiados[i].idElemento)
+        works.splice(index, 1)
         works.push(adiados[i])
     } else {
         aindaAdiados.push(adiados[i])
     }
 }
+//Pensar na possibilidade de adiados poderem ter mais de um idDia
 adiados = aindaAdiados;
 aindaAdiados = [];
 localStorage.setItem("Adiados", JSON.stringify(adiados));
@@ -234,6 +238,7 @@ selectType.forEach(addEventListener("change", (event) => {
 
 - Planejar layout das outras abas, dentro do planejamento(notas, projetos, analises, hábitos e calendário)
 - Futuramente... Adicionar a aba de configurações
+- Indíce de finalização de atividades no dia, com % de finalizadas e % adiadas.
 
 
 */
