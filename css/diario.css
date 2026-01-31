@@ -1,0 +1,153 @@
+.diario {
+    width: 97%;
+}
+
+.data {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    color: rgb(72, 72, 72);
+    font-family: "Poppins", sans-serif;
+}
+
+/*background-color: white;*/
+.data h2 {
+    font-size: 80px;
+    font-weight: 700;
+    line-height: 94px;
+}
+
+.data h3 {
+    font-size: 60px;
+    font-weight: 400;
+    font-family: "League Spartan";
+    padding-bottom: 10px;
+    padding-left: 15px;
+}
+
+
+.legenda-div {
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+    /*background-color:rgb(216, 216, 216);*/
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.legenda {
+    padding-right: 30px;
+    font-size: 15px;
+    font-family: "Poppins";
+    color: rgb(83, 83, 83);
+    /*border-right: 2px solid rgb(131, 131, 131);*/
+}
+
+.leg3 {
+    padding-right: 0;
+    border-right: 0;
+}
+
+
+.input-tarefas {
+    position: relative;
+    width: 100%;
+    height: 80px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    border-radius: 20px;
+    border: solid 1px rgb(128, 128, 128);
+    box-shadow: 2px 2px 5px rgb(173, 173, 173);
+}
+
+#tipo {
+    width: 90px;
+    height: 40px;
+    margin-left: 35px;
+    border-radius: 15px;
+    /*background-color: rgb(234, 234, 234);*/
+    border: 0;
+    cursor: pointer;
+    font-family: "Poppins";
+    font-size: 15px;
+}
+
+#tipo:focus {
+    appearance: none;
+    outline: none;
+}
+
+#escrever {
+    font-family: "Poppins";
+    margin-left: 20px;
+    align-content: center;
+    height: 50px;
+    width: 60%;
+    border: 0;
+    border-radius: 10px;
+    font-size: 17px;
+    padding-left: 30px;
+    white-space: pre-wrap;
+    padding-top: 5px;
+    resize: none;
+    font-weight: 400;
+}
+
+#escrever:focus {
+    outline: 0;
+}
+
+.save {
+    padding: 10px 30px;
+    background-color: rgb(156, 156, 156);
+    border-radius: 10px;
+    color: white;
+    border: 0;
+    font-family: "Poppins";
+    font-weight: 500;
+    box-shadow: 2px 2px 5px rgb(173, 173, 173);
+    cursor: pointer;
+    margin-right: auto;
+    position: absolute;
+    left: 89%;
+}
+
+.tarefa {
+    height: auto;
+    min-height: 60px;
+    max-height: auto;
+    margin-top: 10px;
+    align-items: center;
+    padding: 10px;
+}
+
+.tarefa h4 {
+    max-width: 600px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    font-family: "Poppins";
+    font-weight: 400;
+    margin-left: 50px;
+}
+
+.tipo2 {
+    width: 110px;
+}
+
+.nota {
+    margin-left: 30px;
+    width: 35px;
+    height: 35px;
+}
+
+
+.lixeira {
+    width: auto;
+    height: 25px;
+    position: absolute;
+    left: 95%;
+    cursor: pointer;
+    opacity: 0.5;
+}
+

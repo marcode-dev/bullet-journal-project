@@ -1,0 +1,56 @@
+.notas h1 {
+    color: rgb(72, 72, 72);
+    font-size: 70px;
+    font-weight: 800;
+}
+
+.campo-notas{
+    width:95%;
+    min-height: 800px;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    row-gap: 0px;
+}
+
+.post-it{
+    display: flex;
+    position: relative;
+    width: 250px;
+    min-height: 200px;
+    height:auto;
+    max-height: 500px;
+    background-color: #eee544;
+    margin: 15px;
+    padding: 30px;
+    box-shadow: -3px 3px 20px rgb(182, 182, 182);
+    
+    p {
+        color: #3f3b00;
+        font-size: 18px;
+        word-break: break-all;
+    }
+}
+
+.cor-select {
+    position: absolute;
+    align-self: end;
+
+    background-color: #ffffff;
+    border: none;
+    cursor: pointer;
+    border-radius: 20px;
+    color: white;
+    width: 40px;
+    height: 30px;
+    color: rgb(81, 81, 81);
+}
+.color-select:hover {
+    opacity: 0.9;
+}
+
+/*
+Cores post it: #27b3d9 #fca028 #f44072 #90cf4c #eee544
+Cores post it text: #006681 #814900 #730020 #3a7000 #6b6500
+*/

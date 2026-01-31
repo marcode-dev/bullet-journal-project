@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script> <!--defer serve para garantir que o html carregue primeiro-->
+    <link rel="stylesheet" href="./css/global.css">
+    <script type="module" src="./js/main.js" defer></script> <!--defer serve para garantir que o html carregue primeiro-->
     <title>Bullet Journal</title>
 </head>
 
@@ -55,11 +55,16 @@
                 </div> <!--.input-tarefas-->
             </label> <!--.escrever-->
             <hr>
+            <div class="tarefas-criadas"></div>
 
         </section> <!--Diario-->
 
         <section class="notas">
-            <h1>Destinado para armazenamento de notas, para recordação do que foi anotado...</h1>
+            <h1>Notas</h1>
+            <hr>
+            <div class="campo-notas"></div>
+
+
         </section>
         <div class="rodape">
             <a href="https://github.com/marcode-dev" target="_blank">
