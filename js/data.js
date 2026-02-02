@@ -4,7 +4,7 @@ const mesAno = document.querySelector(".mes-ano");
 const agora = new Date();
 
 let dia = agora.getDate()
-day.textContent = String(dia); // Coleta o dia
+day.textContent = String(zeroAEsquerda(dia)); // Coleta o dia
 let mesEscrito = agora.toLocaleDateString('pt-BR', { month: 'long' });
 let mesNum = agora.getMonth() + 1;
 let ano = String(agora.getFullYear());

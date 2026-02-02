@@ -126,6 +126,7 @@
     max-width: 600px;
     word-wrap: break-word;
     overflow-wrap: break-word;
+    white-space: pre-wrap;
     font-family: "Poppins";
     font-weight: 400;
     margin-left: 50px;
@@ -149,5 +150,13 @@
     left: 95%;
     cursor: pointer;
     opacity: 0.5;
+}
+.editar {
+    width: auto;
+    height: 25px;
+    position: absolute;
+    left: 90%;
+    cursor: pointer;
+    opacity: 0.8;
 }
 

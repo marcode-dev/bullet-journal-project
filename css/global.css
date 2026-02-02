@@ -3,6 +3,7 @@
 
 @import url("notas.css");
 @import url("diario.css");
+@import url("modal.css");
 
 * {
     margin: 0;

@@ -1,3 +1,5 @@
+import { verMaisNecessario } from "./notas.js";
+
 //Seleciona as seções de cada tela/pagina
 export const diarioPagina = document.querySelector(".diario");
 const notasPagina = document.querySelector(".notas");
@@ -19,4 +21,5 @@ notaMenu.addEventListener("click", () => {
     diarioPagina.style.display = "none";
     notasPagina.style.display = "block";
     selecaoMenu.style.top = "-47px";
+    verMaisNecessario()
 });

@@ -1,6 +1,5 @@
-import {criarElementos} from "./criarElementos.js";
+import {criarElementos, opcoes} from "./criarElementos.js";
 import {idDia} from "./data.js";
-import {opcoes} from "./criarElementos.js";
 
 let works = JSON.parse(localStorage.getItem("tarefas")) || []; // Lê o que tinha antes 
 const texto = document.getElementById("escrever");
@@ -25,6 +24,7 @@ export function verificarElementos() { // Se tiver algo escrito no campo de text
         salvarNoJSON(idDia, idElemento, typeObject, `${texto.value}`)
 
         texto.value = ""; // Resetar o texto no campo de inserção
+        window.location.reload();
         texto.focus() // foca no campo pra facilitar registros consecutivos
     }
 }
