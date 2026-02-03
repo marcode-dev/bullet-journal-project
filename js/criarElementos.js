@@ -61,6 +61,7 @@ export function criarElementos() {
             }
 
             const textoTarefa = document.createElement("h4");
+            textoTarefa.classList.add("texto-tarefa")
             textoTarefa.textContent = works[i].conteudo;
 
             const editar = document.createElement("img")

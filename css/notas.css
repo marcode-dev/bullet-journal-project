@@ -71,6 +71,26 @@
     font-size: 17px;
     cursor: pointer;
 }
+
+.editar-nota,
+.apagar-nota {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.post-it:hover .editar-nota,
+.post-it:hover .apagar-nota {
+    opacity: 0.8;
+}
+
+.editar-nota:hover,
+.apagar-nota:hover {
+    opacity: 1 !important;
+}
+
 .modal-quebra{
     white-space: pre-wrap;
     overflow-wrap: break-word;
@@ -79,3 +99,136 @@
 Cores post it: #27b3d9 #fca028 #f44072 #90cf4c #eee544
 Cores post it text: #006681 #814900 #730020 #3a7000 #6b6500
 */
+
+/* ===== RESPONSIVIDADE ===== */
+
+/* Tablets - 1024px e abaixo */
+@media (max-width: 1024px) {
+    .notas h1 {
+        font-size: 55px;
+    }
+
+    .campo-notas {
+        width: 100%;
+    }
+
+    .post-it {
+        width: 200px;
+        height: 200px;
+        margin: 12px;
+        padding: 25px;
+    }
+
+    .pNota {
+        font-size: 16px;
+        line-height: 22px;
+    }
+
+    .editar-nota,
+    .apagar-nota {
+        width: 18px;
+        height: 18px;
+    }
+
+    .cor-select {
+        width: 35px;
+        height: 26px;
+    }
+}
+
+/* Tablets pequenos - 768px e abaixo */
+@media (max-width: 768px) {
+    .notas h1 {
+        font-size: 40px;
+    }
+
+    .campo-notas {
+        width: 100%;
+    }
+
+    .post-it {
+        width: 180px;
+        height: 180px;
+        margin: 10px;
+        padding: 20px;
+    }
+
+    .pNota {
+        font-size: 14px;
+        line-height: 20px;
+        max-height: 130px;
+    }
+
+    .cor-select {
+        width: 35px;
+        height: 26px;
+        font-size: 12px;
+    }
+
+    .ver-mais {
+        font-size: 15px;
+    }
+
+    .acoes {
+        bottom: 12px;
+        right: 12px;
+    }
+
+    .editar-nota,
+    .apagar-nota {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+/* Celulares - 480px e abaixo */
+@media (max-width: 480px) {
+    .notas h1 {
+        font-size: 28px;
+    }
+
+    .campo-notas {
+        width: 100%;
+        row-gap: 5px;
+    }
+
+    .post-it {
+        width: 150px;
+        height: 150px;
+        margin: 8px;
+        padding: 15px;
+        box-shadow: -2px 2px 10px rgb(182, 182, 182);
+    }
+
+    .conteudo-nota {
+        max-height: 90px;
+    }
+
+    .pNota {
+        font-size: 12px;
+        line-height: 18px;
+        max-height: 85px;
+    }
+
+    .cor-select {
+        width: 30px;
+        height: 23px;
+        font-size: 10px;
+    }
+
+    .ver-mais {
+        font-size: 13px;
+    }
+
+    .acoes {
+        bottom: 10px;
+        right: 10px;
+        gap: 4px;
+    }
+
+    .editar-nota,
+    .apagar-nota {
+        width: 14px;
+        height: 14px;
+    }
+}

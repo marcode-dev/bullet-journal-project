@@ -1,6 +1,6 @@
 import { criarElementos } from "./criarElementos.js";
 import { adiados } from "./tarefasAdiadas.js";
-import { detectarCor } from "./notas.js";
+import { detectarCor, detectarCorTexto } from "./notas.js";
 
 const modal = document.querySelector(".modal");
 const tituloModal = document.querySelector(".titulo-modal");
@@ -60,17 +60,43 @@ export function abrirModal(titulo, conteudo, idElemento, acao) {
         }
     } else if (acao == "ver-mais") {
         salvar.style.display = "none";
-        /*
         let index = works.findIndex(a => a.idElemento == idElemento)
         let cor = detectarCor(works[index].cor) || "#eee544";
+        let corTexto = detectarCorTexto(works[index].cor) || "#6b6500";
         modal.style.backgroundColor = cor;
+        modal.style.color = corTexto;
         modal.classList.add("postItTop")
-        */
+    } else if (acao == "editar-nota") {
+        salvar.textContent = "Salvar";
+        let editarTarefa = document.querySelector(".editar-tarefas");
+        editarTarefa.focus()
+        salvar.onclick = () => {
+            let index = works.findIndex(a => a.idElemento == idElemento)
+            works[index].conteudo = `${editarTarefa.value}`;
+            localStorage.setItem("tarefas", JSON.stringify(works))
+            fecharModal()
+            location.reload()
+        }
+    } else if (acao == "excluir-nota") {
+        salvar.textContent = "Excluir";
+        salvar.onclick = () => {
+            console.log(idElemento + ": Nota Excluida")
+            let index = works.findIndex(d => d.idElemento === idElemento)
+            if (index >= 0) {
+                works.splice(index, 1)
+                localStorage.setItem("tarefas", JSON.stringify(works))
+            }
+            fecharModal()
+            location.reload()
+        }
     }
 
 }
 function fecharModal() {
     fade.style.display = "none"
     modal.style.display = "none"
+    modal.style.backgroundColor = "white"
+    modal.style.color = "black"
+    modal.classList.remove("postItTop")
     body.style.overflow = "visible"
 }

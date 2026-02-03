@@ -180,3 +180,222 @@ hr {
     margin-top: 15px;
     margin-bottom: 15px;
 }
+
+/* ===== RESPONSIVIDADE ===== */
+
+/* Tablets - 1024px e abaixo */
+@media (max-width: 1024px) {
+    header {
+        height: 80px;
+    }
+
+    .bold {
+        font-size: 22px;
+    }
+
+    .combinacao-logo h1 {
+        font-size: 18px;
+        margin-left: 8px;
+    }
+
+    .logo-header {
+        height: 40px;
+        width: 40px;
+    }
+
+    .menu {
+        width: 200px;
+        top: 80px;
+        height: calc(100vh - 80px);
+    }
+
+    :root {
+        --option-menu-width: calc(200px - 10px);
+    }
+
+    .selecao-menu {
+        width: calc(var(--option-menu-width) - 6px);
+        height: 42px;
+        top: -79px;
+    }
+
+    .main {
+        width: calc(100vw - 230px);
+        margin-left: 200px;
+        margin-top: 90px;
+        padding-left: 60px;
+        padding-top: 50px;
+    }
+}
+
+/* Tablets pequenos e celulares - 768px e abaixo */
+@media (max-width: 768px) {
+    header {
+        height: 70px;
+    }
+
+    .bold {
+        font-size: 18px;
+    }
+
+    .combinacao-logo h1 {
+        font-size: 14px;
+        margin-left: 6px;
+    }
+
+    .logo-header {
+        height: 35px;
+        width: 35px;
+    }
+
+    .menu {
+        width: 170px;
+        top: 70px;
+        height: calc(100vh - 70px);
+        padding-top: 15px;
+        padding-left: 8px;
+    }
+
+    :root {
+        --option-menu-width: calc(170px - 10px);
+    }
+
+    .selecao-menu {
+        width: calc(var(--option-menu-width) - 6px);
+        height: 38px;
+        margin-left: 4px;
+        top: -71px;
+    }
+
+    .option-menu {
+        margin-left: 4px;
+        padding: 8px;
+        font-size: 13px;
+    }
+
+    .option-menu h3 {
+        margin-left: 8px;
+    }
+
+    .option-menu .img {
+        height: 18px;
+        width: 18px;
+        padding-left: 8px;
+    }
+
+    .main {
+        width: calc(100vw - 198px);
+        margin-left: 170px;
+        margin-top: 80px;
+        padding-left: 40px;
+        padding-top: 40px;
+        padding-right: 20px;
+    }
+
+    .rodape {
+        padding: 0px 15px 15px 15px;
+        height: auto;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+
+    .rodape img {
+        margin-left: 5px;
+        width: 20px;
+        height: 20px;
+    }
+
+    .rodape p {
+        font-size: 10px;
+        line-height: 10px;
+    }
+
+    .creditos {
+        margin-left: 0;
+        margin-right: 0;
+        width: 100%;
+    }
+}
+
+/* Celulares - 480px e abaixo */
+@media (max-width: 480px) {
+    header {
+        height: 60px;
+    }
+
+    .bold {
+        font-size: 16px;
+    }
+
+    .combinacao-logo h1 {
+        font-size: 12px;
+        margin-left: 4px;
+    }
+
+    .logo-header {
+        height: 30px;
+        width: 30px;
+    }
+
+    .menu {
+        width: 140px;
+        top: 60px;
+        height: calc(100vh - 60px);
+        padding-top: 10px;
+        padding-left: 5px;
+    }
+
+    :root {
+        --option-menu-width: calc(140px - 10px);
+    }
+
+    .selecao-menu {
+        width: calc(var(--option-menu-width) - 6px);
+        height: 34px;
+        margin-left: 2px;
+        top: -61px;
+    }
+
+    .option-menu {
+        margin-left: 2px;
+        padding: 6px;
+        font-size: 11px;
+    }
+
+    .option-menu h3 {
+        margin-left: 5px;
+        font-size: 11px;
+    }
+
+    .option-menu .img {
+        height: 16px;
+        width: 16px;
+        padding-left: 5px;
+    }
+
+    .main {
+        width: calc(100vw - 165px);
+        margin-left: 140px;
+        margin-top: 70px;
+        padding-left: 15px;
+        padding-right: 10px;
+        padding-top: 30px;
+        min-height: auto;
+    }
+
+    .rodape {
+        padding: 0px 10px 10px 10px;
+        margin-top: 5vh;
+    }
+
+    .rodape img {
+        margin-left: 3px;
+        width: 18px;
+        height: 18px;
+    }
+
+    .rodape p {
+        font-size: 9px;
+        line-height: 9px;
+    }
+}

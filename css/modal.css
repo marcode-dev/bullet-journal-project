@@ -7,6 +7,10 @@
     display: none;
 }
 
+:root {
+    --corTextoPostIt: #3f3b00
+}
+
 /*Overflow hidden para impedir scroll*/
 .main .postItTop{
     border-radius: 0px;
@@ -26,6 +30,31 @@
     justify-self: center;
     padding: 40px;
     border-radius: 40px;
+}
+
+.modal.postItTop {
+    background-color: #eee544;
+    border-radius: 15px;
+    padding: 30px;
+    color: #6b6500;
+}
+
+.modal.postItTop .titulo-modal {
+    display: none;
+}
+
+.modal.postItTop .modal-conteudo {
+    margin: 0;
+}
+
+.modal.postItTop .modal-conteudo p {
+    color: var(--corTextoPostIt);
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.modal.postItTop hr {
+    display: none;
 }
 
 .modal-header {
@@ -78,4 +107,120 @@
     resize: none;
     font-weight: 400;
     box-shadow: 3px 3px 5px rgb(224, 224, 224);
+}
+
+/* ===== RESPONSIVIDADE ===== */
+
+/* Tablets - 1024px e abaixo */
+@media (max-width: 1024px) {
+    .modal {
+        width: 500px;
+        padding: 30px;
+        border-radius: 30px;
+    }
+
+    .modal-header {
+        font-size: 18px;
+    }
+
+    .modal button {
+        padding: 7px 12px;
+        font-size: 14px;
+    }
+
+    .editar-tarefas {
+        font-size: 15px;
+        padding: 10px 20px;
+    }
+}
+
+/* Tablets pequenos - 768px e abaixo */
+@media (max-width: 768px) {
+    .fade {
+        display: none !important;
+    }
+
+    .modal {
+        width: 90%;
+        max-width: 400px;
+        padding: 25px;
+        border-radius: 25px;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+
+    .modal-header {
+        font-size: 16px;
+    }
+
+    .modal-conteudo {
+        margin-bottom: 20px;
+        font-size: 14px;
+    }
+
+    .modal button {
+        padding: 6px 10px;
+        font-size: 13px;
+        border-radius: 8px;
+    }
+
+    .editar-tarefas {
+        font-size: 14px;
+        padding: 10px 15px;
+        border-radius: 8px;
+    }
+
+    .main .postItTop {
+        width: 300px;
+        height: 300px;
+    }
+}
+
+/* Celulares - 480px e abaixo */
+@media (max-width: 480px) {
+    .fade {
+        display: none !important;
+    }
+
+    .modal {
+        width: 95%;
+        max-width: 350px;
+        padding: 20px;
+        border-radius: 20px;
+        max-height: 85vh;
+        overflow-y: auto;
+    }
+
+    .modal-header {
+        font-size: 14px;
+        flex-direction: column;
+    }
+
+    .modal-conteudo {
+        margin-bottom: 15px;
+        font-size: 13px;
+        line-height: 1.4;
+    }
+
+    .modal-confirmar {
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+
+    .modal button {
+        padding: 5px 8px;
+        font-size: 12px;
+        border-radius: 6px;
+    }
+
+    .editar-tarefas {
+        font-size: 13px;
+        padding: 8px 12px;
+        border-radius: 6px;
+    }
+
+    .main .postItTop {
+        width: 250px;
+        height: 250px;
+    }
 }

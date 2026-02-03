@@ -32,8 +32,21 @@ for (let i in idsNotas) {
         <option value="vermelho">🔴</option>
         <option value="verde">🟢</option>
     `;
+    
+    const editar = document.createElement("img")
+    editar.classList.add("editar-nota")
+    editar.src = "https://images.icon-icons.com/3862/PNG/512/edit_icon_240853.png"
+    editar.title = "Editar"
+    
+    const apagar = document.createElement("img")
+    apagar.classList.add("apagar-nota")
+    apagar.src = "https://cdn-icons-png.freepik.com/512/17/17167.png"
+    apagar.title = "Apagar"
+    
     const acoes = document.createElement("div");
     acoes.classList.add("acoes");
+    acoes.appendChild(editar)
+    acoes.appendChild(apagar)
     acoes.appendChild(corBonita)
 
     let ind;
@@ -65,10 +78,38 @@ selectCor.forEach((selecionado) => {
         console.log(works[index].idElemento + ": Cor alterada para " + works[index].cor);
 
         localStorage.setItem("tarefas", JSON.stringify(works))
+        
         /*
         Cores post it: #27b3d9 #fca028 #f44072 #90cf4c #eee544
         Cores post it text: #006681 #814900 #730020 #3a7000 #6b6500
         */
+    })
+})
+
+const editarNotas = document.querySelectorAll(".editar-nota")
+editarNotas.forEach((a) => {
+    a.addEventListener("click", (event) => {
+        let idDoElemento = event.target.closest(".post-it").dataset.idElemento;
+        let index = works.findIndex(a => a.idElemento == idDoElemento)
+        
+        let tituloModal = `Editar Nota`;
+        let conteudoModal = `
+            <textarea type="text" class="editar-tarefas" wrap="hard" rows="5"
+                cols="10" autofocus>${works[index].conteudo}</textarea>
+        `;
+        abrirModal(tituloModal, conteudoModal, works[index].idElemento, "editar-nota")
+    })
+})
+
+const apagarNotas = document.querySelectorAll(".apagar-nota")
+apagarNotas.forEach((a) => {
+    a.addEventListener("click", (event) => {
+        let idDoElemento = event.target.closest(".post-it").dataset.idElemento;
+        let index = works.findIndex(a => a.idElemento == idDoElemento)
+        
+        let tituloModal = `Excluir Nota?`;
+        let conteudoModal = `<p>Você tem certeza que deseja excluir esta nota?</p>`;
+        abrirModal(tituloModal, conteudoModal, works[index].idElemento, "excluir-nota")
     })
 })
 
@@ -79,7 +120,7 @@ export function detectarCor(cor) {
     else if (cor == "laranja") { return "#fca028" }
     else if (cor == "azul") { return "#27b3d9" }
 }
-function detectarCorTexto(cor) {
+export function detectarCorTexto(cor) {
     if (cor == "amarelo") { return "#6b6500" }
     else if (cor == "verde") { return "#3a7000" }
     else if (cor == "vermelho") { return "#730020" }

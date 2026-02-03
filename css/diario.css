@@ -118,18 +118,24 @@
     min-height: 60px;
     max-height: auto;
     margin-top: 10px;
-    align-items: center;
-    padding: 10px;
+    align-items: flex-start;
+    padding: 15px;
+    gap: 10px;
+    flex-wrap: wrap;
 }
 
 .tarefa h4 {
-    max-width: 600px;
+    max-width: calc(100% - 300px);
     word-wrap: break-word;
     overflow-wrap: break-word;
     white-space: pre-wrap;
     font-family: "Poppins";
     font-weight: 400;
     margin-left: 50px;
+    flex: 1;
+    min-width: 200px;
+    position: relative;
+    z-index: 1;
 }
 
 .tipo2 {
@@ -158,5 +164,355 @@
     left: 90%;
     cursor: pointer;
     opacity: 0.8;
+}
+
+/* ===== RESPONSIVIDADE ===== */
+
+/* Tablets - 1024px e abaixo */
+@media (max-width: 1024px) {
+    .diario {
+        width: 100%;
+    }
+
+    .data h2 {
+        font-size: 60px;
+        line-height: 70px;
+    }
+
+    .data h3 {
+        font-size: 45px;
+        padding-left: 10px;
+    }
+
+    .legenda-div {
+        width: 70%;
+    }
+
+    .legenda {
+        padding-right: 20px;
+        font-size: 13px;
+    }
+
+    .input-tarefas {
+        height: 70px;
+    }
+
+    #tipo {
+        width: 80px;
+        height: 35px;
+        margin-left: 25px;
+        font-size: 13px;
+    }
+
+    #escrever {
+        margin-left: 15px;
+        height: 45px;
+        width: 55%;
+        font-size: 15px;
+        padding-left: 20px;
+    }
+
+    .save {
+        padding: 8px 25px;
+        font-size: 14px;
+        left: 88%;
+    }
+
+    .tarefa {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        height: auto;
+        min-height: 60px;
+        padding: 12px;
+        gap: 10px;
+        align-items: flex-start;
+    }
+
+    .tarefa h4 {
+        max-width: calc(100% - 140px);
+        font-size: 14px;
+        margin-left: 0;
+        margin-top: 0;
+        position: relative;
+        z-index: 1;
+        flex: 1;
+    }
+
+    .tipo2 {
+        width: 80px;
+        font-size: 12px;
+        height: 32px;
+        flex-shrink: 0;
+    }
+
+    .nota {
+        width: 30px;
+        height: 30px;
+        margin-left: 0;
+        flex-shrink: 0;
+    }
+
+    .lixeira {
+        position: absolute;
+        left: auto;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 22px;
+        height: 22px;
+    }
+
+    .editar {
+        position: absolute;
+        left: auto;
+        right: 45px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 22px;
+        height: 22px;
+    }
+}
+
+/* Tablets pequenos - 768px e abaixo */
+@media (max-width: 768px) {
+    .diario {
+        width: 100%;
+    }
+
+    .data h2 {
+        font-size: 45px;
+        line-height: 52px;
+    }
+
+    .data h3 {
+        font-size: 35px;
+        padding-left: 8px;
+    }
+
+    .legenda-div {
+        width: 100%;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .legenda {
+        padding-right: 15px;
+        font-size: 12px;
+    }
+
+    .leg3 {
+        padding-right: 0;
+    }
+
+    .input-tarefas {
+        height: auto;
+        flex-wrap: wrap;
+        padding: 15px;
+    }
+
+    #tipo {
+        width: 70px;
+        height: 32px;
+        margin-left: 15px;
+        font-size: 12px;
+    }
+
+    #escrever {
+        margin-left: 10px;
+        height: 40px;
+        width: calc(100% - 120px);
+        font-size: 14px;
+        padding-left: 15px;
+    }
+
+    .save {
+        padding: 6px 20px;
+        font-size: 12px;
+        position: relative;
+        left: auto;
+        margin-top: 10px;
+        margin-left: auto;
+        margin-right: 0;
+    }
+
+    .tarefa {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: auto;
+        min-height: 70px;
+        padding: 12px;
+        gap: 8px;
+        background-color: #fafafa;
+        border-radius: 12px;
+        margin-top: 8px;
+    }
+
+    .tarefa h4 {
+        max-width: calc(100% - 20px);
+        font-size: 13px;
+        margin-left: 0;
+        margin-top: 0;
+        padding-right: 60px;
+        order: 2;
+        position: relative;
+        z-index: 1;
+    }
+
+    .tipo2 {
+        width: 80px;
+        font-size: 11px;
+        height: 28px;
+        order: 1;
+        align-self: flex-start;
+    }
+
+    .nota {
+        width: 28px;
+        height: 28px;
+        margin-left: 0;
+        order: 1;
+        align-self: flex-start;
+    }
+
+    .lixeira {
+        position: absolute;
+        left: auto;
+        right: 10px;
+        top: 10px;
+        width: 22px;
+        height: 22px;
+    }
+
+    .editar {
+        position: absolute;
+        left: auto;
+        right: 40px;
+        top: 10px;
+        width: 22px;
+        height: 22px;
+    }
+}
+
+/* Celulares - 480px e abaixo */
+@media (max-width: 480px) {
+    .diario {
+        width: 100%;
+    }
+
+    .data h2 {
+        font-size: 32px;
+        line-height: 38px;
+    }
+
+    .data h3 {
+        font-size: 24px;
+        padding-left: 6px;
+    }
+
+    .legenda-div {
+        width: 100%;
+        display: none;
+    }
+
+    .input-tarefas {
+        height: auto;
+        flex-direction: column;
+        padding: 10px;
+        gap: 8px;
+    }
+
+    #tipo {
+        width: 100%;
+        height: 30px;
+        margin-left: 0;
+        font-size: 11px;
+    }
+
+    #escrever {
+        margin-left: 0;
+        height: 35px;
+        width: 100%;
+        font-size: 13px;
+        padding-left: 10px;
+    }
+
+    .save {
+        padding: 5px 15px;
+        font-size: 11px;
+        position: relative;
+        width: 100%;
+        left: auto;
+        margin-top: 8px;
+    }
+
+    .tarefa {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: auto;
+        min-height: 65px;
+        padding: 10px 10px 10px 40px;
+        gap: 6px;
+        background-color: #fafafa;
+        border-left: 4px solid rgb(156, 156, 156);
+        border-radius: 8px;
+        margin-top: 6px;
+    }
+
+    .tarefa[style*="outline: 2px solid yellow"] {
+        border-left-color: #ffd700;
+    }
+
+    .tarefa[style*="outline: 2px solid #88e788"] {
+        border-left-color: #88e788;
+    }
+
+    .tarefa h4 {
+        max-width: calc(100%);
+        font-size: 12px;
+        margin-left: 0;
+        margin-top: 2px;
+        padding-right: 55px;
+        order: 2;
+    }
+
+    .tipo2 {
+        width: 100%;
+        font-size: 10px;
+        height: 26px;
+        order: 1;
+        align-self: flex-start;
+    }
+
+    .nota {
+        width: 24px;
+        height: 24px;
+        margin-left: 0;
+        order: 1;
+        align-self: flex-start;
+    }
+
+    .lixeira {
+        position: absolute;
+        left: auto;
+        right: 8px;
+        top: 8px;
+        width: 18px;
+        height: 18px;
+    }
+
+    .editar {
+        position: absolute;
+        left: auto;
+        right: 32px;
+        top: 8px;
+        width: 18px;
+        height: 18px;
+    }
 }
 
