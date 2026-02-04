@@ -3,23 +3,64 @@ import { verMaisNecessario } from "./notas.js";
 //Seleciona as seções de cada tela/pagina
 export const diarioPagina = document.querySelector(".diario");
 const notasPagina = document.querySelector(".notas");
+const revisaoPagina = document.querySelector(".revisao");
 
 //Os itens do menu
-const notaMenu = document.querySelector(".notas-menu");
+const itensMenu = document.querySelectorAll(".option-menu")
+
 const diarioMenu = document.querySelector(".diario-menu");
+const notaMenu = document.querySelector(".notas-menu");
+const revisaoMenu = document.querySelector(".revisao-menu");
 
 notasPagina.style.display = "none";
 
-//Trocar a Aba
-const selecaoMenu = document.querySelector(".selecao-menu");
-diarioMenu.addEventListener("click", () => {
-    diarioPagina.style.display = "block";
-    notasPagina.style.display = "none";
-    selecaoMenu.style.top = "-93px";
+//Trocar a aba
+itensMenu.forEach((elemento) => {
+    elemento.addEventListener("click", () => {
+        itensMenu.forEach((a) => {
+            a.classList.remove("selecao-menu")
+        })
+
+        if (elemento.classList.contains("diario-menu")) {
+            mudarPagina("diario", diarioPagina);
+            diarioMenu.classList.add("selecao-menu")
+        } 
+        else if (elemento.classList.contains("notas-menu")) {
+            mudarPagina("notas", notasPagina);
+            notaMenu.classList.add("selecao-menu")
+        }
+        else if (elemento.classList.contains("revisao-menu")) {
+            mudarPagina("revisao", revisaoPagina);
+            revisaoMenu.classList.add("selecao-menu")
+        }
+    })
 })
-notaMenu.addEventListener("click", () => {
+
+function mudarPagina(pagina, mostrarPagina) {
     diarioPagina.style.display = "none";
-    notasPagina.style.display = "block";
-    selecaoMenu.style.top = "-47px";
-    verMaisNecessario()
-});
+    notasPagina.style.display = "none";
+    revisaoPagina.style.display = "none";
+
+    mostrarPagina.style.display = "block";
+    sessionStorage.setItem("paginaAtual", pagina);
+    if (pagina == "notas"){
+        verMaisNecessario()
+    }
+}
+
+function exibirPagina(){ //Se recarregada...
+    const paginaSalva = sessionStorage.getItem("paginaAtual")
+
+    if (paginaSalva == "notas"){
+        mudarPagina(paginaSalva, notasPagina)
+        notaMenu.classList.add("selecao-menu")
+    } else if (paginaSalva == "revisao") {
+        mudarPagina(paginaSalva, revisaoPagina)
+        revisaoMenu.classList.add("selecao-menu")
+    } else if (paginaSalva == "diario"){
+        mudarPagina(paginaSalva, diarioPagina)
+        diarioMenu.classList.add("selecao-menu")
+    }
+}
+
+exibirPagina()

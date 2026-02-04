@@ -112,16 +112,7 @@ header {
 }
 
 .selecao-menu {
-    width: calc(var(--option-menu-width) - 6px);
-    height: 46px;
-    margin-left: 6px;
-    background-color: var(--cor-main);
-    border-top-left-radius: 30px;
-    border-bottom-left-radius: 30px;
-    position: relative;
-    z-index: -1;
-    top: -93px;
-    transition: 0.5s;
+    background-color: var(--cor-main) !important;
 }
 
 
