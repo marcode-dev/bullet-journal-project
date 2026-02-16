@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="./css/global.css">
     <script type="module" src="./js/main.js" defer></script>
     <!--defer serve para garantir que o html carregue primeiro-->
-    <title>Bullet Journal</title>
+    <title>Mark•It</title>
 </head>
 
 <body>
@@ -15,7 +15,7 @@
         <!--<img src="https://cdn-icons-png.flaticon.com/512/7216/7216128.png" alt="" class="menu-icon">-->
         <div class="combinacao-logo">
             <div class="logo-header"></div>
-            <h1><span class="bold">Bullet</span> Journal</h1>
+            <h1>Mark it</h1>
         </div>
     </header>
 
@@ -29,8 +29,12 @@
             <h3 class="textMenu">Notas</h3>
         </div>
         <div class="option-menu revisao-menu">
-            <img src="https://cdn-icons-png.flaticon.com/512/624/624229.png" alt="" class="img">
+            <img src="https://cdn-icons-png.flaticon.com/128/6705/6705871.png" alt="" class="img revisao-img">
             <h3 class="textMenu">Revisão</h3>
+        </div>
+        <div class="option-menu exportar-menu">
+            <img src="https://cdn-icons-png.flaticon.com/128/81/81081.png" alt="" class="img">
+            <h3 class="textMenu">Importar Dados</h3>
         </div>
     </div> <!-- .menu -->
 
@@ -47,18 +51,33 @@
             </div> <!-- .legenda -->
             <label for="escrever">
                 <div class="input-tarefas">
-                    <select name="tarefa" id="tipo">
-                        <option value="tarefa" class="opcao">• Tarefa</option>
-                        <option value="evento" class="opcao">○ Evento</option>
-                        <option value="nota" class="opcao">— Nota</option>
-                    </select>
+                    <div class="seta-select">
+                        <select name="tarefa" id="tipo">
+                            <option value="tarefa" class="opcao">• Tarefa</option>
+                            <option value="evento" class="opcao">○ Evento</option>
+                            <option value="nota" class="opcao">— Nota</option>
+                        </select>
+                    </div> <!-- .seta-select -->
+
                     <textarea type="text" placeholder="Escreva sua tarefa aqui..." id="escrever" wrap="hard" rows="5"
                         cols="10" autofocus></textarea>
                     <button class="save">Salvar</button>
                 </div> <!--.input-tarefas-->
             </label> <!--.escrever-->
             <hr>
-            <div class="tarefas-criadas"></div>
+            <div class="tarefas-diario tarefas-criadas"></div>
+            <div class="tarefas-diario tarefas-adiadas">
+                <h5>Adiadas</h5>
+                <hr class="separar">
+            </div>
+            <div class="tarefas-diario tarefas-finalizadas">
+                <h5>Finalizadas</h5>
+                <hr class="separar">
+            </div>
+            <div class="tarefas-diario tarefas-canceladas">
+                <h5>Canceladas</h5>
+                <hr class="separar">
+            </div>
         </section> <!--Diario-->
 
         <section class="notas">
@@ -73,6 +92,31 @@
                 <h3 class="mes-ano"></h3>
             </div> <!-- .data -->
         </section> <!-- .revisao -->
+
+        <section class="exportar">
+            <div class="colunas-import">
+                <div class="background-exportar plano-fundo">
+                    <h3>Exportar</h3>
+                    <hr>
+                    <p>Clique aqui para fazer o dowload de suas tarefas para uso em outro dispositivo</p>
+                    <button class="exportar-button botao">Exportar</button>
+                </div>
+                <div class="background-importar plano-fundo">
+                    <h3>Importar</h3>
+                    <hr>
+                    <p>Clique aqui para fazer o dowload de suas tarefas para uso em outro dispositivo</p>
+                    <input type="file" id="importar-json" accept=".json"> <!--Accept limita o tipo de arquivo que pode ser importado a .json-->
+                    <textarea name="" id="colar-json" placeholder="Ou cole o JSON aqui!"></textarea>
+                    <button class="registrar botao">Registrar</button>
+                    <select name="" id="tipo-importacao">
+                        <option value="adicionar">Adicionar</option>
+                        <option value="substituir">Substituir   </option>
+                    </select>
+                </div>
+            </div>
+
+            <p class="nota-desenvolvedor-marcos">Nota sobre a funcionalidade</p>
+        </section> <!-- .exportar -->
 
         <div class="rodape">
             <a href="https://github.com/marcode-dev" target="_blank">

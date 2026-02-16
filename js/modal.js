@@ -14,6 +14,10 @@ const body = document.querySelector("body");
 let works = JSON.parse(localStorage.getItem("tarefas"));
 
 fade.addEventListener("click", fecharModal)
+body.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+        fecharModal();
+    }})
 fechar.addEventListener("click", fecharModal)
 
 export function abrirModal(titulo, conteudo, idElemento, acao) {
@@ -29,7 +33,7 @@ export function abrirModal(titulo, conteudo, idElemento, acao) {
 
     tituloModal.textContent = titulo;
     conteudoModal.innerHTML = conteudo;
-    if (acao == "editar") {
+    if (acao == "editar") { //-------------------------------------EDITAR
         salvar.textContent = "Salvar";
         let editarTarefa = document.querySelector(".editar-tarefas");
         editarTarefa.focus()
@@ -39,8 +43,11 @@ export function abrirModal(titulo, conteudo, idElemento, acao) {
             localStorage.setItem("tarefas", JSON.stringify(works))
             fecharModal()
             criarElementos()
+            if (titulo == "Editar Nota") {
+                window.location.reload()
+            }
         }
-    } else if (acao == "excluir") {
+    } else if (acao == "excluir") {//-------------------------------- EXCLUIR
         salvar.textContent = "Excluir";
         salvar.onclick = () => {
             console.log(idElemento + ": Excluido")
@@ -58,7 +65,7 @@ export function abrirModal(titulo, conteudo, idElemento, acao) {
             fecharModal()
             criarElementos()
         }
-    } else if (acao == "ver-mais") {
+    } else if (acao == "ver-mais") {//------------------------------ VER MAIS(notas)
         salvar.style.display = "none";
         let index = works.findIndex(a => a.idElemento == idElemento)
         let cor = detectarCor(works[index].cor) || "#eee544";
@@ -66,7 +73,8 @@ export function abrirModal(titulo, conteudo, idElemento, acao) {
         modal.style.backgroundColor = cor;
         modal.style.color = corTexto;
         modal.classList.add("postItTop")
-    } else if (acao == "editar-nota") {
+
+    } else if (acao == "editar-nota") {//---------------------------- EDITAR NOTA
         salvar.textContent = "Salvar";
         let editarTarefa = document.querySelector(".editar-tarefas");
         editarTarefa.focus()
@@ -75,7 +83,7 @@ export function abrirModal(titulo, conteudo, idElemento, acao) {
             works[index].conteudo = `${editarTarefa.value}`;
             localStorage.setItem("tarefas", JSON.stringify(works))
             fecharModal()
-            location.reload()
+            window.location.reload()
         }
     } else if (acao == "excluir-nota") {
         salvar.textContent = "Excluir";
@@ -89,6 +97,13 @@ export function abrirModal(titulo, conteudo, idElemento, acao) {
             fecharModal()
             location.reload()
         }
+    } else if(acao == "confirmar") {
+        salvar.textContent = "Confirmar";
+        salvar.onclick = () => {
+            fecharModal()
+        }
+    } else {
+        salvar.style.display = "none";
     }
 
 }

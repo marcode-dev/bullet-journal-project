@@ -1,0 +1,92 @@
+.exportar {
+    /*Centralizar tela no meio*/
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.plano-fundo {
+    background-color: var(--cor-fundo);
+    border-radius: 15px;
+    padding: 40px;
+    text-align: center;
+    background-color: white;
+    box-shadow: 1px -1px 5px rgba(0, 0, 0, 0.1);
+    width: 45%;
+    margin: 0 auto;
+}
+.plano-fundo h3 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: rgb(51, 51, 51);
+}
+
+.colunas-import {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 30px;
+}
+
+#colar-json {
+    margin-top: 20px;
+    width: 100%;
+    height: 150px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid rgb(200, 200, 200);
+    resize: none;
+}
+
+.botao {
+    background-color: rgb(70, 70, 70);
+    padding: 8px 20px;
+    color: white;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+}
+.botao:hover {
+    background-color: rgb(101, 101, 101);
+    transition: 0.1s;
+}
+
+#tipo-importacao {
+    margin-top: 10px;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid rgb(200, 200, 200);
+    border: none;
+    cursor: pointer ;
+}
+
+#importar-json {
+    margin-top: 10px;
+}
+
+.nota-desenvolvedor-marcos {
+    position: fixed;
+    transform: translateX(10%);
+    left: 50%;
+    bottom: 20px;
+    background-color: rgb(130, 130, 130);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    z-index: 10;
+    cursor: pointer;
+}
+
+@media (max-width: 1220px) {
+    .colunas-import {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+    .plano-fundo {
+        width: 100%;
+        margin-top: 30px;
+    }
+}

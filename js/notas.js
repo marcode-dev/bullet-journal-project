@@ -6,64 +6,76 @@ import { abrirModal } from "./modal.js";
 const quadroNotas = document.querySelector(".campo-notas")
 let works = JSON.parse(localStorage.getItem("tarefas")) || [];
 let idsNotas = works.filter(a => a.tipo == "nota")
-console.log(idsNotas, ": IDs notas")
-const notasMenu = document.querySelector(".notas-menu")
 
-for (let i in idsNotas) {
-    const postIt = document.createElement("div")
-    postIt.classList.add("post-it")
-    postIt.dataset.idElemento = idsNotas[i].idElemento;
-    postIt.style.backgroundColor = idsNotas[i].cor;
-
-    const textoNota = document.createElement("p")
-    textoNota.classList.add("pNota")
-    textoNota.textContent = idsNotas[i].conteudo;
-
-    const conteudoNota = document.createElement("div")
-    conteudoNota.classList.add("conteudo-nota")
-    conteudoNota.appendChild(textoNota)
-
-    const corBonita = document.createElement("select")
-    corBonita.classList.add("cor-select")
-    corBonita.innerHTML = `
-        <option value="amarelo">🟡</option>
-        <option value="azul">🔵</option>
-        <option value="laranja">🟠</option>
-        <option value="vermelho">🔴</option>
-        <option value="verde">🟢</option>
-    `;
-    
-    const editar = document.createElement("img")
-    editar.classList.add("editar-nota")
-    editar.src = "https://images.icon-icons.com/3862/PNG/512/edit_icon_240853.png"
-    editar.title = "Editar"
-    
-    const apagar = document.createElement("img")
-    apagar.classList.add("apagar-nota")
-    apagar.src = "https://cdn-icons-png.freepik.com/512/17/17167.png"
-    apagar.title = "Apagar"
-    
-    const acoes = document.createElement("div");
-    acoes.classList.add("acoes");
-    acoes.appendChild(editar)
-    acoes.appendChild(apagar)
-    acoes.appendChild(corBonita)
-
-    let ind;
-    if (idsNotas[i].cor == "amarelo") { ind = 0 }
-    else if (idsNotas[i].cor == "azul") { ind = 1 }
-    else if (idsNotas[i].cor == "laranja") { ind = 2 }
-    else if (idsNotas[i].cor == "vermelho") { ind = 3 }
-    else if (idsNotas[i].cor == "verde") { ind = 4 }
-
-    corBonita.selectedIndex = ind;
-    postIt.style.backgroundColor = detectarCor(idsNotas[i].cor);
-    postIt.style.color = detectarCorTexto(idsNotas[i].cor);
-
-    postIt.appendChild(conteudoNota);
-    postIt.appendChild(acoes);
-    quadroNotas.appendChild(postIt);
+function semNotas() {
+    console.log("verificando notas existentes, mas nenhuma encontrada");
+    const semNotas = document.createElement("p");
+    semNotas.textContent = "Nenhuma nota criada ainda :D";
+    quadroNotas.appendChild(semNotas);
 }
+
+console.log(idsNotas, ": IDs notas")
+
+if (idsNotas.length > 0) {
+    for (let i in idsNotas) {
+        const postIt = document.createElement("div")
+        postIt.classList.add("post-it")
+        postIt.dataset.idElemento = idsNotas[i].idElemento;
+        postIt.style.backgroundColor = idsNotas[i].cor;
+
+        const textoNota = document.createElement("p")
+        textoNota.classList.add("pNota")
+        textoNota.textContent = idsNotas[i].conteudo;
+
+        const conteudoNota = document.createElement("div")
+        conteudoNota.classList.add("conteudo-nota")
+        conteudoNota.appendChild(textoNota)
+
+        const corBonita = document.createElement("select")
+        corBonita.classList.add("cor-select")
+        corBonita.innerHTML = `
+            <option value="amarelo">🟡</option>
+            <option value="azul">🔵</option>
+            <option value="laranja">🟠</option>
+            <option value="vermelho">🔴</option>
+            <option value="verde">🟢</option>
+        `;
+
+        const editar = document.createElement("img")
+        editar.classList.add("editar-nota")
+        editar.src = "https://images.icon-icons.com/3862/PNG/512/edit_icon_240853.png"
+        editar.title = "Editar"
+
+        const apagar = document.createElement("img")
+        apagar.classList.add("apagar-nota")
+        apagar.src = "https://cdn-icons-png.freepik.com/512/17/17167.png"
+        apagar.title = "Apagar"
+
+        const acoes = document.createElement("div");
+        acoes.classList.add("acoes");
+        acoes.appendChild(editar)
+        acoes.appendChild(apagar)
+        acoes.appendChild(corBonita)
+
+        let ind;
+        if (idsNotas[i].cor == "amarelo") { ind = 0 }
+        else if (idsNotas[i].cor == "azul") { ind = 1 }
+        else if (idsNotas[i].cor == "laranja") { ind = 2 }
+        else if (idsNotas[i].cor == "vermelho") { ind = 3 }
+        else if (idsNotas[i].cor == "verde") { ind = 4 }
+
+        corBonita.selectedIndex = ind;
+        postIt.style.backgroundColor = detectarCor(idsNotas[i].cor);
+        postIt.style.color = detectarCorTexto(idsNotas[i].cor);
+
+        postIt.appendChild(conteudoNota);
+        postIt.appendChild(acoes);
+        quadroNotas.appendChild(postIt);
+    }
+} else {
+    semNotas();
+}
+
 const selectCor = document.querySelectorAll(".cor-select")
 selectCor.forEach((selecionado) => {
     selecionado.addEventListener("change", (event) => {
@@ -78,7 +90,9 @@ selectCor.forEach((selecionado) => {
         console.log(works[index].idElemento + ": Cor alterada para " + works[index].cor);
 
         localStorage.setItem("tarefas", JSON.stringify(works))
-        
+
+        window.location.reload();
+
         /*
         Cores post it: #27b3d9 #fca028 #f44072 #90cf4c #eee544
         Cores post it text: #006681 #814900 #730020 #3a7000 #6b6500
@@ -91,13 +105,13 @@ editarNotas.forEach((a) => {
     a.addEventListener("click", (event) => {
         let idDoElemento = event.target.closest(".post-it").dataset.idElemento;
         let index = works.findIndex(a => a.idElemento == idDoElemento)
-        
+
         let tituloModal = `Editar Nota`;
         let conteudoModal = `
             <textarea type="text" class="editar-tarefas" wrap="hard" rows="5"
                 cols="10" autofocus>${works[index].conteudo}</textarea>
         `;
-        abrirModal(tituloModal, conteudoModal, works[index].idElemento, "editar-nota")
+        abrirModal(tituloModal, conteudoModal, works[index].idElemento, "editar")
     })
 })
 
@@ -106,7 +120,7 @@ apagarNotas.forEach((a) => {
     a.addEventListener("click", (event) => {
         let idDoElemento = event.target.closest(".post-it").dataset.idElemento;
         let index = works.findIndex(a => a.idElemento == idDoElemento)
-        
+
         let tituloModal = `Excluir Nota?`;
         let conteudoModal = `<p>Você tem certeza que deseja excluir esta nota?</p>`;
         abrirModal(tituloModal, conteudoModal, works[index].idElemento, "excluir-nota")

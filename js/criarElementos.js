@@ -1,8 +1,6 @@
 import { idDia } from "./data.js";
 import { abrirModal } from "./modal.js";
 
-const tarefasCriadas = document.querySelector(".tarefas-criadas")
-
 export const opcoes = document.getElementById("tipo");
 export function criarElementos() {
     let works = JSON.parse(localStorage.getItem("tarefas")) || [];
@@ -18,9 +16,19 @@ export function criarElementos() {
             tarefaDiv.classList.add("input-tarefas", "tarefa");
             tarefaDiv.dataset.idElemento = works[i].idElemento
 
+            let tarefasContainer = document.querySelector(".tarefas-criadas");
+            if (works[i].status == "adiada") {
+                tarefasContainer = document.querySelector(".tarefas-adiadas");
+            } else if (works[i].status == "cancelar") {
+                tarefasContainer = document.querySelector(".tarefas-canceladas");
+            } else if (works[i].status == "finalizada") {
+                tarefasContainer = document.querySelector(".tarefas-finalizadas");
+            }
+
             if (works[i].tipo == "evento") {
                 const tipo = document.createElement("h4");
-                tipo.textContent = opcoes.value;
+                tipo.classList.add("tipo-evento");
+                tipo.textContent = "Evento";
                 tarefaDiv.appendChild(tipo); // Tranfere o título para a Div Criada
             } else if (works[i].tipo == "nota") {
                 const iconeNota = document.createElement("img");
@@ -31,7 +39,6 @@ export function criarElementos() {
                 tarefaDiv.appendChild(iconeNota)
             } else {
                 const select = document.createElement("select");
-                select.id = "tipo"
                 select.classList.add("tipo2");
                 select.innerHTML = `
                     <option value="normal">• Tarefa</option>
@@ -54,10 +61,18 @@ export function criarElementos() {
                     opacidade = "1"
                     select.selectedIndex = 2
                 }
+                else {
+                    linhaDeFora = undefined
+                    opacidade = undefined
+                }
                 tarefaDiv.style.outline = linhaDeFora;
                 tarefaDiv.style.opacity = opacidade;
 
-                tarefaDiv.appendChild(select);
+                const seletorSeta = document.createElement("div");
+                seletorSeta.classList.add("seta-select");
+
+                seletorSeta.appendChild(select);
+                tarefaDiv.appendChild(seletorSeta);
             }
 
             const textoTarefa = document.createElement("h4");
@@ -66,8 +81,8 @@ export function criarElementos() {
 
             const editar = document.createElement("img")
             editar.classList.add("editar");
-            editar.src = "https://icon-icons.com/download-file?file=https%3A%2F%2Fimages.icon-icons.com%2F3862%2FPNG%2F512%2Fedit_icon_240853.png&id=240853&pack_or_individual=pack"
-            
+            editar.src = "https://cdn-icons-png.flaticon.com/128/10747/10747217.png"
+
             let tituloModal;
             let conteudoModal;
 
@@ -95,9 +110,33 @@ export function criarElementos() {
             tarefaDiv.appendChild(editar);
             tarefaDiv.appendChild(apagar);
 
-            tarefasCriadas.appendChild(tarefaDiv);
-        } else if (works[i].idDia > idDia){
+            // adiciona no container correto determinado acima
+            tarefasContainer.appendChild(tarefaDiv);
+        } else if (works[i].idDia > idDia) {
 
         }
+    }
+    verificarTarefas()
+}
+export function verificarTarefas() {
+    const tAdiadas = document.querySelector(".tarefas-adiadas")
+    const tCanceladas = document.querySelector(".tarefas-canceladas")
+    const tFinalizadas = document.querySelector(".tarefas-finalizadas")
+
+    // Verifica sem contar o titulo e o hr, para não considerar como tarefa
+    const contarTarefas = (container) => {
+        return Array.from(container.children).filter(c => 
+            c.tagName !== "H5" && c.tagName !== "HR"
+        ).length;
+    };
+
+    if (contarTarefas(tAdiadas) === 0) {
+        tAdiadas.style.display = "none";
+    }
+    if (contarTarefas(tCanceladas) === 0) {
+        tCanceladas.style.display = "none";
+    }
+    if (contarTarefas(tFinalizadas) === 0) {
+        tFinalizadas.style.display = "none";
     }
 }

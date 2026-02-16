@@ -136,9 +136,6 @@
 
 /* Tablets pequenos - 768px e abaixo */
 @media (max-width: 768px) {
-    .fade {
-        display: none !important;
-    }
 
     .modal {
         width: 90%;
@@ -178,9 +175,6 @@
 
 /* Celulares - 480px e abaixo */
 @media (max-width: 480px) {
-    .fade {
-        display: none !important;
-    }
 
     .modal {
         width: 95%;

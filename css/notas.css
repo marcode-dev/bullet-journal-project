@@ -9,12 +9,12 @@
 
 .campo-notas {
     width: 95%;
-    min-height: 800px;
+    min-height: auto;
     height: auto;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    row-gap: 0px;
+    align-content: flex-start;
 }
 
 .post-it {
