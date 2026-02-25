@@ -1,4 +1,5 @@
 import { criarElementos } from "./criarElementos.js";
+import { criarNotas } from "./notas.js";
 import { verMaisNecessario } from "./notas.js";
 
 //Seleciona as seções de cada tela/pagina
@@ -33,6 +34,7 @@ itensMenu.forEach((elemento) => {
         } 
         else if (elemento.classList.contains("notas-menu")) {
             mudarPagina("notas", notasPagina);
+            criarNotas()
             notaMenu.classList.add("selecao-menu")
         }
         else if (elemento.classList.contains("revisao-menu")) {
@@ -52,7 +54,12 @@ function mudarPagina(pagina, mostrarPagina) {
     revisaoPagina.style.display = "none";
     exportarPagina.style.display = "none";
 
-    mostrarPagina.style.display = "block";
+    // Exibe a página; mantenha `flex` para a seção `.notas` (não sobrescrever CSS)
+    if (mostrarPagina.classList.contains("notas")) {
+        mostrarPagina.style.display = "flex";
+    } else {
+        mostrarPagina.style.display = "block";
+    }
     sessionStorage.setItem("paginaAtual", pagina);
     if (pagina == "notas"){
         verMaisNecessario()

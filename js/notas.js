@@ -7,16 +7,39 @@ const quadroNotas = document.querySelector(".campo-notas")
 let works = JSON.parse(localStorage.getItem("tarefas")) || [];
 let idsNotas = works.filter(a => a.tipo == "nota")
 
+let selectCor;
+let editarNotas;
+let apagarNotas;
+
+export function detectarCor(cor) {
+    if (cor == "amarelo") { return "#eee544" }
+    else if (cor == "verde") { return "#90cf4c" }
+    else if (cor == "vermelho") { return "#f44072" }
+    else if (cor == "laranja") { return "#fca028" }
+    else if (cor == "azul") { return "#27b3d9" }
+}
+export function detectarCorTexto(cor) {
+    if (cor == "amarelo") { return "texto-escuro" }
+    else if (cor == "verde") { return "texto-escuro" }
+    else if (cor == "vermelho") { return "texto-claro" }
+    else if (cor == "laranja") { return "texto-claro" }
+    else if (cor == "azul") { return "texto-claro" }
+}
+
 function semNotas() {
-    console.log("verificando notas existentes, mas nenhuma encontrada");
+    console.log("Verificando notas existentes, mas nenhuma encontrada");
     const semNotas = document.createElement("p");
     semNotas.textContent = "Nenhuma nota criada ainda :D";
     quadroNotas.appendChild(semNotas);
 }
 
 console.log(idsNotas, ": IDs notas")
-
-if (idsNotas.length > 0) {
+export function criarNotas() {
+    document.querySelectorAll(".campo-notas > div").forEach(a => { a.remove() })
+    if (!idsNotas || idsNotas.length == 0) {
+        semNotas();
+        return;
+    }
     for (let i in idsNotas) {
         const postIt = document.createElement("div")
         postIt.classList.add("post-it")
@@ -66,80 +89,77 @@ if (idsNotas.length > 0) {
 
         corBonita.selectedIndex = ind;
         postIt.style.backgroundColor = detectarCor(idsNotas[i].cor);
-        postIt.style.color = detectarCorTexto(idsNotas[i].cor);
+        postIt.classList.add(detectarCorTexto(idsNotas[i].cor));
 
         postIt.appendChild(conteudoNota);
         postIt.appendChild(acoes);
         quadroNotas.appendChild(postIt);
     }
-} else {
-    semNotas();
+    selectCor = document.querySelectorAll(".cor-select")
+    editarNotas = document.querySelectorAll(".editar-nota")
+    apagarNotas = document.querySelectorAll(".apagar-nota")
+
+    atualizarCores(); // Adicionar os listener de cor
+    editarNota(); // Adicionar os listener de edição
+    apagarNota(); // Adicionar os listener de deleção
+    verMaisNecessario(); // Verificar se o "ver mais" é necessário e adicionar os listener de ver mais
+}
+criarNotas();
+
+function atualizarCores() {
+    selectCor.forEach((selecionado) => {
+        selecionado.addEventListener("change", (event) => {
+            let index = works.findIndex(a => a.idElemento == event.target.parentNode.parentNode.dataset.idElemento)
+            let cor = event.target.value;
+
+            event.target.parentNode.parentNode.style.backgroundColor = detectarCor(cor);
+
+            event.target.parentNode.parentNode.classList.remove("texto-claro", "texto-escuro");
+            event.target.parentNode.parentNode.classList.add(detectarCorTexto(cor));
+            console.log(detectarCorTexto(cor))
+
+            works[index].cor = cor;
+            console.log(works[index].idElemento + ": Cor alterada para " + works[index].cor);
+
+            localStorage.setItem("tarefas", JSON.stringify(works))
+
+            criarNotas();
+
+            /*
+            Cores post it: #27b3d9 #fca028 #f44072 #90cf4c #eee544
+            Cores post it text: #006681 #814900 #730020 #3a7000 #6b6500
+            */
+        })
+    })
 }
 
-const selectCor = document.querySelectorAll(".cor-select")
-selectCor.forEach((selecionado) => {
-    selecionado.addEventListener("change", (event) => {
-        let index = works.findIndex(a => a.idElemento == event.target.parentNode.parentNode.dataset.idElemento)
-        let cor = event.target.value;
-        console.log(cor);
+function editarNota() {
+    editarNotas.forEach((a) => {
+        a.addEventListener("click", (event) => {
+            let idDoElemento = event.target.closest(".post-it").dataset.idElemento;
+            let index = works.findIndex(a => a.idElemento == idDoElemento)
 
-        event.target.parentNode.parentNode.style.backgroundColor = detectarCor(cor);
-        event.target.parentNode.parentNode.style.color = detectarCorTexto(cor);
-
-        works[index].cor = cor;
-        console.log(works[index].idElemento + ": Cor alterada para " + works[index].cor);
-
-        localStorage.setItem("tarefas", JSON.stringify(works))
-
-        window.location.reload();
-
-        /*
-        Cores post it: #27b3d9 #fca028 #f44072 #90cf4c #eee544
-        Cores post it text: #006681 #814900 #730020 #3a7000 #6b6500
-        */
-    })
-})
-
-const editarNotas = document.querySelectorAll(".editar-nota")
-editarNotas.forEach((a) => {
-    a.addEventListener("click", (event) => {
-        let idDoElemento = event.target.closest(".post-it").dataset.idElemento;
-        let index = works.findIndex(a => a.idElemento == idDoElemento)
-
-        let tituloModal = `Editar Nota`;
-        let conteudoModal = `
+            let tituloModal = `Editar Nota`;
+            let conteudoModal = `
             <textarea type="text" class="editar-tarefas" wrap="hard" rows="5"
                 cols="10" autofocus>${works[index].conteudo}</textarea>
-        `;
-        abrirModal(tituloModal, conteudoModal, works[index].idElemento, "editar")
+            `;
+            abrirModal(tituloModal, conteudoModal, works[index].idElemento, "editar")
+        })
     })
-})
-
-const apagarNotas = document.querySelectorAll(".apagar-nota")
-apagarNotas.forEach((a) => {
-    a.addEventListener("click", (event) => {
-        let idDoElemento = event.target.closest(".post-it").dataset.idElemento;
-        let index = works.findIndex(a => a.idElemento == idDoElemento)
-
-        let tituloModal = `Excluir Nota?`;
-        let conteudoModal = `<p>Você tem certeza que deseja excluir esta nota?</p>`;
-        abrirModal(tituloModal, conteudoModal, works[index].idElemento, "excluir-nota")
-    })
-})
-
-export function detectarCor(cor) {
-    if (cor == "amarelo") { return "#eee544" }
-    else if (cor == "verde") { return "#90cf4c" }
-    else if (cor == "vermelho") { return "#f44072" }
-    else if (cor == "laranja") { return "#fca028" }
-    else if (cor == "azul") { return "#27b3d9" }
 }
-export function detectarCorTexto(cor) {
-    if (cor == "amarelo") { return "#6b6500" }
-    else if (cor == "verde") { return "#3a7000" }
-    else if (cor == "vermelho") { return "#730020" }
-    else if (cor == "laranja") { return "#814900" }
-    else if (cor == "azul") { return "#006681" }
+
+function apagarNota() {
+    apagarNotas.forEach((a) => {
+        a.addEventListener("click", (event) => {
+            let idDoElemento = event.target.closest(".post-it").dataset.idElemento;
+            let index = works.findIndex(a => a.idElemento == idDoElemento)
+
+            let tituloModal = `Excluir Nota?`;
+            let conteudoModal = `<p>Você tem certeza que deseja excluir esta nota?</p>`;
+            abrirModal(tituloModal, conteudoModal, works[index].idElemento, "excluir-nota")
+        })
+    })
 }
 
 export function verMaisNecessario() {

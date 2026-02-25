@@ -12,7 +12,9 @@ registrar.addEventListener("click", () => {
         alert("Por favor, selecione um arquivo ou cole o JSON para importar.");
         return;
     } if (importarInput.value && colarJson.value) {
-
+        alert("Por favor, escolha apenas um método de importação: arquivo ou colar JSON.");
+        return;
+        //-------------------Colocar um sistema pra aceitar os dois no futuro
     } if (importarInput.value) {
         const file = importarInput.files[0]; // Pega o arquivo selecionado
         const reader = new FileReader(); // Cria um FileReader para ler o conteúdo do arquivo
@@ -21,6 +23,8 @@ registrar.addEventListener("click", () => {
             try {
                 const dadosImportados = JSON.parse(event.target.result); // Tenta converter o conteúdo do arquivo para JSON
                 processar(dadosImportados);
+                importarInput.value = "";
+                window.location.reload()
             } catch (error) {
                 alert("Erro ao ler o arquivo. Certifique-se de que é um arquivo JSON válido.");
             }
@@ -32,6 +36,7 @@ registrar.addEventListener("click", () => {
             const dadosImportados = JSON.parse(colarJson.value); // Tenta converter o conteúdo do textarea para JSON
             processar(dadosImportados);
             colarJson.value = ""; // Limpa o textarea após a importação
+            window.location.reload()
         } catch (error) {
             alert("Erro ao ler o JSON. Certifique-se de que o texto é um JSON válido.");
         }

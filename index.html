@@ -81,10 +81,37 @@
         </section> <!--Diario-->
 
         <section class="notas">
-            <h1>Notas</h1>
-            <hr>
-            <div class="campo-notas"></div>
-        </section>
+            <div class="notas-espaco">
+                <h1>Notas</h1>
+                <hr>
+                <div class="campo-notas"></div>
+            </div>
+            <div class="filtros">
+                <div class="legenda-notas">
+                    <div class="add-legenda cor1">
+                        <div class="coor amarelo-legenda"></div>
+                        <input type="text" class="input-legenda input-amarelo" value="Adicione uma legenda aqui..." data-cor="amarelo">
+                    </div>
+                    <div class="add-legenda cor2">
+                        <div class="coor laranja-legenda"></div>
+                        <input type="text" class="input-legenda input-laranja" value="Adicione uma legenda aqui..." data-cor="laranja">
+                    </div>
+                    <div class="add-legenda cor3">
+                        <div class="coor vermelho-legenda"></div>
+                        <input type="text" class="input-legenda input-vermelho" value="Adicione uma legenda aqui..." data-cor="vermelho">
+                    </div>
+                    <div class="add-legenda cor4">
+                        <div class="coor verde-legenda"></div>
+                        <input type="text" class="input-legenda input-verde" value="Adicione uma legenda aqui..." data-cor="verde">
+                    </div>
+                    <div class="add-legenda cor5">
+                        <div class="coor azul-legenda"></div>
+                        <input type="text" class="input-legenda input-azul" value="Adicione uma legenda aqui..." data-cor="azul">
+                    </div>
+                </div> <!-- .legenda-notas -->
+            </div>
+
+        </section> <!-- .notas -->
 
         <section class="revisao">
             <div class="data">
@@ -105,12 +132,13 @@
                     <h3>Importar</h3>
                     <hr>
                     <p>Clique aqui para fazer o dowload de suas tarefas para uso em outro dispositivo</p>
-                    <input type="file" id="importar-json" accept=".json"> <!--Accept limita o tipo de arquivo que pode ser importado a .json-->
+                    <input type="file" id="importar-json" accept=".json">
+                    <!--Accept limita o tipo de arquivo que pode ser importado a .json-->
                     <textarea name="" id="colar-json" placeholder="Ou cole o JSON aqui!"></textarea>
                     <button class="registrar botao">Registrar</button>
                     <select name="" id="tipo-importacao">
                         <option value="adicionar">Adicionar</option>
-                        <option value="substituir">Substituir   </option>
+                        <option value="substituir">Substituir </option>
                     </select>
                 </div>
             </div>

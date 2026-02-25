@@ -9,9 +9,12 @@ import "./tipoTarefa.js";
 import "./verificarElementos.js";
 import "./exportar.js";
 import "./importar.js";
+import { criarNotas } from "./notas.js";
+import "./legendaNotas.js";
 
 //Criar os elementos já criados para/no o dia
 criarElementos()
+criarNotas()
 
 export let selectType = document.querySelectorAll(".tipo2");
 

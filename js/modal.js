@@ -21,7 +21,7 @@ body.addEventListener("keydown", (event) => {
 fechar.addEventListener("click", fecharModal)
 
 export function abrirModal(titulo, conteudo, idElemento, acao) {
-    console.log(idElemento)
+    console.log("Modal aberto: " + idElemento)
     const postIts = document.querySelector(".postItTop")
     if (postIts){
         postIts.classList.remove("postItTop")
@@ -66,6 +66,7 @@ export function abrirModal(titulo, conteudo, idElemento, acao) {
             criarElementos()
         }
     } else if (acao == "ver-mais") {//------------------------------ VER MAIS(notas)
+        works = JSON.parse(localStorage.getItem("tarefas"));
         salvar.style.display = "none";
         let index = works.findIndex(a => a.idElemento == idElemento)
         let cor = detectarCor(works[index].cor) || "#eee544";

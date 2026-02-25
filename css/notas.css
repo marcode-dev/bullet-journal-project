@@ -1,20 +1,85 @@
 :root {
     --corTextoPostIt: #3f3b00
 }
-.notas h1 {
+
+.notas {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    width: 100%;
+    align-items: flex-start;
+}
+.notas-espaco{
+    flex: 1 1 auto;
+    min-width: 0;
+}
+.filtros {
+    position: sticky;
+    top: 150px;
+    flex: 0 0 250px;
+    width: 320px;
+    min-width: 250px;
+}
+
+.add-legenda {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 15px;
+}
+.amarelo-legenda {
+    background-color: #eee544;
+}
+.laranja-legenda {
+    background-color: #fca028;
+}
+.vermelho-legenda {
+    background-color: #f44072;
+}
+.verde-legenda {
+    background-color: #90cf4c;
+}
+.azul-legenda {
+    background-color: #27b3d9;
+}
+.input-legenda {
+    background-color: none;
+    border: none;
+    cursor: pointer;
+    border-radius: 20px;
+    width: 90%;
+    height: 25px;
+    color: rgb(81, 81, 81);
+    padding: 10px;
+}
+.coor {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.notas-espaco h1 {
     color: rgb(72, 72, 72);
     font-size: 70px;
     font-weight: 800;
 }
-
 .campo-notas {
-    width: 95%;
     min-height: auto;
     height: auto;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     align-content: flex-start;
+}
+
+.campo-notas:has(.post-it:hover) .post-it:not(:hover){
+    filter: blur(0.5px);
+    transition: transform 0.2s, opacity 0.5s;
+}
+.campo-notas .post-it:hover {
+    filter: blur(0);
 }
 
 .post-it {
@@ -24,9 +89,16 @@
     width: 230px;
     height: 230px;
     background-color: #eee544;
-    margin: 15px;
+    margin: 10px;
     padding: 30px;
-    box-shadow: -3px 3px 20px rgb(182, 182, 182);
+    box-shadow: -3px 3px 5px rgb(182, 182, 182);
+    border-radius: 15px;
+    cursor: default;
+    transition: transform 0.3s, opacity 0.4s;
+}
+.post-it:hover {
+    transform: scale(1.09);
+    transition: transform 0.2s;
 }
 .post-it:hover .acoes {
     opacity: 1;
@@ -37,13 +109,14 @@
     border: none;
     cursor: pointer;
     border-radius: 20px;
-    width: 40px;
-    height: 30px;
+    width: 37px;
+    height: 25px;
     color: rgb(81, 81, 81);
 }
 
 .conteudo-nota {
     max-height: 180px;
+    font-weight: 500;
     overflow: hidden;
 }
 
@@ -95,6 +168,13 @@
     white-space: pre-wrap;
     overflow-wrap: break-word;
 }
+
+.texto-escuro {
+    color: #2C3E50
+}
+.texto-claro {
+    color: #ecf0f1
+}
 /*
 Cores post it: #27b3d9 #fca028 #f44072 #90cf4c #eee544
 Cores post it text: #006681 #814900 #730020 #3a7000 #6b6500
@@ -104,7 +184,7 @@ Cores post it text: #006681 #814900 #730020 #3a7000 #6b6500
 
 /* Tablets - 1024px e abaixo */
 @media (max-width: 1024px) {
-    .notas h1 {
+    .notas-espaco h1 {
         font-size: 55px;
     }
 
@@ -138,7 +218,7 @@ Cores post it text: #006681 #814900 #730020 #3a7000 #6b6500
 
 /* Tablets pequenos - 768px e abaixo */
 @media (max-width: 768px) {
-    .notas h1 {
+    .notas-espaco h1 {
         font-size: 40px;
     }
 
@@ -179,11 +259,25 @@ Cores post it text: #006681 #814900 #730020 #3a7000 #6b6500
         width: 16px;
         height: 16px;
     }
+    /* Empilha notas e filtros em telas pequenas */
+    .notas {
+        flex-direction: column;
+    }
+
+    .filtros {
+        width: 100%;
+        flex: 0 0 auto;
+        margin-top: 20px;
+    }
+
+    .notas-espaco {
+        width: 100%;
+    }
 }
 
 /* Celulares - 480px e abaixo */
 @media (max-width: 480px) {
-    .notas h1 {
+    .notas-espaco h1 {
         font-size: 28px;
     }
 

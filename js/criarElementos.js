@@ -125,18 +125,20 @@ export function verificarTarefas() {
 
     // Verifica sem contar o titulo e o hr, para não considerar como tarefa
     const contarTarefas = (container) => {
-        return Array.from(container.children).filter(c => 
+        return Array.from(container.children).filter(c =>
             c.tagName !== "H5" && c.tagName !== "HR"
         ).length;
     };
 
     if (contarTarefas(tAdiadas) === 0) {
         tAdiadas.style.display = "none";
-    }
+    } else { tAdiadas.style.display = "block"; }
+
     if (contarTarefas(tCanceladas) === 0) {
         tCanceladas.style.display = "none";
-    }
+    } else { tCanceladas.style.display = "block"; }
+
     if (contarTarefas(tFinalizadas) === 0) {
         tFinalizadas.style.display = "none";
-    }
+    } else { tFinalizadas.style.display = "block"; }
 }

@@ -45,6 +45,7 @@
 
 .modal.postItTop .modal-conteudo {
     margin: 0;
+    font-weight: 500;
 }
 
 .modal.postItTop .modal-conteudo p {

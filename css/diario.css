@@ -63,6 +63,7 @@
     border-radius: 20px;
     border: solid 1px rgb(128, 128, 128);
     box-shadow: 2px 2px 5px rgb(173, 173, 173);
+    transition: transform 0.2s;
 }
 
 #tipo {
@@ -128,6 +129,14 @@
     padding: 15px;
     gap: 10px;
     flex-wrap: wrap;
+    cursor: default;
+    transition: transform 0.1s;
+}
+.tarefa:hover, .tarefa:hover #tipo, .input-tarefas:hover #escrever, .input-tarefas:hover #tipo, .input-tarefas:hover {
+    background-color: #f8f8f8;
+    transform: scale(1.03);
+    transition: background-color 0.3s;
+    transition: transform 0.2s;
 }
 
 .tarefa h4 {
