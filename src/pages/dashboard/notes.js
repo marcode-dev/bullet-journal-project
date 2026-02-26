@@ -1,6 +1,6 @@
 //Cores post it: #27b3d9 #fca028 #f44072 #90cf4c #eee544
 
-import { abrirModal } from "./modal.js";
+import { abrirModal } from "../../components/modal/modal.js";
 
 //Cores post it text: #006681 #814900 #730020 #3a7000 #6b6500
 const quadroNotas = document.querySelector(".campo-notas")

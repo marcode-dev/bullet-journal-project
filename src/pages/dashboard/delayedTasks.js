@@ -1,4 +1,4 @@
-import { idDia } from './data.js';
+import { idDia } from '../../utils/data.js';
 
 export let adiados = JSON.parse(localStorage.getItem("Adiados")) || [];
 let aindaAdiados = [];

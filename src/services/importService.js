@@ -1,4 +1,4 @@
-import { abrirModal } from "./modal.js";
+import { abrirModal } from "../components/modal/modal.js";
 
 const registrar = document.querySelector(".registrar");
 const tipoImportacao = document.querySelector("#tipo-importacao");

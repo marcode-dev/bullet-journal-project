@@ -2,7 +2,7 @@
 let works = JSON.parse(localStorage.getItem("tarefas")) || [];
 let adiados = JSON.parse(localStorage.getItem("Adiados")) || [];
 import { criarElementos } from "./criarElementos.js";
-import { verificarTarefas } from "./criarElementos.js"
+import { verificarTarefas } from "./criarElementos.js";
 
 // import { selectType } from "./main.js";
 // console.log("teste")

@@ -1,4 +1,4 @@
-import {criarElementos, opcoes} from "./criarElementos.js";
+import {criarElementos, opcoes} from "../pages/dashboard/criarElementos.js";
 import {idDia} from "./data.js";
 
 let works = JSON.parse(localStorage.getItem("tarefas")) || []; // Lê o que tinha antes 

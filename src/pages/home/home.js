@@ -1,16 +1,18 @@
-//Importar funções
-import "./data.js";
-import {criarElementos} from "./criarElementos.js";
-import "./menuController.js";
-import "./modal.js";
-import "./notas.js";
-import "./tarefasAdiadas.js";
-import "./tipoTarefa.js";
-import "./verificarElementos.js";
-import "./exportar.js";
-import "./importar.js";
-import { criarNotas } from "./notas.js";
-import "./legendaNotas.js";
+//Importar funções e arquivos necessários para a página
+import "../../components/modal/modal.js";
+import "../../components/navbar/menuController.js";
+
+import { criarElementos } from "../../pages/dashboard/criarElementos.js";
+import "../../pages/dashboard/delayedTasks.js";
+import "../../pages/dashboard/gradeLegends.js";
+import { criarNotas } from "../../pages/dashboard/notes.js";
+import "../../pages/dashboard/taskTypes.js";
+
+import "../../services/exportService.js";
+import "../../services/importService.js";
+
+import "../../utils/data.js";
+import "../../utils/verificarElementos.js";
 
 //Criar os elementos já criados para/no o dia
 criarElementos()

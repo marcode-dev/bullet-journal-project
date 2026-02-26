@@ -1,5 +1,5 @@
-import { idDia } from "./data.js";
-import { abrirModal } from "./modal.js";
+import { idDia } from "../../utils/data.js";
+import { abrirModal } from "../../components/modal/modal.js";
 
 export const opcoes = document.getElementById("tipo");
 export function criarElementos() {

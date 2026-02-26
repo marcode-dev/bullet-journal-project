@@ -1,4 +1,4 @@
-import { abrirModal } from "./modal.js";
+import { abrirModal } from "../components/modal/modal.js";
 let works = JSON.parse(localStorage.getItem("tarefas")) || [];
 const exportarButton = document.querySelector(".exportar-button");
 const notaDesenvolvedor = document.querySelector(".nota-desenvolvedor-marcos");

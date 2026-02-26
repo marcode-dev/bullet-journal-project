@@ -1,6 +1,6 @@
-import { criarElementos } from "./criarElementos.js";
-import { adiados } from "./tarefasAdiadas.js";
-import { detectarCor, detectarCorTexto } from "./notas.js";
+import { criarElementos } from "../../pages/dashboard/criarElementos.js";
+import { adiados } from "../../pages/dashboard/delayedTasks.js";
+import { detectarCor, detectarCorTexto } from "../../pages/dashboard/notes.js";
 
 const modal = document.querySelector(".modal");
 const tituloModal = document.querySelector(".titulo-modal");

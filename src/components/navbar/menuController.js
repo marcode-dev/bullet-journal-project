@@ -1,6 +1,6 @@
-import { criarElementos } from "./criarElementos.js";
-import { criarNotas } from "./notas.js";
-import { verMaisNecessario } from "./notas.js";
+import { criarElementos } from "../../pages/dashboard/criarElementos.js";
+import { criarNotas } from "../../pages/dashboard/notes.js";
+import { verMaisNecessario } from "../../pages/dashboard/notes.js";
 
 //Seleciona as seções de cada tela/pagina
 export const diarioPagina = document.querySelector(".diario");
