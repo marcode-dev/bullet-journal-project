@@ -151,7 +151,9 @@ export function detectarCorTexto(cor) {
 
 function semNotas() {
     console.log("Verificando notas existentes, mas nenhuma encontrada");
+    if (document.querySelector(".sem-notas")) return; // evita criar múltiplas mensagens se já existir
     const semNotas = document.createElement("p");
+    semNotas.classList.add("sem-notas");
     semNotas.textContent = "Nenhuma nota encontrada :D";
     quadroNotas.appendChild(semNotas);
 }
@@ -159,6 +161,7 @@ function semNotas() {
 console.log(idsNotas, ": IDs notas")
 export function criarNotas() {
     document.querySelectorAll(".campo-notas > div").forEach(a => { a.remove() })
+    document.querySelectorAll(".sem-notas").forEach(a => a.remove())
     if (!idsNotas || idsNotas.length == 0) {
         semNotas();
         return;

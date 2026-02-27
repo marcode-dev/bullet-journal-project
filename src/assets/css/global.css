@@ -18,10 +18,46 @@
 
 /* ===== Variáveis de nível global ===== */
 :root {
-    --option-menu-width: calc(250px - 10px);
-    --cor-main: rgb(239, 239, 239);
+    /* layout measurements that change with breakpoints */
+    --header-height: 80px;            /* default header height for desktop/large devices */
+    --menu-width: 250px;              /* full-width of vertical menu container */
+    --option-menu-width: calc(var(--menu-width) - 10px);
+    --main-offset: calc(var(--menu-width) + 70px); /* distance from left edge to center of main */
+
+    /* colors */
+    --cor-main: #f3eee0d5;
+    --body-background: #ffffff;
+    --cor-principal: rgba(255, 204, 0, 0.895);
+    --cor-texto: #5c5b5b;
+
+    /* breakpoints (can be reused) */
+    --bp-tablet: 1024px;
+    --bp-smalltablet: 768px;
+    --bp-mobile: 480px;
 }
 
+body {
+    background-image: url("/src/assets/backgrounds/background.png");
+    background-position: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-color: var(--body-background);
+    /* use flex layout so that .menu and .main are side-by-side and responsive */
+    display: flex;
+    flex-direction: row;
+}
+
+
+.not-haja-luz {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.05);
+    z-index: -10;
+}
 /* ===== Header e navegação superior ===== */
 header {
     position: fixed;
@@ -30,17 +66,14 @@ header {
     align-items: center;
     z-index: 5;
     width: 100vw;
-    height: 100px;
-    background-color: rgb(233, 233, 233);
+    height: var(--header-height);
+    opacity: 0.85;
+    background-image: url("/src/assets/backgrounds/background-header.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     user-select: none;
-}
-
-.menu-icon {
-    position: absolute;
-    height: 40px;
-    width: 40px;
-    left: 20px;
-    cursor: pointer;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .combinacao-logo {
@@ -63,23 +96,26 @@ header {
 
 
 .logo-header {
-    height: 50px;
-    width: 50px;
-    border-radius: 30px;
-    background-color: rgb(47, 47, 47);
+    height: 70px;
+    width: auto;
 }
-
 
 .menu {
     position: fixed;
     z-index: 4;
-    top: 100px;
-    width: 250px;
-    height: calc(100vh - 100px);
-    background-color: rgb(255, 255, 255);
+    /* vertically center relative to header height */
+    top: calc(var(--header-height) + 10px);
+    left: 0;
+    width: var(--menu-width);
+    height: calc(100vh - var(--header-height) - 20px);
+    border-radius: 0px 30px 30px 0px;
+    backdrop-filter: blur(5px);
+    background-color: var(--cor-main);
+    box-shadow: 4px 0px 8px rgba(0, 0, 0, 0.1);
     padding-top: 20px;
     padding-left: 10px;
     user-select: none;
+    transition: width 0.3s ease; /* keep animation when collapses */
 }
 
 .option-menu {
@@ -91,13 +127,21 @@ header {
     padding: 10px;
     border-top-left-radius: 30px;
     border-bottom-left-radius: 30px;
+    transition: 0.5s;
+}
+
+:has(.option-menu:hover) .option-menu:not(:hover) {
+    width: calc(var(--option-menu-width) - 20px);
+    margin-left: 20px;
+    transition: 0.2s;
 }
 
 .option-menu h3 {
     margin-left: 10px;
     font-family: 'Poppins', sans-serif;
     font-weight: 500;
-    color: rgb(51, 51, 51);
+    color: var(--cor-texto);
+    text-shadow: 4px 4px 4px rgba(255, 255, 255, 0.147);
 }
 
 .option-menu .img {
@@ -109,30 +153,31 @@ header {
 
 
 .option-menu:hover {
-    background-color: rgb(234, 234, 234);
+    background-color: rgba(255, 204, 0, 0.558);
     cursor: pointer;
     transition: 0.3s;
 }
 
 .selecao-menu {
-    background-color: var(--cor-main) !important;
+    background-color: var(--cor-principal) !important;
 }
 
 
 /* ===== Conteúdo principal ===== */
 .main {
     background-color: var(--cor-main);
-    width: calc(100vw - 280px);
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    margin-left: 250px;
-    margin-right: 10px;
-    min-height: calc(100vh - 140px);
-    margin-top: 110px;
+    border-radius: 50px;
+    /* flex child will grow; width computed from viewport minus menu */
+    flex: 1 1 auto;
+    min-height: calc(100vh - var(--header-height) - 40px);
+    margin-top: calc(var(--header-height) + 20px);
+    margin-left: var(--menu-width);
     padding-left: 80px;
     padding-right: 80px;
     padding-top: 60px;
+    display: flex;
+    flex-direction: column;
+    transition: margin-left 0.3s ease;
 }
 
 /* ===== Rodapé ===== */
@@ -184,13 +229,15 @@ hr {
 /* ===== RESPONSIVIDADE ===== */
 
 /* Tablets - 1024px e abaixo */
-@media (max-width: 1024px) {
-    header {
-        height: 80px;
+@media (max-width: var(--bp-tablet)) {
+    /* tablet/responsive tweaks; layout remains visually similar to desktop */
+    :root {
+        --header-height: 80px;
+        --menu-width: 200px;
     }
 
-    .bold {
-        font-size: 22px;
+    header {
+        height: var(--header-height);
     }
 
     .combinacao-logo h1 {
@@ -204,25 +251,20 @@ hr {
     }
 
     .menu {
-        width: 200px;
-        top: 80px;
-        height: calc(100vh - 80px);
-    }
-
-    :root {
-        --option-menu-width: calc(200px - 10px);
+        width: var(--menu-width);
+        top: var(--header-height);
+        height: calc(100vh - var(--header-height) - 20px);
     }
 
     .selecao-menu {
         width: calc(var(--option-menu-width) - 6px);
         height: 42px;
-        top: -79px;
+        top: calc(-1 * (var(--header-height) - 1px));
     }
 
     .main {
-        width: calc(100vw - 230px);
-        margin-left: 200px;
-        margin-top: 90px;
+        margin-left: var(--menu-width);
+        margin-top: calc(var(--header-height) + 20px);
         padding-right: 50px;
         padding-left: 60px;
         padding-top: 50px;
@@ -230,9 +272,14 @@ hr {
 }
 
 /* Tablets pequenos e celulares - 768px e abaixo */
-@media (max-width: 768px) {
+@media (max-width: var(--bp-smalltablet)) {
+    :root {
+        --header-height: 70px;
+        --menu-width: 170px;
+    }
+
     header {
-        height: 70px;
+        height: var(--header-height);
     }
 
     .bold {
@@ -250,22 +297,18 @@ hr {
     }
 
     .menu {
-        width: 170px;
-        top: 70px;
-        height: calc(100vh - 70px);
+        width: var(--menu-width);
+        top: var(--header-height);
+        height: calc(100vh - var(--header-height) - 20px);
         padding-top: 15px;
         padding-left: 8px;
-    }
-
-    :root {
-        --option-menu-width: calc(170px - 10px);
     }
 
     .selecao-menu {
         width: calc(var(--option-menu-width) - 6px);
         height: 38px;
         margin-left: 4px;
-        top: -71px;
+        top: calc(-1 * (var(--header-height) - 1px));
     }
 
     .option-menu {
@@ -285,9 +328,8 @@ hr {
     }
 
     .main {
-        width: calc(100vw - 198px);
-        margin-left: 170px;
-        margin-top: 80px;
+        margin-left: var(--menu-width);
+        margin-top: calc(var(--header-height) + 10px);
         padding-left: 40px;
         padding-top: 40px;
         padding-right: 20px;
@@ -319,9 +361,13 @@ hr {
 }
 
 /* Celulares - 480px e abaixo */
-@media (max-width: 480px) {
+@media (max-width: var(--bp-mobile)) {
+    :root {
+        --header-height: 60px;
+        --menu-width: 140px;
+    }
     header {
-        height: 60px;
+        height: var(--header-height);
     }
 
     .bold {
@@ -339,22 +385,19 @@ hr {
     }
 
     .menu {
-        width: 140px;
-        top: 60px;
-        height: calc(100vh - 60px);
+        width: var(--menu-width);
+        top: var(--header-height);
+        height: calc(100vh - var(--header-height) - 20px);
         padding-top: 10px;
         padding-left: 5px;
     }
 
-    :root {
-        --option-menu-width: calc(140px - 10px);
-    }
 
     .selecao-menu {
         width: calc(var(--option-menu-width) - 6px);
         height: 34px;
         margin-left: 2px;
-        top: -61px;
+        top: calc(-1 * (var(--header-height) - 1px));
     }
 
     .option-menu {
@@ -375,9 +418,8 @@ hr {
     }
 
     .main {
-        width: calc(100vw - 165px);
-        margin-left: 140px;
-        margin-top: 70px;
+        margin-left: var(--menu-width);
+        margin-top: calc(var(--header-height) + 10px);
         padding-left: 15px;
         padding-right: 10px;
         padding-top: 30px;

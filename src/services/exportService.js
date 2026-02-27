@@ -1,4 +1,6 @@
 import { abrirModal } from "../components/modal/modal.js";
+import { idDia } from "../utils/data.js";
+
 let works = JSON.parse(localStorage.getItem("tarefas")) || [];
 const exportarButton = document.querySelector(".exportar-button");
 const notaDesenvolvedor = document.querySelector(".nota-desenvolvedor-marcos");
@@ -16,7 +18,7 @@ notaDesenvolvedor.addEventListener("click", () => {
 
 })
 
-exportarButton.addEventListener("click", () => { downloadJSON(works, "tarefas.json"); });
+exportarButton.addEventListener("click", () => { downloadJSON(works, `tarefas${idDia}.json`); });
 
 function downloadJSON(data, filename) {
     const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });

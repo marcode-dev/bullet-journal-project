@@ -15,11 +15,10 @@
     <header>
         <!--<img src="https://cdn-icons-png.flaticon.com/512/7216/7216128.png" alt="" class="menu-icon">-->
         <div class="combinacao-logo">
-            <div class="logo-header"></div>
-            <h1>Mark it</h1>
+            <img src="./src/assets/images/markit-logo.png" alt="" class="logo-header">
         </div>
     </header>
-
+    <div class="not-haja-luz"></div>
     <div class="menu">
         <div class="option-menu diario-menu">
             <img src="https://cdn-icons-png.flaticon.com/128/3387/3387245.png" alt="" class="img">
@@ -83,7 +82,11 @@
 
         <section class="notas">
             <div class="titulo-notas-div">
-                <h1 class="titulo-notas">Notas</h1>
+                <div class="posicao-titulo">
+                    <h1 class="titulo-notas">Notas</h1>
+                    <img src="https://cdn-icons-png.flaticon.com/128/2676/2676818.png" alt="Filtro"
+                        class="filtrar-ocultar-icon">
+                </div>
 
                 <div class="legenda-notas">
                     <div class="add-legenda cor1">
@@ -112,8 +115,6 @@
                             data-cor="azul">
                     </div>
                 </div> <!-- .legenda-notas -->
-                <img src="https://cdn-icons-png.flaticon.com/128/2676/2676818.png" alt="Filtro"
-                    class="filtrar-ocultar-icon">
                 <hr>
             </div>
 
@@ -125,7 +126,7 @@
                     <div class="fundo-filtro">
                         <div class="order-by">
                             <h4 class="order-titulo">Ordenar por:</h4>
-                            <select name="ordenar-notas" id="ordenar-notas">
+                            <select name="ordenar-notas" id="ordenar-notas" class="select-filtro">
                                 <option value="Todos">Todos</option>
                                 <option value="recentes">Mais recentes</option>
                                 <option value="antigos">Mais antigos</option>
@@ -133,7 +134,7 @@
                         </div> <!-- .order-by -->
                         <div class="order-data">
                             <h4 class="order-titulo">Filtrar por data:</h4>
-                            <select name="order-data" id="order-data">
+                            <select name="order-data" id="order-data" class="select-filtro">
                                 <option value="todos">Todos</option>
                                 <option value="hoje">Hoje</option>
                                 <option value="semana">Última semana</option>

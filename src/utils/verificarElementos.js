@@ -24,7 +24,7 @@ export function verificarElementos() { // Se tiver algo escrito no campo de text
         salvarNoJSON(idDia, idElemento, typeObject, `${texto.value}`)
 
         texto.value = ""; // Resetar o texto no campo de inserção
-        window.location.reload();
+        criarElementos();
         texto.focus() // foca no campo pra facilitar registros consecutivos
     }
 }
