@@ -1,7 +1,9 @@
+/* ===== Container principal do diário ===== */
 .diario {
     width: 100%;
 }
 
+/* ===== Cabeçalho de data ===== */
 .data {
     display: flex;
     flex-direction: row;
@@ -29,6 +31,7 @@
 }
 
 
+/* ===== Área de legendas (tipos de tarefas) ===== */
 .legenda-div {
     display: flex;
     flex-direction: row;
@@ -53,6 +56,7 @@
 }
 
 
+/* ===== Caixa de entrada de novas tarefas ===== */
 .input-tarefas {
     position: relative;
     width: 100%;
@@ -103,6 +107,7 @@
     outline: 0;
 }
 
+/* ===== Botão de salvar tarefa ===== */
 .save {
     padding: 10px 30px;
     background-color: rgb(156, 156, 156);
@@ -120,6 +125,7 @@
     right: 15px;
 }
 
+/* ===== Estilo das tarefas listadas ===== */
 .tarefa {
     height: auto;
     min-height: 60px;
@@ -167,7 +173,7 @@
     white-space: nowrap;
 }
 
-/* botão de status dentro das tarefas */
+/* ===== Botões de status (dentro das tarefas) ===== */
 .tipo2 {
     width: 120px;
     height: 40px;
@@ -184,6 +190,7 @@
     appearance: none;
 }
 
+/* ===== Ícone de nota dentro de tarefa ===== */
 .nota {
     margin-left: 30px;
     width: 35px;
@@ -191,6 +198,7 @@
 }
 
 
+/* ===== Ícone de lixeira para excluir tarefa ===== */
 .lixeira {
     width: auto;
     height: 25px;
@@ -200,6 +208,7 @@
     opacity: 0.5;
 }
 
+/* ===== Ícone de edição dentro de tarefa ===== */
 .editar {
     width: auto;
     height: 25px;
@@ -209,6 +218,7 @@
     opacity: 0.8;
 }
 
+/* ===== Select estilizado com seta ===== */
 .seta-select {
     position: relative;
     display: flex;
@@ -247,6 +257,7 @@
 .seta-select.select-small { width: 110px; height: 32px; }
 .seta-select.select-full { width: 100%; height: auto; }
 
+/* ===== Subtítulos e separadores ===== */
 h5 {
     font-weight: 400;
     font-size: 20px;

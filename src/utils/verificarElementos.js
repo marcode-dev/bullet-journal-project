@@ -35,7 +35,8 @@ function salvarNoJSON(idDia, idElemento, typeObject, conteudo) {
         idDia,
         idElemento,
         "tipo": typeObject,
-        conteudo
+        conteudo,
+        cor: typeObject == "nota" ? "amarelo" : undefined
     })
     localStorage.setItem("tarefas", JSON.stringify(works))
     criarElementos();

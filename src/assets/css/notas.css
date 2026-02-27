@@ -1,19 +1,35 @@
-:root {
-    --corTextoPostIt: #3f3b00
-}
+/* ---------- Estrutura principal e layout ---------- */
 
-.notas {
+/* contêiner de legendas exibido acima da lista de notas */
+.legenda-notas {
     display: flex;
     flex-direction: row;
-    gap: 40px;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+/* painel que agrupa todas as notas */
+.notas {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
+.notas-conteudo {
+    display: flex;
+    flex-direction: row;
     width: 100%;
     align-items: flex-start;
 }
-.notas-espaco{
+
+.notas-espaco {
     flex: 1 1 auto;
     min-width: 0;
 }
-.filtros {
+
+/* barra lateral fixa de filtros */
+.painel-filtros {
     position: sticky;
     top: 150px;
     flex: 0 0 250px;
@@ -21,6 +37,7 @@
     min-width: 250px;
 }
 
+/* área para adicionar novas legendas no painel de filtros */
 .add-legenda {
     display: flex;
     flex-direction: row;
@@ -28,43 +45,75 @@
     gap: 5px;
     margin-bottom: 15px;
 }
+
+/* ---------- Cores das legendas ---------- */
 .amarelo-legenda {
     background-color: #eee544;
 }
+
 .laranja-legenda {
     background-color: #fca028;
 }
+
 .vermelho-legenda {
     background-color: #f44072;
 }
+
 .verde-legenda {
     background-color: #90cf4c;
 }
+
 .azul-legenda {
     background-color: #27b3d9;
 }
-.input-legenda {
-    background-color: none;
-    border: none;
-    cursor: pointer;
-    border-radius: 20px;
-    width: 90%;
-    height: 25px;
-    color: rgb(81, 81, 81);
-    padding: 10px;
-}
+
+/* ---------- Elementos reutilizáveis ---------- */
+/* círculo de cor padrão utilizado nas legendas */
 .coor {
     width: 25px;
     height: 25px;
     border-radius: 50%;
-    margin-right: 10px;
 }
 
-.notas-espaco h1 {
+/* quando o mesmo círculo aparece dentro de um botão de filtro
+   ele precisa ser menor; o seletor abaixo garante o override mantendo
+   a regra anterior para qualquer outra ocorrência */
+.select-notas-option .coor {
+    width: 14px;
+    height: 14px;
+    border-radius: 4px;
+}
+
+/* campo de texto para inserir nome de legenda */
+.input-legenda {
+    background-color: #f9f9f9;
+    border: none;
+    cursor: text;
+    border-radius: 20px;
+    width: 90%;
+    height: 25px;
+    color: rgb(48, 48, 48);
+    font-weight: 400;
+    padding: 10px;
+}
+
+/* título principal da seção de notas */
+.titulo-notas {
     color: rgb(72, 72, 72);
-    font-size: 70px;
+    font-size: 50px;
     font-weight: 800;
 }
+
+/* ícone de filtro ao lado do título */
+.filtrar-ocultar-icon {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+}
+
+/* área que comporta os post-its */
 .campo-notas {
     min-height: auto;
     height: auto;
@@ -74,12 +123,114 @@
     align-content: flex-start;
 }
 
-.campo-notas:has(.post-it:hover) .post-it:not(:hover){
+/* efeitos ao passar o mouse sobre notas */
+.campo-notas:has(.post-it:hover) .post-it:not(:hover) {
     filter: blur(0.5px);
-    transition: transform 0.2s, opacity 0.5s;
+    transition: transform 0.2s, opacity 0.5s, filter 0.5s;
 }
+
 .campo-notas .post-it:hover {
     filter: blur(0);
+}
+
+/* ---------- Caixa branca de filtros ---------- */
+.fundo-filtro {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* ===== componentes de formulário dentro do painel ===== */
+
+/* títulos de pequenas seções dentro do filtro */
+.order-titulo {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #333;
+}
+
+/* selects padrões estilizados */
+select {
+    width: 100%;
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    transition: 0.2s ease;
+}
+
+select:focus,
+select:hover {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* contêiner vertical que agrupa as opções de cor */
+.select-por-cor {
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+}
+
+/* cada opção assume o comportamento de botão */
+.select-notas-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 6px 8px;
+    border-radius: 8px;
+    transition: background 0.2s ease;
+}
+
+.select-notas-option:hover {
+    background: #f5f5f5;
+}
+
+/* checkbox dentro das opções deve usar cor personalizada */
+.select-notas-option input[type="checkbox"] {
+    accent-color: #007bff;
+    cursor: pointer;
+}
+
+/* botão de aplicar filtros */
+.aplicar-filtros-notas {
+    margin-top: 5px;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    background: #007bff;
+    color: white;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.aplicar-filtros-notas:hover {
+    background: #0062cc;
+}
+
+
+.aplicar-filtros-notas:active {
+    transform: scale(0.98);
+}
+
+/* Responsivo */
+@media (max-width: 480px) {
+    .fundo-filtro {
+        max-width: 100%;
+        padding: 16px;
+    }
 }
 
 .post-it {
@@ -94,25 +245,49 @@
     box-shadow: -3px 3px 5px rgb(182, 182, 182);
     border-radius: 15px;
     cursor: default;
-    transition: transform 0.3s, opacity 0.4s;
+    transition: transform 0.1s, opacity 0.4s, filter 0.3s;
 }
+
 .post-it:hover {
     transform: scale(1.09);
     transition: transform 0.2s;
 }
+
 .post-it:hover .acoes {
     opacity: 1;
 }
 
 .cor-select {
-    background-color: #ffffff;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    width: 43px;
+    height: 27px;
+
+    border-radius: 100px;
     border: none;
+
+    background-color: #ffffff;
+
+    padding: 0;
     cursor: pointer;
-    border-radius: 20px;
-    width: 37px;
-    height: 25px;
-    color: rgb(81, 81, 81);
+
+    font-size: 0;
+    
+    background-repeat: no-repeat, no-repeat;
+    background-position: right;
+
+    transition: transform 0.15s ease;
 }
+
+/* Cores das opções no dropdown */
+.cor-select option {
+    padding: 5px;
+    font-size: 14px;
+    text-align: center;
+}
+
 
 .conteudo-nota {
     max-height: 180px;
@@ -123,7 +298,7 @@
 .pNota {
     max-height: 150px;
     line-height: 25px;
-    color: var(--corTextoPostIt);
+    color: inherit;
     font-size: 18px;
     overflow-wrap: break-word;
     white-space: pre-wrap;
@@ -140,7 +315,7 @@
 }
 
 .ver-mais {
-    color:var(--corTextoPostIt);
+    color: var(--corTextoPostIt);
     font-size: 17px;
     cursor: pointer;
 }
@@ -164,17 +339,39 @@
     opacity: 1 !important;
 }
 
-.modal-quebra{
+.modal-quebra {
     white-space: pre-wrap;
     overflow-wrap: break-word;
 }
 
 .texto-escuro {
-    color: #2C3E50
+    color: #1c2733
 }
+
 .texto-claro {
     color: #ecf0f1
 }
+
+.tamanho-nota{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+label[for="tamanho-pequena"], label[for="tamanho-media"], label[for="tamanho-grande"] {
+    font-size: 15px;
+    padding: 1px 10px;
+    border-radius: 5px;
+    height: auto;
+    input {
+        cursor: pointer;
+    }
+}
+label[for="tamanho-pequena"]:hover, label[for="tamanho-media"]:hover, label[for="tamanho-grande"]:hover {
+    background-color: rgb(227, 227, 227);
+    transition: 0.2s;
+    cursor: pointer;
+}
+
 /*
 Cores post it: #27b3d9 #fca028 #f44072 #90cf4c #eee544
 Cores post it text: #006681 #814900 #730020 #3a7000 #6b6500
@@ -211,7 +408,7 @@ Cores post it text: #006681 #814900 #730020 #3a7000 #6b6500
     }
 
     .cor-select {
-        width: 35px;
+        width: 45px;
         height: 26px;
     }
 }
@@ -240,9 +437,8 @@ Cores post it text: #006681 #814900 #730020 #3a7000 #6b6500
     }
 
     .cor-select {
-        width: 35px;
+        width: 45px;
         height: 26px;
-        font-size: 12px;
     }
 
     .ver-mais {
@@ -259,6 +455,7 @@ Cores post it text: #006681 #814900 #730020 #3a7000 #6b6500
         width: 16px;
         height: 16px;
     }
+
     /* Empilha notas e filtros em telas pequenas */
     .notas {
         flex-direction: column;
@@ -305,9 +502,8 @@ Cores post it text: #006681 #814900 #730020 #3a7000 #6b6500
     }
 
     .cor-select {
-        width: 30px;
+        width: 40px;
         height: 23px;
-        font-size: 10px;
     }
 
     .ver-mais {

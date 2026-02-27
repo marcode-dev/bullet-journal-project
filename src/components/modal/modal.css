@@ -1,3 +1,4 @@
+/* ===== Overlay escurecido ===== */
 .fade {
     background-color: rgba(0, 0, 0, 0.5);
     width: 100%;
@@ -7,16 +8,19 @@
     display: none;
 }
 
+/* ===== Variáveis globais usadas pelo modal ===== */
 :root {
     --corTextoPostIt: #3f3b00
 }
 
+/* ===== Modificações de post-it quando modal aberto ===== */
 /*Overflow hidden para impedir scroll*/
 .main .postItTop{
     border-radius: 0px;
     width: 400px;
     height: 400px;
 }
+/* ===== Estilo base do modal ===== */
 .modal {    
     display:none;
     z-index: 9;
@@ -32,6 +36,7 @@
     border-radius: 40px;
 }
 
+/* ===== Variante post-it (cor amarela) ===== */
 .modal.postItTop {
     background-color: #eee544;
     border-radius: 15px;
@@ -58,14 +63,17 @@
     display: none;
 }
 
+/* ===== Cabeçalho interno do modal ===== */
 .modal-header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
+/* ===== Área de conteúdo do modal ===== */
 .modal-conteudo{
     margin-bottom:30px;
 }
+/* ===== Botões de confirmação/ação ===== */
 .modal-confirmar{
     width: 100%;
     display: flex;
@@ -81,10 +89,11 @@
 }
 .fechar-modal {
     background-color: rgba(215, 215, 215, 0);
-    color: rgb(74, 74, 74);
+    color: rgb(56, 56, 56);
+    font-weight: 500;
 }
 .fechar-modal:hover {
-    background-color: rgb(213, 213, 213);
+    background-color: rgba(255, 255, 255, 0.8);
     transition: 0.3s;
 }
 .salvar {

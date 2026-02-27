@@ -81,35 +81,120 @@
         </section> <!--Diario-->
 
         <section class="notas">
-            <div class="notas-espaco">
-                <h1>Notas</h1>
-                <hr>
-                <div class="campo-notas"></div>
-            </div>
-            <div class="filtros">
+            <div class="titulo-notas-div">
+                <h1 class="titulo-notas">Notas</h1>
+
                 <div class="legenda-notas">
                     <div class="add-legenda cor1">
                         <div class="coor amarelo-legenda"></div>
-                        <input type="text" class="input-legenda input-amarelo" value="Adicione uma legenda aqui..." data-cor="amarelo">
+                        <input type="text" class="input-legenda input-amarelo" value="Adicione uma legenda aqui..."
+                            data-cor="amarelo">
                     </div>
                     <div class="add-legenda cor2">
                         <div class="coor laranja-legenda"></div>
-                        <input type="text" class="input-legenda input-laranja" value="Adicione uma legenda aqui..." data-cor="laranja">
+                        <input type="text" class="input-legenda input-laranja" value="Adicione uma legenda aqui..."
+                            data-cor="laranja">
                     </div>
                     <div class="add-legenda cor3">
                         <div class="coor vermelho-legenda"></div>
-                        <input type="text" class="input-legenda input-vermelho" value="Adicione uma legenda aqui..." data-cor="vermelho">
+                        <input type="text" class="input-legenda input-vermelho" value="Adicione uma legenda aqui..."
+                            data-cor="vermelho">
                     </div>
                     <div class="add-legenda cor4">
                         <div class="coor verde-legenda"></div>
-                        <input type="text" class="input-legenda input-verde" value="Adicione uma legenda aqui..." data-cor="verde">
+                        <input type="text" class="input-legenda input-verde" value="Adicione uma legenda aqui..."
+                            data-cor="verde">
                     </div>
                     <div class="add-legenda cor5">
                         <div class="coor azul-legenda"></div>
-                        <input type="text" class="input-legenda input-azul" value="Adicione uma legenda aqui..." data-cor="azul">
+                        <input type="text" class="input-legenda input-azul" value="Adicione uma legenda aqui..."
+                            data-cor="azul">
                     </div>
                 </div> <!-- .legenda-notas -->
+                <img src="https://cdn-icons-png.flaticon.com/128/2676/2676818.png" alt="Filtro"
+                    class="filtrar-ocultar-icon">
+                <hr>
             </div>
+
+            <div class="notas-conteudo">
+                <div class="notas-espaco">
+                    <div class="campo-notas"></div>
+                </div>
+                <div class="painel-filtros">
+                    <div class="fundo-filtro">
+                        <div class="order-by">
+                            <h4 class="order-titulo">Ordenar por:</h4>
+                            <select name="ordenar-notas" id="ordenar-notas">
+                                <option value="Todos">Todos</option>
+                                <option value="recentes">Mais recentes</option>
+                                <option value="antigos">Mais antigos</option>
+                            </select>
+                        </div> <!-- .order-by -->
+                        <div class="order-data">
+                            <h4 class="order-titulo">Filtrar por data:</h4>
+                            <select name="order-data" id="order-data">
+                                <option value="todos">Todos</option>
+                                <option value="hoje">Hoje</option>
+                                <option value="semana">Última semana</option>
+                                <option value="mes">Último mês</option>
+                            </select>
+                        </div> <!-- .order-data -->
+                        <div class="tamanho-nota">
+                            <div class="tamanho-nota">
+                                <label for="tamanho-pequena">
+                                    <input type="radio" name="tamanho-nota" id="tamanho-pequena" value="pequena">
+                                    P
+                                </label>
+                                <label for="tamanho-media">
+                                    <input type="radio" name="tamanho-nota" id="tamanho-media" value="media">
+                                    M
+                                </label>
+                                <label for="tamanho-grande">
+                                    <input type="radio" name="tamanho-nota" id="tamanho-grande" value="grande">
+                                    G
+                                </label>
+                            </div>
+                        </div> <!-- .tamanho-nota -->
+                        <div class="select-por-cor">
+                            <h4 class="order-titulo">Filtrar por cor:</h4>
+                            <label class="select-notas-option">
+                                <input type="checkbox" name="filtro-cor" id="filtro-cor-todos" value="todos">
+                                <div class="filtro-cor"></div>
+                                Todos
+                            </label>
+                            <label class="select-notas-option">
+                                <input type="checkbox" name="filtro-cor" id="filtro-cor-azul" value="azul">
+                                <div class="coor azul-legenda filtro-cor"></div>
+                                Azul
+                            </label>
+                            <label class="select-notas-option">
+                                <input type="checkbox" name="filtro-cor" id="filtro-cor-verde" value="verde">
+                                <div class="coor verde-legenda filtro-cor"></div>
+                                Verde
+                            </label>
+                            <label class="select-notas-option">
+                                <input type="checkbox" name="filtro-cor" id="filtro-cor-vermelho" value="vermelho">
+                                <div class="coor vermelho-legenda filtro-cor"></div>
+                                Vermelho
+                            </label>
+                            <label class="select-notas-option">
+                                <input type="checkbox" name="filtro-cor" id="filtro-cor-laranja" value="laranja">
+                                <div class="coor laranja-legenda filtro-cor"></div>
+                                Laranja
+                            </label>
+                            <label class="select-notas-option">
+                                <input type="checkbox" name="filtro-cor" id="filtro-cor-amarelo" value="amarelo">
+                                <div class="coor amarelo-legenda filtro-cor"></div>
+                                Amarelo
+                            </label>
+                        </div> <!-- .select-por-cor -->
+                        <button type="button" class="aplicar-filtros-notas">
+                            Aplicar Filtros
+                        </button>
+                    </div>
+                </div> <!-- .painel-filtros -->
+            </div>
+
 
         </section> <!-- .notas -->
 
