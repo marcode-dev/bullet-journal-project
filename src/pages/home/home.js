@@ -13,6 +13,7 @@ import "../../services/importService.js";
 
 import "../../utils/data.js";
 import "../../utils/verificarElementos.js";
+import "../../utils/darkMode.js";
 
 //Criar os elementos já criados para/no o dia
 criarElementos()

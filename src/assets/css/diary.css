@@ -1,3 +1,9 @@
+:root{
+    --background-input-tarefas: rgb(255, 253, 243);
+    --input-hover: rgb(255, 253, 241);
+    --cor-botao-padrao: rgb(169, 162, 140);
+}
+
 /* ===== Container principal do diário ===== */
 .diario {
     width: 100%;
@@ -8,7 +14,6 @@
     display: flex;
     flex-direction: row;
     align-items: flex-end;
-    color: rgb(72, 72, 72);
     font-family: "Poppins", sans-serif;
     width: 100%;
 }
@@ -19,6 +24,7 @@
     font-weight: 700;
     line-height: 94px;
     user-select: none;
+    color: var(--cor-texto-menu);
 }
 
 .data h3 {
@@ -28,6 +34,7 @@
     padding-bottom: 10px;
     padding-left: 15px;
     user-select: none;
+    color: var(--cor-texto-menu);
 }
 
 
@@ -46,7 +53,8 @@
 .legenda {
     font-size: 15px;
     font-family: "Poppins";
-    color: rgb(83, 83, 83);
+    color: var(--cor-texto-menu);
+    font-style: italic;
     /*border-right: 2px solid rgb(131, 131, 131);*/
 }
 
@@ -61,7 +69,7 @@
     position: relative;
     width: 100%;
     height: 80px;
-    background-color: white;
+    background-color: var(--background-input-tarefas);
     display: flex;
     align-items: center;
     border-radius: 20px;
@@ -76,7 +84,7 @@
     margin-left: 25px;
     border: 0;
     border-radius: 20px;
-    /*background-color: rgb(234, 234, 234);*/
+    background-color: var(--background-input-tarefas);
     cursor: pointer;
     font-family: "Poppins";
     font-size: 15px;
@@ -101,6 +109,7 @@
     padding-top: 5px;
     resize: none;
     font-weight: 400;
+    background-color: var(--background-input-tarefas);
 }
 
 #escrever:focus {
@@ -110,7 +119,7 @@
 /* ===== Botão de salvar tarefa ===== */
 .save {
     padding: 10px 30px;
-    background-color: rgb(156, 156, 156);
+    background-color: var(--cor-botao-padrao);
     border-radius: 10px;
     color: white;
     border: 0;
@@ -139,7 +148,7 @@
     transition: transform 0.1s;
 }
 .tarefa:hover, .tarefa:hover #tipo, .input-tarefas:hover #escrever, .input-tarefas:hover #tipo, .input-tarefas:hover {
-    background-color: #f8f8f8;
+    background-color: var(--input-hover);
     transform: scale(1.03);
     transition: background-color 0.3s;
     transition: transform 0.2s;
@@ -183,7 +192,7 @@
     font-family: "Poppins";
     font-size: 15px;
     padding: 0 12px;
-    background-color: rgb(241, 241, 241);
+    background-color: var(--background-input-tarefas);
     box-sizing: border-box;
     /**/
     -webkit-appearance: none;
@@ -236,7 +245,7 @@
     padding: 8px 36px 8px 12px;
     border-radius: 18px;
     border: 1px solid #e0dddd;
-    background-color: #fff;
+    background-color: var(--background-input-tarefas);
     cursor: pointer;
     font-family: "Poppins";
     font-size: 14px;
@@ -253,7 +262,6 @@
     color: #555;
 } 
 
-/* adaptamos .seta-select para ficar harmonizada com .tipo2 */
 .seta-select.select-small { width: 110px; height: 32px; }
 .seta-select.select-full { width: 100%; height: auto; }
 
@@ -351,7 +359,6 @@ h5 {
         font-family: "Poppins";
         font-size: 13px;
         padding: 0 10px;
-        background-color: rgb(234, 234, 234);
         box-sizing: border-box;
         -webkit-appearance: none;
         appearance: none;
@@ -493,7 +500,6 @@ h5 {
         font-family: "Poppins";
         font-size: 12px;
         padding: 6px 10px;
-        background-color: rgb(234, 234, 234);
         box-sizing: border-box;
         -webkit-appearance: none;
         appearance: none;
@@ -634,7 +640,6 @@ h5 {
         font-family: "Poppins";
         font-size: 12px;
         padding: 8px 12px;
-        background-color: rgb(234,234,234);
         box-sizing: border-box;
         -webkit-appearance: none;
         appearance: none;

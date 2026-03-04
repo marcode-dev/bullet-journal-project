@@ -1,3 +1,5 @@
+
+
 /* ===== Container exportação/importação ===== */
 .exportar {
     /*Centralizar tela no meio*/
@@ -8,11 +10,10 @@
 
 /* ===== Painel branco centralizado ===== */
 .plano-fundo {
-    background-color: var(--cor-fundo);
+    background-color: var(--background-input-tarefas);
     border-radius: 15px;
     padding: 40px;
     text-align: center;
-    background-color: rgba(255, 255, 255, 0.80);
     box-shadow: 1px -1px 5px rgba(0, 0, 0, 0.1);
     width: 45%;
     margin: 0 auto;
@@ -40,25 +41,28 @@
     border-radius: 10px;
     border: 1px solid rgb(200, 200, 200);
     resize: none;
+    background-color: var(--background-input-tarefas);
 }
 
 /* ===== Botões padrão ===== */
 .botao {
-    background-color: rgb(70, 70, 70);
+    background-color: var(--cor-botao-padrao);
     padding: 8px 20px;
     color: white;
     border-radius: 8px;
     border: none;
     cursor: pointer;
     margin-top: 10px;
+    box-shadow: 2px 2px 5px rgba(38, 20, 0, 0.553);
 }
 .botao:hover {
-    background-color: rgb(101, 101, 101);
+    background-color: rgba(186, 170, 154, 0.832);
     transition: 0.1s;
 }
 
 /* ===== Select do tipo de importação ===== */
 #tipo-importacao {
+    background-color: var(--background-input-tarefas);
     margin-top: 10px;
     padding: 8px;
     border-radius: 5px;

@@ -374,6 +374,8 @@ function verificarEstadoFiltros() {
         filtrarCampo.style.display = "block";
         filtrarCampo.style.pointerEvents = "auto";
         filtrarIcon.style.opacity = "1";
+        quadroNotas.style.border = "1px solid var(--cor-escura)";
+        
 
         const tamanhoNota = document.querySelectorAll('input[name="tamanho-nota"]');
         tamanhoNota.forEach((input) => {

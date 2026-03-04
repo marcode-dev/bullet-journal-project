@@ -36,7 +36,8 @@
 /* barra lateral fixa de filtros */
 .painel-filtros {
     position: sticky;
-    top: 150px;
+    /*top: 50%;
+    transform: translateY(-40%);*/
     flex: 0 0 250px;
     width: 320px;
     min-width: 250px;
@@ -91,7 +92,7 @@
 
 /* campo de texto para inserir nome de legenda */
 .input-legenda {
-    background-color: #f9f9f9;
+    background-color: #f3eee0b6;
     border: none;
     cursor: text;
     border-radius: 20px;
@@ -104,7 +105,7 @@
 
 /* título principal da seção de notas */
 .titulo-notas {
-    color: rgb(72, 72, 72);
+    color: var(--cor-texto-menu);
     font-size: 50px;
     font-weight: 800;
 }
@@ -247,7 +248,7 @@
     background-color: #eee544;
     margin: 10px;
     padding: 30px;
-    box-shadow: -3px 3px 5px rgb(182, 182, 182);
+    box-shadow: -3px 3px 7px rgba(182, 182, 182, 0.4);
     border-radius: 15px;
     cursor: default;
     transition: transform 0.1s, opacity 0.4s, filter 0.3s;

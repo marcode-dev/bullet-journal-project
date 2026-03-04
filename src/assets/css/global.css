@@ -13,22 +13,23 @@
     padding: 0;
     box-sizing: border-box;
     font-family: "Poppins";
-    /* faz com que bordas e paddings façam parte do width/height do elemento */
+    color: var(--cor-texto-fundo-claro);
 }
 
 /* ===== Variáveis de nível global ===== */
 :root {
-    /* layout measurements that change with breakpoints */
-    --header-height: 80px;            /* default header height for desktop/large devices */
-    --menu-width: 250px;              /* full-width of vertical menu container */
+    --header-height: 80px;
+    --menu-width: 250px;
     --option-menu-width: calc(var(--menu-width) - 10px);
-    --main-offset: calc(var(--menu-width) + 70px); /* distance from left edge to center of main */
+    --main-offset: calc(var(--menu-width) + 70px);
 
     /* colors */
     --cor-main: #f3eee0d5;
     --body-background: #ffffff;
-    --cor-principal: rgba(255, 204, 0, 0.895);
-    --cor-texto: #5c5b5b;
+    --cor-principal: #c8bfa6;
+    --cor-hover-menu: #c8bfa6bd;
+    --cor-texto-menu: #2f1b00e4;
+    --cor-texto-fundo-claro: #363636e4;
 
     /* breakpoints (can be reused) */
     --bp-tablet: 1024px;
@@ -43,7 +44,6 @@ body {
     background-size: cover;
     background-attachment: fixed;
     background-color: var(--body-background);
-    /* use flex layout so that .menu and .main are side-by-side and responsive */
     display: flex;
     flex-direction: row;
 }
@@ -85,16 +85,6 @@ header {
     align-items: center;
 }
 
-
-
-.combinacao-logo h1 {
-    font-family: 'Poppins', sans-serif;
-    font-size: 20px;
-    margin-left: 10px;
-    line-height: 18px;
-}
-
-
 .logo-header {
     height: 70px;
     width: auto;
@@ -103,7 +93,6 @@ header {
 .menu {
     position: fixed;
     z-index: 4;
-    /* vertically center relative to header height */
     top: calc(var(--header-height) + 10px);
     left: 0;
     width: var(--menu-width);
@@ -112,10 +101,10 @@ header {
     backdrop-filter: blur(5px);
     background-color: var(--cor-main);
     box-shadow: 4px 0px 8px rgba(0, 0, 0, 0.1);
-    padding-top: 20px;
+    padding-top: 40px;
     padding-left: 10px;
     user-select: none;
-    transition: width 0.3s ease; /* keep animation when collapses */
+    transition: width 0.3s ease, background-color 0.5s ease; /* keep animation when collapses */
 }
 
 .option-menu {
@@ -127,11 +116,11 @@ header {
     padding: 10px;
     border-top-left-radius: 30px;
     border-bottom-left-radius: 30px;
-    transition: 0.5s;
+    transition: 0.3s;
 }
 
 :has(.option-menu:hover) .option-menu:not(:hover) {
-    width: calc(var(--option-menu-width) - 20px);
+    /*width: calc(var(--option-menu-width) - 20px);*/
     margin-left: 20px;
     transition: 0.2s;
 }
@@ -140,8 +129,8 @@ header {
     margin-left: 10px;
     font-family: 'Poppins', sans-serif;
     font-weight: 500;
-    color: var(--cor-texto);
-    text-shadow: 4px 4px 4px rgba(255, 255, 255, 0.147);
+    color: var(--cor-texto-menu);
+    /*text-shadow: 4px 4px 4px rgba(255, 255, 255, 0.147);*/
 }
 
 .option-menu .img {
@@ -153,7 +142,7 @@ header {
 
 
 .option-menu:hover {
-    background-color: rgba(255, 204, 0, 0.558);
+    background-color: var(--cor-hover-menu);
     cursor: pointer;
     transition: 0.3s;
 }
@@ -171,13 +160,14 @@ header {
     flex: 1 1 auto;
     min-height: calc(100vh - var(--header-height) - 40px);
     margin-top: calc(var(--header-height) + 20px);
-    margin-left: var(--menu-width);
+    margin-left: calc(var(--menu-width) + 30px);
+    margin-right: 30px;
     padding-left: 80px;
     padding-right: 80px;
     padding-top: 60px;
     display: flex;
     flex-direction: column;
-    transition: margin-left 0.3s ease;
+    transition: margin-left 0.3s ease, background-color 0.5s ease;
 }
 
 /* ===== Rodapé ===== */
@@ -208,7 +198,7 @@ header {
 .rodape p {
     font-size: 12px;
     line-height: 12px;
-    color: rgba(91, 79, 60, 0.9);
+    color: var(--cor-texto-menu);
 }
 
 .creditos {
@@ -224,6 +214,40 @@ hr {
 
 .textMenu {
     line-height: 15px;
+}
+
+.dark-mode{
+    position: absolute;
+    z-index: 15;
+    transition: 0.2s;
+    right: 50px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.dark-mode:hover {
+    cursor: pointer;
+    transform: scale(1.1) translateY(-50%);
+    transition: 0.2s;
+}
+.fundo-toogle {
+    background-color: white;
+    border-radius: 15px;
+    width: 40px;
+    height: 25px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+
+}
+.fundo-toogle .dark-mode-ativo {
+    background-color: black;
+}
+.bolinha-toogle {
+    background-color: var(--cor-botao-padrao);
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    margin: 1.5px;
 }
 
 /* ===== RESPONSIVIDADE ===== */
