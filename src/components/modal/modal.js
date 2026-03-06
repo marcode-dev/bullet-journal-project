@@ -1,6 +1,6 @@
 import { criarElementos } from "../../pages/dashboard/criarElementos.js";
 import { adiados } from "../../pages/dashboard/delayedTasks.js";
-import { detectarCor, detectarCorTexto } from "../../pages/dashboard/notes.js";
+import { criarNotas, detectarCor, detectarCorTexto } from "../../pages/dashboard/notes.js";
 
 const modal = document.querySelector(".modal");
 const tituloModal = document.querySelector(".titulo-modal");
@@ -13,6 +13,7 @@ const body = document.querySelector("body");
 
 let works = JSON.parse(localStorage.getItem("tarefas"));
 
+// Sair do modal - Ou pelo esc, ou pelo clique no fade
 fade.addEventListener("click", fecharModal)
 body.addEventListener("keydown", (event) => {
     if (event.key === "Escape") {
@@ -43,9 +44,7 @@ export function abrirModal(titulo, conteudo, idElemento, acao) {
             localStorage.setItem("tarefas", JSON.stringify(works))
             fecharModal()
             criarElementos()
-            if (titulo == "Editar Nota") {
-                window.location.reload()
-            }
+            criarNotas()
         }
     } else if (acao == "excluir") {//-------------------------------- EXCLUIR
         salvar.textContent = "Excluir";
@@ -84,7 +83,7 @@ export function abrirModal(titulo, conteudo, idElemento, acao) {
             works[index].conteudo = `${editarTarefa.value}`;
             localStorage.setItem("tarefas", JSON.stringify(works))
             fecharModal()
-            window.location.reload()
+            criarNotas()
         }
     } else if (acao == "excluir-nota") {
         salvar.textContent = "Excluir";
@@ -96,7 +95,6 @@ export function abrirModal(titulo, conteudo, idElemento, acao) {
                 localStorage.setItem("tarefas", JSON.stringify(works))
             }
             fecharModal()
-            location.reload()
         }
     } else if(acao == "confirmar") {
         salvar.textContent = "Confirmar";

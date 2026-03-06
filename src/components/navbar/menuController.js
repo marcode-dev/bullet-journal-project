@@ -1,6 +1,7 @@
 import { criarElementos } from "../../pages/dashboard/criarElementos.js";
 import { criarNotas } from "../../pages/dashboard/notes.js";
 import { verMaisNecessario } from "../../pages/dashboard/notes.js";
+import { aplicarDarkMode } from "../../utils/darkMode.js";
 
 //Seleciona as seções de cada tela/pagina
 export const diarioPagina = document.querySelector(".diario");
@@ -26,6 +27,7 @@ itensMenu.forEach((elemento) => {
         itensMenu.forEach((a) => {
             a.classList.remove("selecao-menu")
         })
+        aplicarDarkMode();
 
         if (elemento.classList.contains("diario-menu")) {
             mudarPagina("diario", diarioPagina);

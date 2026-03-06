@@ -24,8 +24,6 @@
     --main-offset: calc(var(--menu-width) + 70px);
 
     /* colors */
-    --cor-main: #f3eee0d5;
-    --body-background: #ffffff;
     --cor-principal: #c8bfa6;
     --cor-hover-menu: #c8bfa6bd;
     --cor-texto-menu: #2f1b00e4;
@@ -38,14 +36,17 @@
 }
 
 body {
-    background-image: url("/src/assets/backgrounds/background.png");
+    background-color: black;
+    width: 100%;
+    min-height: 100vh;
     background-position: fixed;
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
-    background-color: var(--body-background);
     display: flex;
     flex-direction: row;
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
 
 
@@ -53,7 +54,7 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
+    width: 100%;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.05);
     z-index: -10;
@@ -65,10 +66,9 @@ header {
     flex-direction: row;
     align-items: center;
     z-index: 5;
-    width: 100vw;
+    width: 100%;
     height: var(--header-height);
     opacity: 0.85;
-    background-image: url("/src/assets/backgrounds/background-header.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -150,18 +150,26 @@ header {
 .selecao-menu {
     background-color: var(--cor-principal) !important;
 }
+.selecao-menu .img {
+    filter: invert(0%) !important;
+}
+.selecao-menu h3 {
+    color: #2f1b00e4 !important;
+}
+
 
 
 /* ===== Conteúdo principal ===== */
 .main {
     background-color: var(--cor-main);
     border-radius: 50px;
-    /* flex child will grow; width computed from viewport minus menu */
     flex: 1 1 auto;
     min-height: calc(100vh - var(--header-height) - 40px);
+    height: auto;
     margin-top: calc(var(--header-height) + 20px);
-    margin-left: calc(var(--menu-width) + 30px);
-    margin-right: 30px;
+    margin-left: calc(var(--menu-width) + 20px);
+    margin-right: 20px;
+    margin-bottom: 20px;
     padding-left: 80px;
     padding-right: 80px;
     padding-top: 60px;
