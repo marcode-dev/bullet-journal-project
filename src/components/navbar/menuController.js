@@ -1,6 +1,6 @@
 import { criarElementos } from "../../pages/dashboard/criarElementos.js";
-import { criarNotas } from "../../pages/dashboard/notes.js";
-import { verMaisNecessario } from "../../pages/dashboard/notes.js";
+import { criarNotas } from "../../pages/dashboard/notas/notes.js";
+import { verMaisNecessario } from "../../pages/dashboard/notas/notes.js";
 import { aplicarDarkMode } from "../../utils/darkMode.js";
 
 //Seleciona as seções de cada tela/pagina
@@ -88,6 +88,5 @@ function exibirPagina(){ //Se recarregar a página, exibe a última página visu
         exportarMenu.classList.add("selecao-menu")
     }
 }
-
 
 exibirPagina()

@@ -1,65 +1,25 @@
 //Cores post it: #27b3d9 #fca028 #f44072 #90cf4c #eee544
 
-import { abrirModal } from "../../components/modal/modal.js";
-import { idDia } from "../../utils/data.js";
+import { abrirModal } from "../../../components/modal/modal.js";
+import { idDia } from "../../../utils/data.js";
+import "./filtrosNotas.js"
 
 //Cores post it text: #006681 #814900 #730020 #3a7000 #6b6500
 const quadroNotas = document.querySelector(".campo-notas")
 let works = JSON.parse(localStorage.getItem("tarefas")) || [];
-let idsNotas = works.filter(a => a.tipo == "nota")
 let filtrosCores = ["amarelo", "azul", "laranja", "vermelho", "verde"];
 
-
-const selectTodos = document.getElementById("filtro-cor-todos");
-selectTodos.addEventListener("change", () => {
-    const checkboxes = document.querySelectorAll('input[name="filtro-cor"]');
-    if (selectTodos.checked) {
-        checkboxes.forEach((checkbox) => {
-            checkbox.checked = true;
-        });
-    } else {
-        checkboxes.forEach((checkbox) => {
-            checkbox.checked = false;
-        });
-    }
-    // sempre que qualquer checkbox mudar, atualiza status de "todos" e armazenamento
-    checkboxes.forEach((checkbox) => {
-        checkbox.addEventListener("change", () => {
-            if (checkbox.checked == false) {
-                selectTodos.checked = false;
-            } else {
-                const todos = Array.from(document.querySelectorAll('input[name="filtro-cor"]'))
-                    .filter(c => c.value !== "todos");
-                if (todos.every(c => c.checked)) {
-                    selectTodos.checked = true;
-                }
-            }
-            // depois da alteração, reflete no localStorage imediatamente
-            updateStorageCores();
-        })
-    })
-})
-
-// helper para atualizar localStorage com as cores selecionadas atuais
-function updateStorageCores() {
-    let coresSelecion = [];
-    document.querySelectorAll('input[name="filtro-cor"]:checked').forEach(c => coresSelecion.push(c.value));
-    if (coresSelecion.length === 0) {
-        localStorage.removeItem("filtrosCores");
-    } else {
-        if (coresSelecion.includes("todos")) {
-            coresSelecion = ["amarelo", "azul", "laranja", "vermelho", "verde"];
-        }
-        localStorage.setItem("filtrosCores", JSON.stringify(coresSelecion));
-    }
-}
+// Adicionar listeners assim que o DOM está pronto
+adicionarListenersCheckboxes();
 
 let tamanhoSelecionado = "null";
 
+//Filtros selecionados
 const aplicarFiltros = document.querySelector(".aplicar-filtros-notas");
 aplicarFiltros.addEventListener("click", (e) => {
     e.preventDefault(); // evita que o botão dentro do form submeta a página
-    idsNotas = works.filter(a => a.tipo == "nota")
+    works = JSON.parse(localStorage.getItem("tarefas")) || [];
+    let idsNotas = works.filter(a => a.tipo == "nota")
     const orderNotas = document.getElementById("ordenar-notas").value;
     if (orderNotas == "recentes") {
         idsNotas.sort((a, b) => b.idElemento - a.idElemento); // Ordena do mais recente para o mais antigo
@@ -116,9 +76,7 @@ aplicarFiltros.addEventListener("click", (e) => {
         localStorage.removeItem("filtrosCores");
         console.log("Nenhum filtro de cor aplicado - armazenamento limpo");
     }
-    criarNotas();
-
-
+    criarNotas(idsNotas);
     console.log("Notas Filtradas: ", idsNotas)
 });
 
@@ -149,6 +107,7 @@ export function detectarCorTexto(cor) {
     else if (cor == "azul") { return "texto-claro" }
 }
 
+// Verificar se há notas já registradas
 function semNotas() {
     console.log("Verificando notas existentes, mas nenhuma encontrada");
     if (document.querySelector(".sem-notas")) return; // evita criar múltiplas mensagens se já existir
@@ -158,8 +117,10 @@ function semNotas() {
     quadroNotas.appendChild(semNotas);
 }
 
-console.log(idsNotas, ": IDs notas")
-export function criarNotas() {
+// Criar post-its
+export function criarNotas(notes) {
+    works = JSON.parse(localStorage.getItem("tarefas")) || [];
+    let idsNotas = notes == (null || []) ? notes : works.filter(a => a.tipo == "nota")
     document.querySelectorAll(".campo-notas > div").forEach(a => { a.remove() })
     document.querySelectorAll(".sem-notas").forEach(a => a.remove())
     if (!idsNotas || idsNotas.length == 0) {
@@ -249,14 +210,14 @@ export function criarNotas() {
     editarNotas = document.querySelectorAll(".editar-nota")
     apagarNotas = document.querySelectorAll(".apagar-nota")
 
-    atualizarCores(); // Adicionar os listener de cor
+    atualizarCores(idsNotas); // Adicionar os listener de cor
     editarNota(); // Adicionar os listener de edição
     apagarNota(); // Adicionar os listener de deleção
     verMaisNecessario(); // Verificar se o "ver mais" é necessário e adicionar os listener de ver mais
 }
 criarNotas();
 
-function atualizarCores() {
+function atualizarCores(idsNotas) {
     selectCor.forEach((selecionado) => {
         selecionado.addEventListener("change", (event) => {
             let index = works.findIndex(a => a.idElemento == event.target.parentNode.parentNode.dataset.idElemento)
@@ -278,14 +239,13 @@ function atualizarCores() {
 
             localStorage.setItem("tarefas", JSON.stringify(works))
 
-            criarNotas();
-
             /*
             Cores post it: #27b3d9 #fca028 #f44072 #90cf4c #eee544
             Cores post it text: #006681 #814900 #730020 #3a7000 #6b6500
             */
         })
     })
+    criarNotas(idsNotas);
 }
 
 function editarNota() {
@@ -296,9 +256,9 @@ function editarNota() {
 
             let tituloModal = `Editar Nota`;
             let conteudoModal = `
-            <textarea type="text" class="editar-tarefas" wrap="hard" rows="5"
-                cols="10" autofocus>${works[index].conteudo}</textarea>
-            `;
+                <textarea type="text" class="editar-tarefas" wrap="hard" rows="5"
+                    cols="10" autofocus>${works[index].conteudo}</textarea>
+                `;
             abrirModal(tituloModal, conteudoModal, works[index].idElemento, "editar")
         })
     })
@@ -318,6 +278,7 @@ function apagarNota() {
 }
 
 export function verMaisNecessario() {
+    if (!selectCor) return;
     selectCor.forEach((a) => {
         const postIt = a.closest(".post-it");
         if (!postIt) return;
@@ -354,52 +315,4 @@ export function verMaisNecessario() {
             verMais.style.display = "none";
         }
     })
-}
-
-const filtrarIcon = document.querySelector(".filtrar-ocultar-icon");
-const filtrarCampo = document.querySelector(".painel-filtros");
-verificarEstadoFiltros();
-filtrarIcon.addEventListener("click", () => {
-    if (filtrarCampo.style.display == "block") {
-        sessionStorage.setItem("filtrosNotas", "fechado")
-        verificarEstadoFiltros();
-    } else {
-        sessionStorage.setItem("filtrosNotas", "aberto")
-        verificarEstadoFiltros();
-    }
-})
-
-function verificarEstadoFiltros() {
-    if (sessionStorage.getItem("filtrosNotas") == "aberto") {
-        filtrarCampo.style.display = "block";
-        filtrarCampo.style.pointerEvents = "auto";
-        filtrarIcon.style.opacity = "1";
-        quadroNotas.style.border = "1px solid var(--cor-escura)";
-        
-
-        const tamanhoNota = document.querySelectorAll('input[name="tamanho-nota"]');
-        tamanhoNota.forEach((input) => {
-            if (input.value == localStorage.getItem("tamanhoNota")) {
-                input.checked = true;
-            }
-        })
-        const filtrosCores = JSON.parse(localStorage.getItem("filtrosCores"));
-        if (filtrosCores && filtrosCores.length > 0) {
-            document.querySelectorAll('input[name="filtro-cor"]').forEach((checkbox) => {
-                if (filtrosCores.includes(checkbox.value)) {
-                    checkbox.checked = true;
-                }
-            });
-            // se o array salvo contém todas as cores básicas, mesmo sem guardar "todos",
-            // garantir que o checkbox de "todos" apareça selecionado
-            const todasAsCores = ["amarelo", "azul", "laranja", "vermelho", "verde"];
-            if (!filtrosCores.includes("todos") &&
-                todasAsCores.every(c => filtrosCores.includes(c))) {
-                selectTodos.checked = true;
-            }
-        }
-    } else {
-        filtrarCampo.style.display = "none";
-        filtrarIcon.style.opacity = "0.7";
-    }
 }

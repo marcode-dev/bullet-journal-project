@@ -5,7 +5,8 @@ import "../../components/navbar/menuController.js";
 import { criarElementos } from "../../pages/dashboard/criarElementos.js";
 import "../../pages/dashboard/delayedTasks.js";
 import "../../pages/dashboard/gradeLegends.js";
-import { criarNotas } from "../../pages/dashboard/notes.js";
+import { criarNotas } from "../dashboard/notas/notes.js";
+import "../dashboard/notas/filtrosNotas.js";
 import "../../pages/dashboard/taskTypes.js";
 
 import "../../services/exportService.js";
@@ -14,11 +15,13 @@ import "../../services/importService.js";
 import "../../utils/data.js";
 import "../../utils/verificarElementos.js";
 import "../../utils/darkMode.js";
+import { abrirModal } from "../../components/modal/modal.js";
 
 //Criar os elementos já criados para/no o dia
 criarElementos()
 criarNotas()
 
+abrirModal()
 export let selectType = document.querySelectorAll(".tipo2");
 
 /*
