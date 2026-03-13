@@ -2,15 +2,14 @@
 
 import { abrirModal } from "../../../components/modal/modal.js";
 import { idDia } from "../../../utils/data.js";
-import "./filtrosNotas.js"
 
 //Cores post it text: #006681 #814900 #730020 #3a7000 #6b6500
-const quadroNotas = document.querySelector(".campo-notas")
+const quadroNotas = document.querySelector(".campo-notas");
 let works = JSON.parse(localStorage.getItem("tarefas")) || [];
 let filtrosCores = ["amarelo", "azul", "laranja", "vermelho", "verde"];
 
 // Adicionar listeners assim que o DOM está pronto
-adicionarListenersCheckboxes();
+
 
 let tamanhoSelecionado = "null";
 
@@ -119,7 +118,7 @@ function semNotas() {
 
 // Criar post-its
 export function criarNotas(notes) {
-    works = JSON.parse(localStorage.getItem("tarefas")) || [];
+    let works = JSON.parse(localStorage.getItem("tarefas")) || [];
     let idsNotas = notes == (null || []) ? notes : works.filter(a => a.tipo == "nota")
     document.querySelectorAll(".campo-notas > div").forEach(a => { a.remove() })
     document.querySelectorAll(".sem-notas").forEach(a => a.remove())

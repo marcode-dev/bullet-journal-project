@@ -1,3 +1,7 @@
+import { criarNotas} from "../notas/notes.js"
+
+adicionarListenersCheckboxes();
+
 // Função para sincronizar o status do "Todos" baseado nos checkboxes individuais
 function sincronizarCheckboxTodos() {
     const checkboxesIndividuais = Array.from(document.querySelectorAll('input[name="filtro-cor"]:not(#filtro-cor-todos)'));
@@ -9,7 +13,7 @@ function sincronizarCheckboxTodos() {
 }
 
 // Adicionar listeners aos checkboxes individuais
-function adicionarListenersCheckboxes() {
+export function adicionarListenersCheckboxes() {
     const checkboxes = document.querySelectorAll('input[name="filtro-cor"]:not(#filtro-cor-todos)');
     checkboxes.forEach((checkbox) => {
         checkbox.addEventListener("change", () => {
