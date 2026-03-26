@@ -1,6 +1,6 @@
 import { criarElementos } from "../../pages/dashboard/criarElementos.js";
 import { adiados } from "../../pages/dashboard/delayedTasks.js";
-import { criarNotas, detectarCor, detectarCorTexto } from "../../pages/dashboard/notes.js";
+import { criarNotas, detectarCor, detectarCorTexto } from "../../pages/dashboard/notas/notes.js";
 
 const modal = document.querySelector(".modal");
 const tituloModal = document.querySelector(".titulo-modal");
@@ -18,13 +18,14 @@ fade.addEventListener("click", fecharModal)
 body.addEventListener("keydown", (event) => {
     if (event.key === "Escape") {
         fecharModal();
-    }})
+    }
+})
 fechar.addEventListener("click", fecharModal)
 
 export function abrirModal(titulo, conteudo, idElemento, acao) {
     console.log("Modal aberto: " + idElemento)
     const postIts = document.querySelector(".postItTop")
-    if (postIts){
+    if (postIts) {
         postIts.classList.remove("postItTop")
     }
     fade.style.display = "block";
@@ -34,7 +35,9 @@ export function abrirModal(titulo, conteudo, idElemento, acao) {
 
     tituloModal.textContent = titulo;
     conteudoModal.innerHTML = conteudo;
+    
     if (acao == "editar") { //-------------------------------------EDITAR
+        works = JSON.parse(localStorage.getItem("tarefas"));
         salvar.textContent = "Salvar";
         let editarTarefa = document.querySelector(".editar-tarefas");
         editarTarefa.focus()
@@ -47,6 +50,7 @@ export function abrirModal(titulo, conteudo, idElemento, acao) {
             criarNotas()
         }
     } else if (acao == "excluir") {//-------------------------------- EXCLUIR
+        works = JSON.parse(localStorage.getItem("tarefas"));
         salvar.textContent = "Excluir";
         salvar.onclick = () => {
             console.log(idElemento + ": Excluido")
@@ -75,6 +79,7 @@ export function abrirModal(titulo, conteudo, idElemento, acao) {
         modal.classList.add("postItTop")
 
     } else if (acao == "editar-nota") {//---------------------------- EDITAR NOTA
+        works = JSON.parse(localStorage.getItem("tarefas"));
         salvar.textContent = "Salvar";
         let editarTarefa = document.querySelector(".editar-tarefas");
         editarTarefa.focus()
@@ -86,6 +91,7 @@ export function abrirModal(titulo, conteudo, idElemento, acao) {
             criarNotas()
         }
     } else if (acao == "excluir-nota") {
+        works = JSON.parse(localStorage.getItem("tarefas"));
         salvar.textContent = "Excluir";
         salvar.onclick = () => {
             console.log(idElemento + ": Nota Excluida")
@@ -94,11 +100,15 @@ export function abrirModal(titulo, conteudo, idElemento, acao) {
                 works.splice(index, 1)
                 localStorage.setItem("tarefas", JSON.stringify(works))
             }
+            criarNotas()
             fecharModal()
         }
-    } else if(acao == "confirmar") {
+    } else if (acao == "confirmar") {
         salvar.textContent = "Confirmar";
         salvar.onclick = () => {
+            if (typeof idElemento === "function") {
+                idElemento(); // executa o callback
+            }
             fecharModal()
         }
     } else {

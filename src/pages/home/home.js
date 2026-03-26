@@ -5,7 +5,9 @@ import "../../components/navbar/menuController.js";
 import { criarElementos } from "../../pages/dashboard/criarElementos.js";
 import "../../pages/dashboard/delayedTasks.js";
 import "../../pages/dashboard/gradeLegends.js";
-import { criarNotas } from "../../pages/dashboard/notes.js";
+import "../dashboard/notas/notes.js"
+import { criarNotas } from "../dashboard/notas/notes.js";
+import "../dashboard/notas/filtrosNotas.js";
 import "../../pages/dashboard/taskTypes.js";
 
 import "../../services/exportService.js";
@@ -14,12 +16,38 @@ import "../../services/importService.js";
 import "../../utils/data.js";
 import "../../utils/verificarElementos.js";
 import "../../utils/darkMode.js";
+import { abrirModal } from "../../components/modal/modal.js";
 
 //Criar os elementos já criados para/no o dia
 criarElementos()
 criarNotas()
 
+abrirModal()
 export let selectType = document.querySelectorAll(".tipo2");
+
+
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-analytics.js";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+    apiKey: "AIzaSyC2rGgjtXoP3ibEzksh7ZvxCdtVdkRg9lo",
+    authDomain: "bullet-journal-948be.firebaseapp.com",
+    projectId: "bullet-journal-948be",
+    storageBucket: "bullet-journal-948be.firebasestorage.app",
+    messagingSenderId: "555087682080",
+    appId: "1:555087682080:web:e2bddf655595d1ada43a45",
+    measurementId: "G-5KBPNW18GJ"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+
 
 /*
 - Tarefas
