@@ -22,7 +22,6 @@ import { abrirModal } from "../../components/modal/modal.js";
 criarElementos()
 criarNotas()
 
-abrirModal()
 export let selectType = document.querySelectorAll(".tipo2");
 
 

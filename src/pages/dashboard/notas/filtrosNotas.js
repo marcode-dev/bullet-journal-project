@@ -77,7 +77,7 @@ function carregarFiltrosSalvos() {
         sincronizarCheckboxTodos();
 
         // AQUI: Reaplica os filtros de cor ao carregar a página
-        works = JSON.parse(localStorage.getItem("tarefas")) || [];
+        let works = JSON.parse(localStorage.getItem("tarefas")) || [];
         let notasFiltradas = works.filter(a => a.tipo == "nota" && filtrosCores.includes(a.cor));
         criarNotas(notasFiltradas);
     } else {
@@ -95,11 +95,10 @@ verificarEstadoFiltros();
 filtrarIcon.addEventListener("click", () => {
     if (filtrarCampo.style.display == "block") {
         sessionStorage.setItem("filtrosNotas", "fechado")
-        verificarEstadoFiltros();
     } else {
         sessionStorage.setItem("filtrosNotas", "aberto")
-        verificarEstadoFiltros();
     }
+    verificarEstadoFiltros();
 })
 
 function verificarEstadoFiltros() {

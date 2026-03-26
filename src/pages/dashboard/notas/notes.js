@@ -214,7 +214,7 @@ export function criarNotas(notes) {
     apagarNota(); // Adicionar os listener de deleção
     verMaisNecessario(); // Verificar se o "ver mais" é necessário e adicionar os listener de ver mais
 }
-criarNotas();
+
 
 function atualizarCores(idsNotas) {
     selectCor.forEach((selecionado) => {
@@ -244,7 +244,6 @@ function atualizarCores(idsNotas) {
             */
         })
     })
-    criarNotas(idsNotas);
 }
 
 function editarNota() {
