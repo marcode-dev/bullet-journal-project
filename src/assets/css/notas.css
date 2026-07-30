@@ -1,58 +1,8 @@
-/* ---------- Estrutura principal e layout ---------- */
+/* ============================================================
+   NOTAS.CSS — Design system da tela de Notas
+   ============================================================ */
 
-/* contêiner de legendas exibido acima da lista de notas */
-.legenda-notas {
-    display: flex;
-    flex-direction: row;
-    gap: 15px;
-    margin-bottom: 20px;
-}
-.posicao-titulo {
-    display: flex; /* mantém título e ícone de filtro alinhados horizontalmente */
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-}
-/* painel que agrupa todas as notas */
-.notas {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    width: 100%;
-}
-
-.notas-conteudo {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    align-items: flex-start;
-}
-
-.notas-espaco {
-    flex: 1 1 auto;
-    min-width: 0;
-}
-
-/* barra lateral fixa de filtros */
-.painel-filtros {
-    position: sticky;
-    /*top: 50%;
-    transform: translateY(-40%);*/
-    flex: 0 0 250px;
-    width: 320px;
-    min-width: 250px;
-}
-
-/* área para adicionar novas legendas no painel de filtros */
-.add-legenda {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 5px;
-    margin-bottom: 15px;
-}
-
-/* ---------- Cores das legendas ---------- */
+/* ---------- Cores das legendas (globais) ---------- */
 .amarelo-legenda {
     background-color: #eee544;
 }
@@ -73,458 +23,439 @@
     background-color: #27b3d9;
 }
 
-/* ---------- Elementos reutilizáveis ---------- */
-/* círculo de cor padrão utilizado nas legendas */
-.coor {
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
+/* ---------- Layout da seção ---------- */
+.notas {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 0;
 }
 
-/* quando o mesmo círculo aparece dentro de um botão de filtro
-   ele precisa ser menor; o seletor abaixo garante o override mantendo
-   a regra anterior para qualquer outra ocorrência */
-.select-notas-option .coor {
-    width: 14px;
-    height: 14px;
-    border-radius: 4px;
+/* ---------- Topbar: título + filtros inline ---------- */
+.notas-topbar {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--cor-borda);
+    margin-bottom: 24px;
+    background: transparent;
 }
 
-/* campo de texto para inserir nome de legenda */
-.input-legenda {
-    background-color: #f3eee0b6;
-    border: none;
-    cursor: text;
-    border-radius: 20px;
-    width: 90%;
-    height: 25px;
-    color: rgb(48, 48, 48);
-    font-weight: 400;
-    padding: 10px;
-}
-
-/* título principal da seção de notas */
 .titulo-notas {
+    font-size: clamp(28px, 2.3vw, 36px);
+    font-weight: 700;
+    font-family: "Poppins";
     color: var(--cor-texto-menu);
-    font-size: 50px;
-    font-weight: 800;
+    white-space: nowrap;
+    flex-shrink: 0;
+    letter-spacing: -0.2px;
+    margin: 0;
 }
 
-/* ícone de filtro ao lado do título */
-.filtrar-ocultar-icon {
-    width: 30px;
-    height: 30px;
+.subtitulo-sobre {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--cor-texto-suave);
+    margin: 0;
+    max-width: 720px;
+}
+
+/* Grupo de filtros alinhados horizontalmente */
+.notas-filtros-inline {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    flex: 1;
+    margin-top: 8px;
+    width: 100%;
+    padding-top: 8px;
+    border-top: 1px solid var(--cor-borda);
+}
+
+/* Selects com visual underline — padrão diario */
+.select-filtro-inline {
+    padding: 3px 6px;
+    border-radius: 0;
+    border: none;
+    border-bottom: 1px solid var(--cor-borda-forte);
+    font-size: 12px;
+    font-family: "Poppins";
+    background-color: transparent;
     cursor: pointer;
-    opacity: 0.7;
-    transition: opacity 0.2s ease;
+    color: var(--cor-texto-menu);
+    appearance: none;
+    -webkit-appearance: none;
+    transition: border-color 0.2s;
+    padding-right: 18px;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='%232f1b00' height='16' viewBox='0 0 24 24' width='16' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 2px center;
 }
 
-/* área que comporta os post-its */
+.select-filtro-inline:focus {
+    outline: none;
+    border-bottom-color: var(--cor-texto-menu);
+}
+
+.select-filtro-inline:hover {
+    border-bottom-color: var(--cor-texto-menu);
+}
+
+/* Separador vertical sutil entre grupos */
+.notas-filtros-inline::before {
+    content: none;
+}
+
+.filtros-separador {
+    width: 1px;
+    height: 18px;
+    background-color: rgba(47, 27, 0, 0.2);
+    flex-shrink: 0;
+}
+
+/* Grupo P/M — estilo tabs do diário */
+.tamanho-nota-inline {
+    display: flex;
+    gap: 0;
+    align-items: flex-end;
+    border-bottom: 1px solid rgba(47, 27, 0, 0.15);
+}
+
+.tamanho-nota-inline label {
+    font-size: 11px;
+    font-family: "Poppins";
+    font-weight: 400;
+    padding: 3px 8px 2px 8px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    cursor: pointer;
+    user-select: none;
+    border: none;
+    color: var(--cor-texto-menu);
+    transition: background 0.15s, color 0.15s;
+}
+
+.tamanho-nota-inline label:hover {
+    background-color: rgba(47, 27, 0, 0.08);
+}
+
+.tamanho-nota-inline input[type="radio"] {
+    display: none;
+}
+
+.tamanho-nota-inline input[type="radio"]:checked+span,
+.tamanho-nota-inline label:has(input:checked) {
+    background-color: rgba(47, 27, 0, 0.6);
+    color: white;
+    font-weight: 800;
+    border-bottom: 2px solid var(--cor-texto-menu);
+}
+
+/* Grupo de bolinhas de cor */
+.filtro-cores-inline {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.bolinha-filtro {
+    cursor: pointer;
+    position: relative;
+}
+
+.bolinha-filtro input[type="checkbox"] {
+    display: none;
+}
+
+.bolinha {
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    transition: border-color 0.15s, transform 0.2s;
+    opacity: 0.55;
+}
+
+.todos-bolinha {
+    background: conic-gradient(#eee544 0% 20%, #fca028 20% 40%, #f44072 40% 60%, #90cf4c 60% 80%, #27b3d9 80% 100%);
+}
+
+.bolinha-filtro input:checked+.bolinha {
+    border-color: rgba(47, 27, 0, 0.55);
+    transform: scale(1.3);
+    opacity: 1;
+}
+
+/* Botão Filtrar — ocultado pois os filtros são instantâneos */
+.aplicar-filtros-notas {
+    display: none;
+}
+
+/* ---------- Corpo: post-its + painel legendas ---------- */
+.notas-conteudo {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.notas-espaco {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+/* Área dos post-its */
 .campo-notas {
-    min-height: auto;
-    height: auto;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     align-content: flex-start;
+    gap: 10px;
 }
 
-/* efeitos ao passar o mouse sobre notas */
-.campo-notas:has(.post-it:hover) .post-it:not(:hover) {
-    /*filter: blur(0.5px);*/
-    transition: transform 0.2s, opacity 0.5s, filter 0.5s;
-}
-
-.campo-notas .post-it:hover {
-    filter: blur(0);
-}
-
-/* ---------- Caixa branca de filtros ---------- */
-.fundo-filtro {
-    background: #ffffff;
-    padding: 20px;
-    border-radius: 12px;
-    width: 100%;
-    max-width: 400px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-    font-family: Arial, Helvetica, sans-serif;
+/* ---------- Painel lateral de legendas ---------- */
+.painel-legendas {
+    flex: 0 0 180px;
+    width: 180px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
-}
+    gap: 6px;
+    position: sticky;
+    top: 10px;    padding: 10px 0;
+    background: transparent;}
 
-/* ===== componentes de formulário dentro do painel ===== */
-
-/* títulos de pequenas seções dentro do filtro */
-.order-titulo {
-    font-size: 14px;
+.legendas-titulo {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #999;
     font-weight: 600;
-    margin-bottom: 6px;
-    color: #333;
+    margin-bottom: 4px;
+    user-select: none;
+    font-family: "Poppins";
 }
 
-/* selects padrões estilizados */
-.select-filtro {
-    width: 100%;
-    padding: 8px 10px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    font-size: 14px;
-    transition: 0.2s ease;
-}
-
-.select-filtro:focus,
-.select-filtro:hover {
-    border-color: #007bff;
-    outline: none;
-}
-
-/* contêiner vertical que agrupa as opções de cor */
-.select-por-cor {
-    display: flex;
-    flex-direction: column;
-    gap: 0px;
-}
-
-/* cada opção assume o comportamento de botão */
-.select-notas-option {
+.add-legenda {
     display: flex;
     align-items: center;
-    gap: 10px;
-    cursor: pointer;
-    font-size: 14px;
-    padding: 6px 8px;
-    border-radius: 8px;
-    transition: background 0.2s ease;
+    gap: 8px;
 }
 
-.select-notas-option:hover {
-    background: #f5f5f5;
+.coor {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
 }
 
-/* checkbox dentro das opções deve usar cor personalizada */
-.select-notas-option input[type="checkbox"] {
-    accent-color: #007bff;
-    cursor: pointer;
-}
-
-/* botão de aplicar filtros */
-.aplicar-filtros-notas {
-    margin-top: 5px;
-    padding: 10px;
+.input-legenda {
+    background: transparent;
     border: none;
-    border-radius: 10px;
-    background: #007bff;
-    color: white;
-    font-weight: 600;
-    font-size: 14px;
-    cursor: pointer;
-    transition: 0.2s ease;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    font-size: 11px;
+    color: #555;
+    font-family: "Poppins";
+    width: 100%;
+    padding: 2px 4px;
+    cursor: text;
+    transition: border-color 0.2s;
 }
 
-.aplicar-filtros-notas:hover {
-    background: #0062cc;
+.input-legenda:focus {
+    outline: none;
+    border-bottom-color: var(--cor-texto-menu);
 }
 
-
-.aplicar-filtros-notas:active {
-    transform: scale(0.98);
-}
-
-/* Responsivo */
-@media (max-width: 480px) {
-    .fundo-filtro {
-        max-width: 100%;
-        padding: 16px;
-    }
-}
-
+/* ---------- Post-its ---------- */
 .post-it {
     display: flex;
     flex-direction: column;
     position: relative;
-    width: 230px;
-    height: 230px;
+    width: 175px;
+    height: 175px;
     background-color: #eee544;
-    margin: 10px;
-    padding: 30px;
-    box-shadow: -3px 3px 7px rgba(182, 182, 182, 0.4);
-    border-radius: 15px;
+    padding: 14px;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
     cursor: default;
-    transition: transform 0.1s, opacity 0.4s, filter 0.3s;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    overflow: hidden;
 }
 
 .post-it:hover {
-    transform: scale(1.09);
-    transition: transform 0.2s;
+    transform: scale(1.04) translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
 }
 
 .post-it:hover .acoes {
     opacity: 1;
 }
 
-.cor-select {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-
-    width: 43px;
-    height: 27px;
-
-    border-radius: 100px;
-    border: none;
-
-    background-color: #ffffff;
-
-    padding: 0;
-    cursor: pointer;
-
-    font-size: 0;
-    
-    background-repeat: no-repeat, no-repeat;
-    background-position: right;
-
-    transition: transform 0.15s ease;
+.post-it:hover .data-criacao-postit {
+    opacity: 1;
 }
-
-/* Cores das opções no dropdown */
-.cor-select option {
-    padding: 5px;
-    font-size: 14px;
-    text-align: center;
-}
-
 
 .conteudo-nota {
-    max-height: 180px;
-    font-weight: 500;
+    flex: 1;
     overflow: hidden;
 }
 
 .pNota {
-    max-height: 150px;
-    line-height: 25px;
-    color: inherit;
-    font-size: 18px;
+    font-size: 13px;
+    line-height: 18px;
     overflow-wrap: break-word;
     white-space: pre-wrap;
+    color: inherit;
 }
 
+/* ---------- Ações (ícones + seletor) ---------- */
 .acoes {
     display: flex;
     flex-direction: row;
-    gap: 6px;
+    gap: 5px;
     align-items: center;
     position: absolute;
-    bottom: 15px;
-    right: 15px;
-}
-
-.ver-mais {
-    color: var(--corTextoPostIt);
-    font-size: 17px;
-    cursor: pointer;
+    bottom: 8px;
+    right: 8px;
+    opacity: 0;
+    transition: opacity 0.2s;
 }
 
 .editar-nota,
 .apagar-nota {
-    width: 20px;
-    height: 20px;
+    width: 14px;
+    height: 14px;
     cursor: pointer;
-    opacity: 0;
-    transition: opacity 0.3s;
-}
-
-.post-it:hover .editar-nota,
-.post-it:hover .apagar-nota {
-    opacity: 0.8;
+    opacity: 0.7;
+    transition: opacity 0.15s, transform 0.15s;
 }
 
 .editar-nota:hover,
 .apagar-nota:hover {
-    opacity: 1 !important;
+    opacity: 1;
+    transform: scale(1.1);
 }
 
+/* Seletor de cor — pequeno círculo */
+.cor-select {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.7);
+    background-color: transparent;
+    padding: 0;
+    cursor: pointer;
+    font-size: 0;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    transition: transform 0.15s;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.cor-select:hover {
+    transform: scale(1.15);
+}
+
+.cor-select option {
+    font-size: 14px;
+}
+
+/* Data de criação (aparece no hover canto inf. esq.) */
+.data-criacao-postit {
+    position: absolute;
+    bottom: 8px;
+    left: 10px;
+    font-size: 9px;
+    opacity: 0;
+    transition: opacity 0.2s;
+    color: inherit;
+    pointer-events: none;
+    font-style: italic;
+    user-select: none;
+}
+
+/* ---------- Ver mais ---------- */
+.ver-mais {
+    font-size: 11px;
+    cursor: pointer;
+    margin-top: 4px;
+    opacity: 0.7;
+    color: inherit;
+    user-select: none;
+}
+
+.ver-mais:hover {
+    opacity: 1;
+}
+
+/* ---------- Classes de cor de texto ---------- */
+.texto-escuro {
+    color: var(--cor-texto-menu);
+    font-weight: 500;
+}
+
+.texto-claro {
+    color: var(--cor-texto-menu);
+    font-weight: 500;
+}
+
+/* ---------- Mensagem sem notas ---------- */
+.sem-notas {
+    font-size: 13px;
+    color: #aaa;
+    padding: 20px 0;
+    font-style: italic;
+}
+
+/* ---------- Modal ---------- */
 .modal-quebra {
     white-space: pre-wrap;
     overflow-wrap: break-word;
 }
 
-.texto-escuro {
-    color: #1c2733
-}
-
-.texto-claro {
-    color: #ecf0f1
-}
-
-.tamanho-nota{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-label[for="tamanho-pequena"], label[for="tamanho-media"], label[for="tamanho-grande"] {
-    font-size: 15px;
-    padding: 1px 10px;
-    border-radius: 5px;
-    height: auto;
-    input {
-        cursor: pointer;
-    }
-}
-label[for="tamanho-pequena"]:hover, label[for="tamanho-media"]:hover, label[for="tamanho-grande"]:hover {
-    background-color: rgb(227, 227, 227);
-    transition: 0.2s;
-    cursor: pointer;
-}
-
-/*
-Cores post it: #27b3d9 #fca028 #f44072 #90cf4c #eee544
-Cores post it text: #006681 #814900 #730020 #3a7000 #6b6500
-*/
-
-/* ===== RESPONSIVIDADE ===== */
-
-/* Tablets - 1024px e abaixo */
-@media (max-width: 1024px) {
-    .notas-espaco h1 {
-        font-size: 55px;
-    }
-
-    .campo-notas {
-        width: 100%;
-    }
-
-    .post-it {
-        width: 200px;
-        height: 200px;
-        margin: 12px;
-        padding: 25px;
-    }
-
-    .pNota {
-        font-size: 16px;
-        line-height: 22px;
-    }
-
-    .editar-nota,
-    .apagar-nota {
-        width: 18px;
-        height: 18px;
-    }
-
-    .cor-select {
-        width: 45px;
-        height: 26px;
-    }
-}
-
-/* Tablets pequenos - 768px e abaixo */
-@media (max-width: 768px) {
-    .notas-espaco h1 {
-        font-size: 40px;
-    }
-
-    .campo-notas {
-        width: 100%;
-    }
-
-    .post-it {
-        width: 180px;
-        height: 180px;
-        margin: 10px;
-        padding: 20px;
-    }
-
-    .pNota {
-        font-size: 14px;
-        line-height: 20px;
-        max-height: 130px;
-    }
-
-    .cor-select {
-        width: 45px;
-        height: 26px;
-    }
-
-    .ver-mais {
-        font-size: 15px;
-    }
-
-    .acoes {
-        bottom: 12px;
-        right: 12px;
-    }
-
-    .editar-nota,
-    .apagar-nota {
-        width: 16px;
-        height: 16px;
-    }
-
-    /* Empilha notas e filtros em telas pequenas */
-    .notas {
+/* ---------- Responsividade ---------- */
+@media (max-width: 900px) {
+    .notas-conteudo {
         flex-direction: column;
     }
 
-    .filtros {
+    .painel-legendas {
+        flex: none;
         width: 100%;
-        flex: 0 0 auto;
-        margin-top: 20px;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 8px;
     }
 
-    .notas-espaco {
+    .legendas-titulo {
         width: 100%;
     }
 }
 
-/* Celulares - 480px e abaixo */
-@media (max-width: 480px) {
-    .notas-espaco h1 {
-        font-size: 28px;
+@media (max-width: 600px) {
+    .notas-topbar {
+        gap: 10px;
     }
 
-    .campo-notas {
-        width: 100%;
-        row-gap: 5px;
+    .titulo-notas {
+        font-size: 18px;
     }
 
     .post-it {
-        width: 150px;
-        height: 150px;
-        margin: 8px;
-        padding: 15px;
-        box-shadow: -2px 2px 10px rgb(182, 182, 182);
-    }
-
-    .conteudo-nota {
-        max-height: 90px;
+        width: 145px;
+        height: 145px;
+        padding: 10px;
     }
 
     .pNota {
         font-size: 12px;
-        line-height: 18px;
-        max-height: 85px;
-    }
-
-    .cor-select {
-        width: 40px;
-        height: 23px;
-    }
-
-    .ver-mais {
-        font-size: 13px;
-    }
-
-    .acoes {
-        bottom: 10px;
-        right: 10px;
-        gap: 4px;
-    }
-
-    .editar-nota,
-    .apagar-nota {
-        width: 14px;
-        height: 14px;
+        line-height: 16px;
     }
 }

@@ -1,4 +1,4 @@
-:root{
+:root {
     --background-input-tarefas: rgb(255, 253, 243);
     --input-hover: rgb(255, 253, 241);
     --cor-botao-padrao: rgb(169, 162, 140);
@@ -13,26 +13,24 @@
 .data {
     display: flex;
     flex-direction: row;
-    align-items: flex-end;
-    font-family: "Poppins", sans-serif;
+    align-items: baseline;
     width: 100%;
 }
 
 /*background-color: white;*/
-.data h2 {
-    font-size: 80px;
+.day {
+    font-size: 40px;
     font-weight: 700;
-    line-height: 94px;
+    font-family: "League Spartan";
     user-select: none;
     color: var(--cor-texto-menu);
 }
 
-.data h3 {
-    font-size: 60px;
+.mes-ano {
+    font-size: 30px;
     font-weight: 400;
     font-family: "League Spartan";
-    padding-bottom: 10px;
-    padding-left: 15px;
+    padding-left: 5px;
     user-select: none;
     color: var(--cor-texto-menu);
 }
@@ -68,50 +66,60 @@
 .input-tarefas {
     position: relative;
     width: 100%;
-    height: 80px;
+    height: 45px;
     background-color: var(--background-input-tarefas);
     display: flex;
     align-items: center;
-    border-radius: 20px;
-    border: solid 1px rgb(128, 128, 128);
+    border-radius: 10px;
     box-shadow: 2px 2px 5px rgb(173, 173, 173);
     transition: transform 0.2s, background-color 0.3s;
 }
 
-#tipo {
-    width: 85%;
-    height: 40px;
-    margin-left: 25px;
-    border: 0;
-    border-radius: 20px;
-    /*background-color: var(--background-input-tarefas);*/
-    background-color: transparent;
-    cursor: pointer;
-    font-family: "Poppins";
-    font-size: 15px;
-}
+
 
 #tipo:focus {
     appearance: none;
     outline: none;
 }
 
+.seta-select-input {
+    background-color: white;
+    border-radius: 10px;
+    z-index: 10;
+    display: flex;
+    background-color: var(--cor-texto-menu);
+    padding: 2px 10px;
+}
+
+.seta-select-input select {
+    color: white;
+    font-size: 14px;
+    width: 100%;
+    height: 20px;
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+}
+
 #escrever {
+    margin-top: 5px;
     font-family: "Poppins";
-    margin-left: 20px;
-    align-content: center;
-    height: 50px;
+    align-content: top;
+    min-height: 60px;
+    height: 40px;
     width: 60%;
     border: 0;
     border-radius: 10px;
-    font-size: 17px;
-    padding-left: 30px;
+    font-size: 14px;
+    padding: 20px 30px;
     white-space: pre-wrap;
     padding-top: 5px;
     resize: none;
     font-weight: 400;
     /*background-color: var(--background-input-tarefas);*/
     background-color: transparent;
+    border: rgb(233, 233, 233) solid 1px;
+    width: 100%;
 }
 
 #escrever:focus {
@@ -139,20 +147,25 @@
 /* ===== Estilo das tarefas listadas ===== */
 .tarefa {
     height: auto;
-    min-height: 60px;
-    max-height: auto;
+    /* min-height: 60px;
+    max-height: auto; */
     margin-top: 10px;
-    align-items: center;
-    padding: 15px;
+    align-items: flex-start;
+    padding: 5px;
     gap: 10px;
     flex-wrap: wrap;
     cursor: default;
     transition: transform 0.1s;
 }
-.tarefa:hover, .tarefa:hover #tipo, .input-tarefas:hover {
+
+/* Remodelar animação hover ‼️‼️*/
+/* .tarefa:hover, .tarefa:hover #tipo, .input-tarefas:hover {
     background-color: var(--input-hover);
     transform: scale(1.03);
     transition: background-color 0.3s, transform 0.2s;
+} */
+.input-tarefas:hover .task-actions {
+    opacity: 1;
 }
 
 .tarefa h4 {
@@ -185,7 +198,7 @@
 
 /* ===== Botões de status (dentro das tarefas) ===== */
 .tipo2 {
-    width: 120px;
+    width: 100px;
     height: 40px;
     border-radius: 15px;
     border: 0;
@@ -207,33 +220,12 @@
     height: 35px;
 }
 
-
-/* ===== Ícone de lixeira para excluir tarefa ===== */
-.lixeira {
-    width: auto;
-    height: 25px;
-    position: absolute;
-    left: 95%;
-    cursor: pointer;
-    opacity: 0.5;
-}
-
-/* ===== Ícone de edição dentro de tarefa ===== */
-.editar {
-    width: auto;
-    height: 25px;
-    position: absolute;
-    left: 90%;
-    cursor: pointer;
-    opacity: 0.8;
-}
-
 /* ===== Select estilizado com seta ===== */
 .seta-select {
     position: relative;
     display: flex;
     width: 140px;
-    height: 40px;
+    height: 20px;
 }
 
 .seta-select select {
@@ -243,13 +235,13 @@
     appearance: none;
     -webkit-appearance: none;
 
-    padding: 8px 36px 8px 12px;
-    border-radius: 18px;
+
+    border-radius: 7px;
     border: 1px solid #e0dddd;
     background-color: var(--background-input-tarefas);
     cursor: pointer;
     font-family: "Poppins";
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .seta-select::after {
@@ -259,12 +251,20 @@
     top: 50%;
     transform: translateY(-50%);
     pointer-events: none;
-    font-size: 12px;
+    font-size: 10px;
     color: #555;
-} 
+}
 
-.seta-select.select-small { width: 110px; height: 32px; }
-.seta-select.select-full { width: 100%; height: auto; }
+.seta-select.select-small {
+    width: 110px;
+    height: 32px;
+}
+
+.seta-select.select-full {
+    width: 100%;
+    height: auto;
+}
+
 
 /* ===== Subtítulos e separadores ===== */
 h5 {
@@ -273,8 +273,119 @@ h5 {
     margin-top: 30px;
     user-select: none;
 }
+
 .separar {
     margin-top: 0;
+}
+
+.new-task {
+    background-color: var(--cor-texto-menu);
+    padding: 2px 15px;
+    display: flex;
+    z-index: 10;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.new-task:hover {
+    transform: scale(100.5%);
+}
+
+.new-task p {
+    color: white;
+    font-weight: 400;
+    font-size: 14px;
+    user-select: none;
+}
+
+.task-actions {
+    position: absolute;
+    gap: 10px;
+    right: 0px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+    opacity: 0;
+    transition: 0.2s;
+}
+
+/* ===== Ícone de lixeira para excluir tarefa ===== */
+.lixeira {
+    width: auto;
+    height: 17px;
+    cursor: pointer;
+    opacity: 0.5;
+}
+
+/* ===== Ícone de edição dentro de tarefa ===== */
+.editar {
+    width: auto;
+    height: 17px;
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.windows {
+    display: flex;
+    align-items: bottom;
+    flex-direction: row;
+    margin-top: 10px;
+    border-bottom: 1px #999999 solid;
+}
+
+.windows div {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding: 5px 10px 0px 10px;
+    cursor: pointer;
+    transition: 0.2s;
+    user-select: none;
+}
+
+.windows div:hover {
+    background-color: #2f28001e;
+}
+
+.windows div h4 {
+    font-weight: 300;
+    cursor: default;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+/* .windows div:hover h4 {
+    color: white;
+} */
+
+/* Ideia #1 */
+.tab-selecionada {
+    background-color: #2f280079;
+    border-bottom: var(--cor-texto-menu) 2px solid;
+}
+
+.tab-selecionada h4 {
+    color: white;
+    font-weight: 800;
+}
+
+.search-diary-container {
+    margin-left: auto;
+    align-self: flex-end;
+    padding-right: 10px;
+    padding-bottom: 3px;
+}
+
+#search-diary {
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    padding: 3px 10px;
+    outline: none;
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
 }
 
 /* ===== RESPONSIVIDADE ===== */
@@ -367,8 +478,16 @@ h5 {
     }
 
     /* adapta .seta-select para resoluções maiores */
-    .seta-select { width: 120px; height: 36px; }
-    .seta-select select { font-size: 13px; padding: 6px 34px 6px 10px; border-radius: 12px; }
+    .seta-select {
+        width: 120px;
+        height: 36px;
+    }
+
+    .seta-select select {
+        font-size: 13px;
+        padding: 6px 34px 6px 10px;
+        border-radius: 12px;
+    }
 
     .nota {
         width: 30px;
@@ -431,7 +550,8 @@ h5 {
 
     .input-tarefas {
         height: auto;
-        flex-direction: column; /* melhor legibilidade em tablets pequenos */
+        flex-direction: column;
+        /* melhor legibilidade em tablets pequenos */
         padding: 16px;
         gap: 10px;
         align-items: stretch;
@@ -472,12 +592,14 @@ h5 {
         width: 100%;
         height: auto;
         min-height: 72px;
-        padding: 14px 16px 14px 18px; /* mais espaço interno */
+        padding: 14px 16px 14px 18px;
+        /* mais espaço interno */
         gap: 8px;
         background-color: #fafafa;
         border-radius: 12px;
         margin-top: 8px;
-        padding-right: 80px; /* reserva espaço para ícones */
+        padding-right: 80px;
+        /* reserva espaço para ícones */
     }
 
     .tarefa h4 {
@@ -508,8 +630,15 @@ h5 {
         align-self: flex-start;
     }
 
-    .seta-select { width: 100px; height: 32px; }
-    .seta-select select { padding: 6px 32px 6px 10px; font-size: 12px; }
+    .seta-select {
+        width: 100px;
+        height: 32px;
+    }
+
+    .seta-select select {
+        padding: 6px 32px 6px 10px;
+        font-size: 12px;
+    }
 
     .lixeira {
         margin-top: 10px;
@@ -580,7 +709,8 @@ h5 {
 
     #escrever {
         margin-left: 0;
-        min-height: 70px; /* aumento do tamanho do input tarefas */
+        min-height: 70px;
+        /* aumento do tamanho do input tarefas */
         height: auto;
         width: 100%;
         font-size: 14px;
@@ -610,15 +740,18 @@ h5 {
         background-color: #fafafa;
         border-radius: 8px;
         margin-top: 6px;
-        padding-right: 56px; /* espaço para ícones */
+        padding-right: 56px;
+        /* espaço para ícones */
     }
 
-    .tarefa[style*="outline: 2px solid yellow"], .tarefa.status-adiada {
+    .tarefa[style*="outline: 2px solid yellow"],
+    .tarefa.status-adiada {
         border-left-color: #ffd700;
         opacity: 0.95;
     }
 
-    .tarefa[style*="outline: 2px solid #88e788"], .tarefa.status-finalizada {
+    .tarefa[style*="outline: 2px solid #88e788"],
+    .tarefa.status-finalizada {
         border-left-color: #88e788;
         opacity: 1;
     }
@@ -668,8 +801,15 @@ h5 {
         height: 18px;
     }
 
-    .seta-select { width: 100%; height: 36px; }
-    .seta-select select { padding: 8px 36px 8px 12px; font-size: 12px; }
+    .seta-select {
+        width: 100%;
+        height: 36px;
+    }
+
+    .seta-select select {
+        padding: 8px 36px 8px 12px;
+        font-size: 12px;
+    }
 
     .nota {
         width: 24px;

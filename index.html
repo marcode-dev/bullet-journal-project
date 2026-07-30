@@ -27,6 +27,11 @@
     </header>
     <div class="not-haja-luz"></div>
     <div class="menu">
+        <div class="logo-menu">
+            <img src="./src/assets/images/logo-title.png" alt="">
+            <h2>Mark IT</h2>
+        </div>
+
         <div class="option-menu diario-menu">
             <img src="https://cdn-icons-png.flaticon.com/128/3387/3387245.png" alt="" class="img">
             <h3 class="textMenu">Diário</h3>
@@ -35,9 +40,9 @@
             <img src="https://cdn-icons-png.flaticon.com/128/4434/4434927.png" alt="" class="img">
             <h3 class="textMenu">Notas</h3>
         </div>
-        <div class="option-menu revisao-menu">
-            <img src="https://cdn-icons-png.flaticon.com/128/6705/6705871.png" alt="" class="img revisao-img">
-            <h3 class="textMenu">Revisão</h3>
+        <div class="option-menu sobre-menu">
+            <img src="https://cdn-icons-png.flaticon.com/128/4770/4770102.png" alt="" class="img sobre-img">
+            <h3 class="textMenu">Sobre</h3>
         </div>
         <div class="option-menu exportar-menu">
             <img src="https://cdn-icons-png.flaticon.com/128/81/81081.png" alt="" class="img">
@@ -48,208 +53,220 @@
     <div class="main">
         <section class="diario">
             <div class="data">
-                <h2 class="day"></h2>
-                <h3 class="mes-ano"></h3>
+                <p class="day"></p>
+                <p class="mes-ano"></p>
             </div> <!-- .data -->
+            <!--
             <div class="legenda-div">
                 <p class="legenda leg1">Enter - Salvar Tarefa</p>
                 <p class="legenda leg2">Shift-Enter - Quebra de linha</p>
-            </div> <!-- .legenda -->
-            <label for="escrever">
-                <div class="input-tarefas">
-                    <div class="seta-select">
-                        <select name="tarefa" id="tipo">
-                            <option value="tarefa" class="opcao">• Tarefa</option>
-                            <option value="evento" class="opcao">○ Evento</option>
-                            <option value="nota" class="opcao">— Nota</option>
-                        </select>
-                    </div> <!-- .seta-select -->
-
-                    <textarea type="text" placeholder="Escreva sua tarefa aqui..." id="escrever" wrap="hard" rows="5"
-                        cols="10" autofocus></textarea>
-                    <button class="save">Salvar</button>
-                </div> <!--.input-tarefas-->
-            </label> <!--.escrever-->
-            <hr>
+            </div>  .legenda 
+            -->
+            <div class="new-task">
+                <p>+ Nova Tarefa</p>
+            </div>
+            <div class="windows">
+                <div class="todos-tab">
+                    <h4>Todos</h4>
+                </div>
+                <div class="pendentes-tab">
+                    <h4>Pendentes</h4>
+                </div>
+                <div class="adiadas-tab">
+                    <h4>Adiadas</h4>
+                </div>
+                <div class="finalizadas-tab">
+                    <h4>Finalizadas</h4>
+                </div>
+                <div class="canceladas-tab">
+                    <h4>Canceladas</h4>
+                </div>
+                <div class="notas-tab">
+                    <h4>Notas</h4>
+                </div>
+                <form class="search-diary-container" onsubmit="event.preventDefault();">
+                    <input type="text" id="search-diary" placeholder="Pesquisar...">
+                </form>
+            </div>
             <div class="tarefas-diario tarefas-criadas"></div>
-            <div class="tarefas-diario tarefas-adiadas">
-                <h5>Adiadas</h5>
-                <hr class="separar">
-            </div>
-            <div class="tarefas-diario tarefas-finalizadas">
-                <h5>Finalizadas</h5>
-                <hr class="separar">
-            </div>
-            <div class="tarefas-diario tarefas-canceladas">
-                <h5>Canceladas</h5>
-                <hr class="separar">
-            </div>
+            <div class="tarefas-diario tarefas-adiadas"></div>
+            <div class="tarefas-diario tarefas-finalizadas"></div>
+            <div class="tarefas-diario tarefas-canceladas"></div>
+            <div class="tarefas-diario tarefas-notas"></div>
+
         </section> <!--Diario-->
 
         <section class="notas">
-            <div class="titulo-notas-div">
-                <div class="posicao-titulo">
-                    <h1 class="titulo-notas">Notas</h1>
-                    <img src="https://cdn-icons-png.flaticon.com/128/2676/2676818.png" alt="Filtro"
-                        class="filtrar-ocultar-icon">
+            <div class="notas-topbar">
+                <h1 class="titulo-notas">Notas</h1>
+                <p class="subtitulo-sobre">Organize ideias, lembretes e pensamentos rápidos com a mesma liberdade visual do seu caderno.</p>
+                <div class="notas-filtros-inline">
+                    <select name="ordenar-notas" id="ordenar-notas" class="select-filtro-inline">
+                        <option value="Todos">Ordem</option>
+                        <option value="recentes">Mais recentes</option>
+                        <option value="antigos">Mais antigos</option>
+                    </select>
+                    <select name="order-data" id="order-data" class="select-filtro-inline">
+                        <option value="todos">Data</option>
+                        <option value="hoje">Hoje</option>
+                        <option value="semana">Última semana</option>
+                        <option value="mes">Último mês</option>
+                    </select>
+                    <div class="tamanho-nota-inline">
+                        <label for="tamanho-pequena" title="Pequeno">
+                            <input type="radio" name="tamanho-nota" id="tamanho-pequena" value="pequena"> P
+                        </label>
+                        <label for="tamanho-media" title="Médio">
+                            <input type="radio" name="tamanho-nota" id="tamanho-media" value="media"> M
+                        </label>
+                    </div>
+                    <div class="filtro-cores-inline">
+                        <label class="bolinha-filtro" title="Todos">
+                            <input type="checkbox" name="filtro-cor" id="filtro-cor-todos" value="todos">
+                            <div class="bolinha todos-bolinha"></div>
+                        </label>
+                        <label class="bolinha-filtro" title="Amarelo">
+                            <input type="checkbox" name="filtro-cor" id="filtro-cor-amarelo" value="amarelo">
+                            <div class="bolinha amarelo-legenda"></div>
+                        </label>
+                        <label class="bolinha-filtro" title="Laranja">
+                            <input type="checkbox" name="filtro-cor" id="filtro-cor-laranja" value="laranja">
+                            <div class="bolinha laranja-legenda"></div>
+                        </label>
+                        <label class="bolinha-filtro" title="Vermelho">
+                            <input type="checkbox" name="filtro-cor" id="filtro-cor-vermelho" value="vermelho">
+                            <div class="bolinha vermelho-legenda"></div>
+                        </label>
+                        <label class="bolinha-filtro" title="Verde">
+                            <input type="checkbox" name="filtro-cor" id="filtro-cor-verde" value="verde">
+                            <div class="bolinha verde-legenda"></div>
+                        </label>
+                        <label class="bolinha-filtro" title="Azul">
+                            <input type="checkbox" name="filtro-cor" id="filtro-cor-azul" value="azul">
+                            <div class="bolinha azul-legenda"></div>
+                        </label>
+                    </div>
+                    <button type="button" class="aplicar-filtros-notas">Filtrar</button>
                 </div>
-
-                <div class="legenda-notas">
-                    <div class="add-legenda cor1">
-                        <div class="coor amarelo-legenda"></div>
-                        <input type="text" class="input-legenda input-amarelo" value="Adicione uma legenda aqui..."
-                            data-cor="amarelo">
-                    </div>
-                    <div class="add-legenda cor2">
-                        <div class="coor laranja-legenda"></div>
-                        <input type="text" class="input-legenda input-laranja" value="Adicione uma legenda aqui..."
-                            data-cor="laranja">
-                    </div>
-                    <div class="add-legenda cor3">
-                        <div class="coor vermelho-legenda"></div>
-                        <input type="text" class="input-legenda input-vermelho" value="Adicione uma legenda aqui..."
-                            data-cor="vermelho">
-                    </div>
-                    <div class="add-legenda cor4">
-                        <div class="coor verde-legenda"></div>
-                        <input type="text" class="input-legenda input-verde" value="Adicione uma legenda aqui..."
-                            data-cor="verde">
-                    </div>
-                    <div class="add-legenda cor5">
-                        <div class="coor azul-legenda"></div>
-                        <input type="text" class="input-legenda input-azul" value="Adicione uma legenda aqui..."
-                            data-cor="azul">
-                    </div>
-                </div> <!-- .legenda-notas -->
-                <hr>
             </div>
 
             <div class="notas-conteudo">
                 <div class="notas-espaco">
                     <div class="campo-notas"></div>
                 </div>
-                <div class="painel-filtros">
-                    <div class="fundo-filtro">
-                        <div class="order-by">
-                            <h4 class="order-titulo">Ordenar por:</h4>
-                            <select name="ordenar-notas" id="ordenar-notas" class="select-filtro">
-                                <option value="Todos">Todos</option>
-                                <option value="recentes">Mais recentes</option>
-                                <option value="antigos">Mais antigos</option>
-                            </select>
-                        </div> <!-- .order-by -->
-                        <div class="order-data">
-                            <h4 class="order-titulo">Filtrar por data:</h4>
-                            <select name="order-data" id="order-data" class="select-filtro">
-                                <option value="todos">Todos</option>
-                                <option value="hoje">Hoje</option>
-                                <option value="semana">Última semana</option>
-                                <option value="mes">Último mês</option>
-                            </select>
-                        </div> <!-- .order-data -->
-                        <div class="tamanho-nota">
-                            <div class="tamanho-nota">
-                                <label for="tamanho-pequena">
-                                    <input type="radio" name="tamanho-nota" id="tamanho-pequena" value="pequena">
-                                    P
-                                </label>
-                                <label for="tamanho-media">
-                                    <input type="radio" name="tamanho-nota" id="tamanho-media" value="media">
-                                    M
-                                </label>
-                                <label for="tamanho-grande">
-                                    <input type="radio" name="tamanho-nota" id="tamanho-grande" value="grande">
-                                    G
-                                </label>
-                            </div>
-                        </div> <!-- .tamanho-nota -->
-                        <div class="select-por-cor">
-                            <h4 class="order-titulo">Filtrar por cor:</h4>
-                            <label class="select-notas-option">
-                                <input type="checkbox" name="filtro-cor" id="filtro-cor-todos" value="todos">
-                                <div class="filtro-cor"></div>
-                                Todos
-                            </label>
-                            <label class="select-notas-option">
-                                <input type="checkbox" name="filtro-cor" id="filtro-cor-azul" value="azul">
-                                <div class="coor azul-legenda filtro-cor"></div>
-                                Azul
-                            </label>
-                            <label class="select-notas-option">
-                                <input type="checkbox" name="filtro-cor" id="filtro-cor-verde" value="verde">
-                                <div class="coor verde-legenda filtro-cor"></div>
-                                Verde
-                            </label>
-                            <label class="select-notas-option">
-                                <input type="checkbox" name="filtro-cor" id="filtro-cor-vermelho" value="vermelho">
-                                <div class="coor vermelho-legenda filtro-cor"></div>
-                                Vermelho
-                            </label>
-                            <label class="select-notas-option">
-                                <input type="checkbox" name="filtro-cor" id="filtro-cor-laranja" value="laranja">
-                                <div class="coor laranja-legenda filtro-cor"></div>
-                                Laranja
-                            </label>
-                            <label class="select-notas-option">
-                                <input type="checkbox" name="filtro-cor" id="filtro-cor-amarelo" value="amarelo">
-                                <div class="coor amarelo-legenda filtro-cor"></div>
-                                Amarelo
-                            </label>
-                        </div> <!-- .select-por-cor -->
-                        <button type="button" class="aplicar-filtros-notas">
-                            Aplicar Filtros
-                        </button>
+
+                <div class="painel-legendas">
+                    <p class="legendas-titulo">Legendas</p>
+                    <div class="add-legenda cor1">
+                        <div class="coor amarelo-legenda"></div>
+                        <input type="text" class="input-legenda input-amarelo" value="Legenda..." data-cor="amarelo">
                     </div>
-                </div> <!-- .painel-filtros -->
+                    <div class="add-legenda cor2">
+                        <div class="coor laranja-legenda"></div>
+                        <input type="text" class="input-legenda input-laranja" value="Legenda..." data-cor="laranja">
+                    </div>
+                    <div class="add-legenda cor3">
+                        <div class="coor vermelho-legenda"></div>
+                        <input type="text" class="input-legenda input-vermelho" value="Legenda..." data-cor="vermelho">
+                    </div>
+                    <div class="add-legenda cor4">
+                        <div class="coor verde-legenda"></div>
+                        <input type="text" class="input-legenda input-verde" value="Legenda..." data-cor="verde">
+                    </div>
+                    <div class="add-legenda cor5">
+                        <div class="coor azul-legenda"></div>
+                        <input type="text" class="input-legenda input-azul" value="Legenda..." data-cor="azul">
+                    </div>
+                </div>
             </div>
-
-
         </section> <!-- .notas -->
 
-        <section class="revisao">
-            <div class="data">
-                <h2 class="day"></h2>
-                <h3 class="mes-ano"></h3>
-            </div> <!-- .data -->
-        </section> <!-- .revisao -->
+        <section class="sobre">
+            <div class="sobre-topbar">
+                <h1 class="titulo-sobre">Sobre</h1>
+                <p class="subtitulo-sobre">Conheça o contexto, a metodologia e a proposta que deram vida ao Mark-It.</p>
+            </div>
 
-        <section class="exportar">
-            <div class="colunas-import">
-                <div class="background-exportar plano-fundo">
-                    <h3>Exportar</h3>
-                    <hr>
-                    <p>Clique aqui para fazer o dowload de suas tarefas para uso em outro dispositivo</p>
-                    <button class="exportar-button botao">Exportar</button>
+            <div class="sobre-container">
+                <div class="sobre-header">
+                    <div class="perfil-card">
+                        <img src="https://lh3.googleusercontent.com/a-/ALV-UjWziX4uGhDNI8J5xTLTjm9h5_tIybSPp4Nd0OMPpH_sUIxuQ5iS=s300-p-k-rw-no" alt="Avatar" class="avatar-dev">
+                        <div class="perfil-info">
+                            <h2>Marcos Gustavo</h2>
+                            <p>Desenvolvedor Frontend & Criador do Mark-It</p>
+                            <div class="perfil-links">
+                                <a href="https://github.com/marcode-dev" target="_blank" class="link-btn github-btn">
+                                    <img src="https://images.icon-icons.com/3685/PNG/512/github_logo_icon_229278.png" alt="GitHub"> GitHub
+                                </a>
+                                <a href="https://www.linkedin.com/" target="_blank" class="link-btn linkedin-btn">
+                                    <img src="https://www.shareicon.net/data/256x256/2017/06/30/888065_logo_512x512.png" alt="LinkedIn"> LinkedIn
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="background-importar plano-fundo">
-                    <h3>Importar</h3>
-                    <hr>
-                    <p>Clique aqui para fazer o dowload de suas tarefas para uso em outro dispositivo</p>
-                    <input type="file" id="importar-json" accept=".json">
-                    <!--Accept limita o tipo de arquivo que pode ser importado a .json-->
-                    <textarea name="" id="colar-json" placeholder="Ou cole o JSON aqui!"></textarea>
-                    <button class="registrar botao">Registrar</button>
-                    <select name="" id="tipo-importacao">
-                        <option value="adicionar">Adicionar</option>
-                        <option value="substituir">Substituir </option>
-                    </select>
+
+                <div class="sobre-content">
+                    <div class="sobre-bloco">
+                        <h3>O Projeto e o Portfólio</h3>
+                        <p>O <strong>Mark-It</strong> nasceu da minha necessidade pessoal por um organizador diário simples, flexível e sem distrações. Desenvolvi este projeto não apenas para resolver minha própria desorganização, mas também como uma peça fundamental para o meu portfólio.</p>
+                        <p>Foi construído utilizando HTML, CSS e JavaScript puros (Vanilla), com foco em manipulação intensiva do DOM, armazenamento local (Local Storage) e interfaces responsivas.</p>
+                    </div>
+
+                    <div class="sobre-espaco-imagem sobre-imagem-caderno" aria-hidden="true"></div>
+
+                    <div class="sobre-bloco">
+                        <h3>O Método: Bullet Journal</h3>
+                        <p>Toda a estrutura do Mark-It (Diário, Notas, Legendas de Cores e ícones de status) é fortemente baseada no método <strong>Bullet Journal</strong>, criado por <em>Ryder Carroll</em>.</p>
+                        <p>No papel, o Bullet Journal usa símbolos simples (um ponto para tarefas, um círculo para eventos, um traço para notas) para permitir o registro rápido. O Mark-It traz essa mesma filosofia analógica para o mundo digital: você apenas escreve, escolhe o tipo da entrada, e o sistema se encarrega de organizar suas ideias para aquele dia.</p>
+                    </div>
                 </div>
             </div>
 
-            <p class="nota-desenvolvedor-marcos">Nota sobre a funcionalidade</p>
-        </section> <!-- .exportar -->
+            <div class="rodape">
+                <p>&copy; 2026 Marcos Gustavo. Todos os direitos reservados.</p>
+                <p class="creditos">Inspiração: "O Método Bullet Journal" de Ryder Carroll</p>
+            </div>
+        </section> <!-- .sobre -->
 
-        <div class="rodape">
-            <a href="https://github.com/marcode-dev" target="_blank">
-                <img src="https://images.icon-icons.com/3685/PNG/512/github_logo_icon_229278.png" alt="github" id="git">
-            </a>
-            <a href="Ainda a adicionar">
-                <img src="https://www.shareicon.net/data/256x256/2017/06/30/888065_logo_512x512.png" alt="linkedin"
-                    id="linkedin">
-            </a>
-            <p>&copy;Copyright 2026 Marcos Gustavo. <br>Todos os direitos reservados</p>
-            <p class="creditos">Créditos ao livro: "Método Bullet Journal <br>De Ryder Carroll"</p>
-        </div>
+        <section class="exportar">
+            <div class="plano-fundo-unificado">
+                <div class="exportar-topbar">
+                    <h1 class="titulo-exportar">Gerenciamento de Dados</h1>
+                    <p class="subtitulo-exportar">Importe ou exporte todas as suas tarefas e notas, com o mesmo cuidado visual das demais telas do app.</p>
+                </div>
+                
+                <div class="colunas-import-unificado">
+                    <div class="bloco-import-export">
+                        <h3>Exportar</h3>
+                        <hr class="col-import">
+                        <p>Faça o download de suas tarefas e notas para uso em outro dispositivo ou como backup seguro.</p>
+                        <button class="exportar-button botao">Fazer Download (JSON)</button>
+                    </div>
+                    
+                    <div class="divisor-vertical"></div>
+
+                    <div class="bloco-import-export">
+                        <h3>Importar</h3>
+                        <hr class="col-import">
+                        <p>Restaure um arquivo JSON salvo anteriormente ou cole o conteúdo diretamente.</p>
+                        
+                        <div class="inputs-import">
+                            <input type="file" id="importar-json" accept=".json" class="file-input-estilizado">
+                            <textarea id="colar-json" placeholder="Cole o código JSON aqui..."></textarea>
+                        </div>
+                        
+                        <div class="acoes-import">
+                            <select id="tipo-importacao" class="select-import">
+                                <option value="adicionar">Modo: Adicionar</option>
+                                <option value="substituir">Modo: Substituir</option>
+                            </select>
+                            <button class="registrar botao">Registrar Dados</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section> <!-- .exportar -->
     </div> <!--main-->
 
     <div class="fade"></div>

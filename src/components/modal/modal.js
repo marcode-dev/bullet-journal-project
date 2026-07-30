@@ -1,4 +1,5 @@
 import { criarElementos } from "../../pages/dashboard/criarElementos.js";
+import { verificarElementos } from "../../utils/verificarElementos.js"
 import { adiados } from "../../pages/dashboard/delayedTasks.js";
 import { criarNotas, detectarCor, detectarCorTexto } from "../../pages/dashboard/notas/notes.js";
 
@@ -35,7 +36,7 @@ export function abrirModal(titulo, conteudo, idElemento, acao) {
 
     tituloModal.textContent = titulo;
     conteudoModal.innerHTML = conteudo;
-    
+
     if (acao == "editar") { //-------------------------------------EDITAR
         works = JSON.parse(localStorage.getItem("tarefas"));
         salvar.textContent = "Salvar";
@@ -110,6 +111,21 @@ export function abrirModal(titulo, conteudo, idElemento, acao) {
                 idElemento(); // executa o callback
             }
             fecharModal()
+        }
+    } else if (acao == "add-task") {
+        salvar.textContent = "Salvar";
+        const texto = document.getElementById("escrever");
+        texto.addEventListener("keydown", (event) => {
+            if (event.key == "Enter" && !event.shiftKey) {
+                event.preventDefault();
+                verificarElementos();
+                fecharModal();
+            }
+        })
+
+        salvar.onclick = () => {
+            verificarElementos();
+            fecharModal();
         }
     } else {
         salvar.style.display = "none";

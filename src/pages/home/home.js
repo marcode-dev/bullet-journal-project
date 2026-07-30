@@ -16,12 +16,15 @@ import "../../services/importService.js";
 import "../../utils/data.js";
 import "../../utils/verificarElementos.js";
 import "../../utils/darkMode.js";
+import "../../utils/windowsDiary.js";
 import { abrirModal } from "../../components/modal/modal.js";
+
+import { mudarPagina } from "../../components/navbar/menuController.js"
 
 //Criar os elementos já criados para/no o dia
 criarElementos()
 criarNotas()
-
+mudarPagina("diario", diarioPagina)
 export let selectType = document.querySelectorAll(".tipo2");
 
 

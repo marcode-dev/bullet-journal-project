@@ -15,25 +15,26 @@
 
 /* ===== Modificações de post-it quando modal aberto ===== */
 /*Overflow hidden para impedir scroll*/
-.main .postItTop{
+.main .postItTop {
     border-radius: 0px;
     width: 400px;
     height: 400px;
 }
+
 /* ===== Estilo base do modal ===== */
-.modal {    
-    display:none;
+.modal {
+    display: none;
     z-index: 9;
     width: 600px;
     height: auto;
     background-color: white;
     position: fixed;
-    top:50%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     justify-self: center;
-    padding: 40px;
-    border-radius: 40px;
+    padding: 25px;
+    border-radius: 20px;
 }
 
 /* ===== Variante post-it (cor amarela) ===== */
@@ -63,18 +64,28 @@
     display: none;
 }
 
+.modal hr {
+    margin: 5px 0px;
+}
+
+.modal-header h3 {
+    font-size: 15px;
+}
+
 /* ===== Cabeçalho interno do modal ===== */
 .modal-header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
+
 /* ===== Área de conteúdo do modal ===== */
-.modal-conteudo{
-    margin-bottom:30px;
+.modal-conteudo {
+    margin-bottom: 5px;
 }
+
 /* ===== Botões de confirmação/ação ===== */
-.modal-confirmar{
+.modal-confirmar {
     width: 100%;
     display: flex;
     justify-content: flex-end;
@@ -82,26 +93,32 @@
 }
 
 .modal button {
-    padding: 8px 15px;
+    padding: 5px 10px;
     border: 0;
     border-radius: 10px;
-    cursor: pointer
+    cursor: pointer;
+    font-size: 12px;
 }
+
 .fechar-modal {
     background-color: rgba(215, 215, 215, 0);
     color: rgb(56, 56, 56);
     font-weight: 500;
 }
+
 .fechar-modal:hover {
     background-color: rgba(255, 255, 255, 0.8);
     transition: 0.3s;
 }
+
 .salvar {
     color: white;
-    background-color: rgb(92, 92, 92);
+    background-color: var(--cor-texto-menu);
+    padding: 5px 10px;
 }
+
 .salvar:hover {
-    background-color: rgb(129, 129, 129);
+    background-color: rgba(56, 38, 0, 0.807);
     transition: 0.3s;
 }
 

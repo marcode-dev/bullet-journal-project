@@ -1,0 +1,271 @@
+/* ===== Estrutura Principal da Tela Sobre ===== */
+.sobre {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: stretch;
+}
+
+.sobre-topbar {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--cor-borda);
+    margin-bottom: 8px;
+    width: 100%;
+}
+
+.titulo-sobre {
+    font-size: clamp(28px, 2.3vw, 36px);
+    font-weight: 700;
+    font-family: "Poppins";
+    color: var(--cor-texto-menu);
+    letter-spacing: -0.2px;
+    margin: 0;
+}
+
+.subtitulo-sobre {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--cor-texto-suave);
+    max-width: 720px;
+    margin: 0;
+}
+
+.sobre-container {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex: 1 1 auto;
+}
+
+/* ===== Profile Card (Cabeçalho) ===== */
+.sobre-header {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0 0 16px 0;
+    box-shadow: none;
+}
+
+.perfil-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 24px;
+}
+
+.avatar-dev {
+    width: 92px;
+    height: 92px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid rgba(47, 27, 0, 0.14);
+    box-shadow: 0 2px 8px rgba(47, 27, 0, 0.12);
+}
+
+.perfil-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.perfil-info h2 {
+    font-size: 24px;
+    color: var(--cor-texto-menu);
+    font-weight: 700;
+    margin-bottom: 4px;
+    font-family: "Poppins";
+}
+
+.perfil-info p {
+    font-size: 14px;
+    color: var(--cor-texto-suave);
+    margin-bottom: 12px;
+}
+
+.perfil-links {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.link-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    background-color: var(--cor-surface);
+    border: 1px solid var(--cor-borda);
+    border-radius: 999px;
+    text-decoration: none;
+    color: var(--cor-texto-menu);
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.link-btn img {
+    width: 18px;
+    height: 18px;
+}
+
+.link-btn:hover {
+    background-color: var(--cor-surface-2);
+    border-color: var(--cor-borda-forte);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* ===== Conteúdo (Blocos) ===== */
+.sobre-content {
+    display: grid;
+    grid-template-columns: 1.4fr 0.8fr;
+    gap: 18px;
+    margin-bottom: 8px;
+    width: 100%;
+    align-items: start;
+}
+
+.sobre-bloco {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0 0 16px 0;
+    box-shadow: none;
+}
+
+.sobre-espaco-imagem {
+    min-height: 220px;
+    border-radius: 18px;
+    border: 1px solid var(--cor-borda);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.sobre-imagem-caderno {
+    background-image: linear-gradient(135deg, rgba(255, 247, 214, 0.55), rgba(149, 110, 63, 0.25)), url('https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&w=900&q=80');
+}
+
+.sobre-imagem-cafe {
+    min-height: 220px;
+    border-radius: 18px;
+    border: 1px solid var(--cor-borda);
+    background-image: linear-gradient(135deg, rgba(92, 62, 32, 0.25), rgba(255, 243, 214, 0.45)), url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=900&q=80');
+    background-size: cover;
+    background-position: center;
+}
+
+.sobre-espaco-imagem::before,
+.sobre-espaco-imagem::after {
+    content: "";
+    position: absolute;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.25);
+}
+
+.sobre-espaco-imagem::before {
+    width: 140px;
+    height: 140px;
+    right: -20px;
+    top: -20px;
+}
+
+.sobre-espaco-imagem::after {
+    width: 90px;
+    height: 90px;
+    left: 20px;
+    bottom: 20px;
+}
+
+.sobre-bloco h3 {
+    font-size: 18px;
+    color: var(--cor-texto-menu);
+    font-weight: 600;
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgba(47, 27, 0, 0.12);
+    padding-bottom: 8px;
+    font-family: "Poppins";
+    background: transparent;
+}
+
+.sobre-bloco p {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--cor-texto-fundo-claro);
+    margin-bottom: 12px;
+}
+
+.sobre-bloco p:last-child {
+    margin-bottom: 0;
+}
+
+.sobre .rodape {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 20px 0 0;
+    margin-top: 8px;
+    border-top: 1px solid var(--cor-borda);
+    width: 100%;
+}
+
+.sobre .rodape p {
+    font-size: 12px;
+    color: var(--cor-texto-mais-suave);
+}
+
+.sobre .creditos {
+    margin-left: auto;
+    margin-right: 0;
+    text-align: right;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .perfil-card {
+        flex-direction: column;
+        text-align: center;
+        align-items: flex-start;
+    }
+
+    .perfil-links {
+        justify-content: flex-start;
+    }
+
+    .sobre-container {
+        gap: 16px;
+    }
+
+    .sobre-bloco {
+        padding: 18px 20px;
+    }
+
+    .sobre-content {
+        grid-template-columns: 1fr;
+    }
+
+    .sobre .rodape {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .sobre .creditos {
+        margin-left: 0;
+        text-align: left;
+    }
+}

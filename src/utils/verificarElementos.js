@@ -1,18 +1,11 @@
-import {criarElementos, opcoes} from "../pages/dashboard/criarElementos.js";
-import {idDia} from "./data.js";
+import { criarElementos } from "../pages/dashboard/criarElementos.js";
+import { idDia } from "./data.js";
 
 let works = JSON.parse(localStorage.getItem("tarefas")) || []; // Lê o que tinha antes 
-const texto = document.getElementById("escrever");
-texto.addEventListener("keydown", (event) => {
-    if (event.key == "Enter" && !event.shiftKey) {
-        event.preventDefault();
-        verificarElementos()
-    }
-})
 
-const salvarTarefa = document.querySelector(".save");
-salvarTarefa.addEventListener("click", verificarElementos);
 export function verificarElementos() { // Se tiver algo escrito no campo de texto e a pessoas salvar, vai criar automaticamente
+    const texto = document.getElementById("escrever");
+    const opcoes = document.getElementById("tipo");
     if (!texto.value) {
         alert("Preencha os campos corretamente!");
         return;
@@ -25,7 +18,7 @@ export function verificarElementos() { // Se tiver algo escrito no campo de text
 
         texto.value = ""; // Resetar o texto no campo de inserção
         criarElementos();
-        texto.focus() // foca no campo pra facilitar registros consecutivos
+        /* texto.focus() */
     }
 }
 //Guardar novos elementos no localStorage

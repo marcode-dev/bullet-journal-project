@@ -3,7 +3,7 @@ import { idDia } from "../utils/data.js";
 
 let works = JSON.parse(localStorage.getItem("tarefas")) || [];
 const exportarButton = document.querySelector(".exportar-button");
-const notaDesenvolvedor = document.querySelector(".nota-desenvolvedor-marcos");
+/* const notaDesenvolvedor = document.querySelector(".nota-desenvolvedor-marcos");
 
 notaDesenvolvedor.addEventListener("click", () => {
     let titulo = "Sobre a funcionalidade de Importação/Exportação";
@@ -16,7 +16,7 @@ notaDesenvolvedor.addEventListener("click", () => {
     const sobreTexto = document.querySelector(".sobre");
     sobreTexto.style.whiteSpace = "pre-line"; // Preserva quebras de linha
 
-})
+}) */
 
 exportarButton.addEventListener("click", () => { downloadJSON(works, `tarefas${idDia}.json`); });
 

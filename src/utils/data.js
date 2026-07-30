@@ -16,6 +16,6 @@ function zeroAEsquerda(valor) {
 let idDia = ano + zeroAEsquerda(mesNum) + zeroAEsquerda(dia);
 console.log(idDia)
 
-mesAno.textContent = `de ${mesEscrito} de ${ano}`;
+mesAno.textContent = ` de ${mesEscrito} de ${ano}`;
 console.log(mesEscrito, ano);
 export {idDia};

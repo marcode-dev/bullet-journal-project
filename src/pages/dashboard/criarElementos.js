@@ -1,7 +1,32 @@
 import { idDia } from "../../utils/data.js";
 import { abrirModal } from "../../components/modal/modal.js";
 
-export const opcoes = document.getElementById("tipo");
+const newTask = document.querySelector(".new-task")
+newTask.addEventListener("click", () => {
+    let tituloModal = "Nova Tarefa";
+    // <option value="evento" class="opcao">○ Evento</option>
+    let conteudoModal = `
+    <label for="escrever">
+        
+            <div class="seta-select-input">
+                <select name="tarefa" id="tipo">
+                    <option value="tarefa" class="opcao">• Tarefa</option>
+                    <option value="nota" class="opcao">— Nota</option>
+                </select>
+            </div> <!-- .seta-select -->
+
+            <textarea type="text" placeholder="Escreva sua tarefa aqui..." id="escrever" wrap="hard" rows="5"
+                cols="10" autofocus></textarea>
+        
+    </label> <!--.escrever-->`;
+    abrirModal(
+        tituloModal, 
+        conteudoModal, 
+        "", 
+        "add-task"
+    )
+})
+
 export function criarElementos() {
     let works = JSON.parse(localStorage.getItem("tarefas")) || [];
     console.log(works)
@@ -17,7 +42,9 @@ export function criarElementos() {
             tarefaDiv.dataset.idElemento = works[i].idElemento
 
             let tarefasContainer = document.querySelector(".tarefas-criadas");
-            if (works[i].status == "adiada") {
+            if (works[i].tipo == "nota") {
+                tarefasContainer = document.querySelector(".tarefas-notas");
+            } else if (works[i].status == "adiada") {
                 tarefasContainer = document.querySelector(".tarefas-adiadas");
             } else if (works[i].status == "cancelar") {
                 tarefasContainer = document.querySelector(".tarefas-canceladas");
@@ -106,9 +133,14 @@ export function criarElementos() {
             })
             apagar.src = "https://cdn-icons-png.freepik.com/512/17/17167.png";
 
+            const icons = document.createElement("div");
+            icons.classList.add("task-actions");
+
+            icons.appendChild(editar);
+            icons.appendChild(apagar);
+
             tarefaDiv.appendChild(textoTarefa);
-            tarefaDiv.appendChild(editar);
-            tarefaDiv.appendChild(apagar);
+            tarefaDiv.appendChild(icons)
 
             // adiciona no container correto determinado acima
             tarefasContainer.appendChild(tarefaDiv);
@@ -118,27 +150,56 @@ export function criarElementos() {
     }
     verificarTarefas()
 }
+
 export function verificarTarefas() {
+    const tPendentes = document.querySelector(".tarefas-criadas")
     const tAdiadas = document.querySelector(".tarefas-adiadas")
     const tCanceladas = document.querySelector(".tarefas-canceladas")
     const tFinalizadas = document.querySelector(".tarefas-finalizadas")
+    const tNotas = document.querySelector(".tarefas-notas")
 
     // Verifica sem contar o titulo e o hr, para não considerar como tarefa
     const contarTarefas = (container) => {
+        if (!container) return 0;
         return Array.from(container.children).filter(c =>
             c.tagName !== "H5" && c.tagName !== "HR"
         ).length;
     };
 
-    if (contarTarefas(tAdiadas) === 0) {
+    const numPendentes = contarTarefas(tPendentes);
+    const numAdiadas = contarTarefas(tAdiadas);
+    const numCanceladas = contarTarefas(tCanceladas);
+    const numFinalizadas = contarTarefas(tFinalizadas);
+    const numNotas = contarTarefas(tNotas);
+    const numTodos = numPendentes + numAdiadas + numFinalizadas + numCanceladas + numNotas;
+
+    if (document.querySelector(".todos-tab h4")) document.querySelector(".todos-tab h4").textContent = `Todos (${numTodos})`;
+    if (document.querySelector(".pendentes-tab h4")) document.querySelector(".pendentes-tab h4").textContent = `Pendentes (${numPendentes})`;
+    if (document.querySelector(".adiadas-tab h4")) document.querySelector(".adiadas-tab h4").textContent = `Adiadas (${numAdiadas})`;
+    if (document.querySelector(".finalizadas-tab h4")) document.querySelector(".finalizadas-tab h4").textContent = `Finalizadas (${numFinalizadas})`;
+    if (document.querySelector(".canceladas-tab h4")) document.querySelector(".canceladas-tab h4").textContent = `Canceladas (${numCanceladas})`;
+    if (document.querySelector(".notas-tab h4")) document.querySelector(".notas-tab h4").textContent = `Notas (${numNotas})`;
+
+    if (numAdiadas === 0 && tAdiadas) {
         tAdiadas.style.display = "none";
-    } else { tAdiadas.style.display = "block"; }
+    } else if (tAdiadas) { tAdiadas.style.display = "block"; }
 
-    if (contarTarefas(tCanceladas) === 0) {
+    if (numCanceladas === 0 && tCanceladas) {
         tCanceladas.style.display = "none";
-    } else { tCanceladas.style.display = "block"; }
+    } else if (tCanceladas) { tCanceladas.style.display = "block"; }
 
-    if (contarTarefas(tFinalizadas) === 0) {
+    if (numFinalizadas === 0 && tFinalizadas) {
         tFinalizadas.style.display = "none";
-    } else { tFinalizadas.style.display = "block"; }
+    } else if (tFinalizadas) { tFinalizadas.style.display = "block"; }
 }
+
+const searchInput = document.getElementById("search-diary");
+if (searchInput) {
+    searchInput.addEventListener("input", (e) => {
+        const term = e.target.value.toLowerCase();
+        document.querySelectorAll(".tarefa").forEach(tarefa => {
+            const texto = tarefa.querySelector(".texto-tarefa")?.textContent.toLowerCase() || "";
+            tarefa.style.display = texto.includes(term) ? "" : "none";
+        });
+    });
+}

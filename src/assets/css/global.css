@@ -6,6 +6,7 @@
 @import url("diary.css");
 @import url("../../components/modal/modal.css");
 @import url("transferer.css");
+@import url("sobre.css");
 
 /* ===== Reset global e box-sizing ===== */
 * {
@@ -18,8 +19,8 @@
 
 /* ===== Variáveis de nível global ===== */
 :root {
-    --header-height: 80px;
-    --menu-width: 250px;
+    --header-height: 50px;
+    --menu-width: 200px;
     --option-menu-width: calc(var(--menu-width) - 10px);
     --main-offset: calc(var(--menu-width) + 70px);
 
@@ -28,6 +29,18 @@
     --cor-hover-menu: #c8bfa6bd;
     --cor-texto-menu: #2f1b00e4;
     --cor-texto-fundo-claro: #363636e4;
+    --cor-texto-suave: #666;
+    --cor-texto-mais-suave: #777;
+    --cor-surface: rgba(255, 253, 243, 0.96);
+    --cor-surface-2: rgba(255, 250, 236, 0.92);
+    --cor-borda: rgba(47, 27, 0, 0.12);
+    --cor-borda-forte: rgba(47, 27, 0, 0.2);
+    --cor-input-fundo: rgba(255, 255, 255, 0.86);
+    --cor-input-texto: #2c2c2c;
+    --cor-sombra: rgba(47, 27, 0, 0.08);
+    --cor-card-import: linear-gradient(135deg, rgba(255, 253, 243, 0.96), rgba(255, 249, 232, 0.92));
+    --cor-card-import-alt: rgba(255, 255, 255, 0.7);
+    --cor-postit-amarelo: #eee544;
 
     /* breakpoints (can be reused) */
     --bp-tablet: 1024px;
@@ -47,6 +60,7 @@ body {
     flex-direction: row;
     overflow-x: hidden;
     overflow-y: scroll;
+    color: var(--cor-texto-fundo-claro);
 }
 
 
@@ -59,6 +73,7 @@ body {
     background-color: rgba(0, 0, 0, 0.05);
     z-index: -10;
 }
+
 /* ===== Header e navegação superior ===== */
 header {
     position: fixed;
@@ -86,7 +101,7 @@ header {
 }
 
 .logo-header {
-    height: 70px;
+    height: 45px;
     width: auto;
 }
 
@@ -95,35 +110,37 @@ header {
     z-index: 4;
     top: calc(var(--header-height) + 10px);
     left: 0;
+    margin-left: 10px;
     width: var(--menu-width);
     height: calc(100vh - var(--header-height) - 20px);
-    border-radius: 0px 30px 30px 0px;
+    border-radius: 15px;
     backdrop-filter: blur(5px);
     background-color: var(--cor-main);
     box-shadow: 4px 0px 8px rgba(0, 0, 0, 0.1);
-    padding-top: 40px;
-    padding-left: 10px;
+    padding-top: 0px;
+    /* padding-left: 10px; */
     user-select: none;
-    transition: width 0.3s ease, background-color 0.5s ease; /* keep animation when collapses */
+    transition: width 0.3s ease, background-color 0.5s ease;
+    /* keep animation when collapses */
 }
 
 .option-menu {
-    font-size: 15px;
-    margin-left: 6px;
+    font-size: 12px;
+    /* margin-left: 6px; */
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 10px;
-    border-top-left-radius: 30px;
-    border-bottom-left-radius: 30px;
+    padding: 10px 2px;
+    margin: 5px 8px;
+    border-radius: 15px;
     transition: 0.3s;
 }
 
-:has(.option-menu:hover) .option-menu:not(:hover) {
-    /*width: calc(var(--option-menu-width) - 20px);*/
+/* :has(.option-menu:hover) .option-menu:not(:hover) {
+    // width: calc(var(--option-menu-width) - 20px);
     margin-left: 20px;
     transition: 0.2s;
-}
+} */
 
 .option-menu h3 {
     margin-left: 10px;
@@ -135,7 +152,7 @@ header {
 
 .option-menu .img {
     height: auto;
-    width: 20px;
+    width: 15px;
     box-sizing: content-box;
     padding-left: 10px;
 }
@@ -150,9 +167,11 @@ header {
 .selecao-menu {
     background-color: var(--cor-principal) !important;
 }
+
 .selecao-menu .img {
     filter: invert(0%) !important;
 }
+
 .selecao-menu h3 {
     color: #2f1b00e4 !important;
 }
@@ -162,17 +181,17 @@ header {
 /* ===== Conteúdo principal ===== */
 .main {
     background-color: var(--cor-main);
-    border-radius: 50px;
+    color: var(--cor-texto-menu);
+    border-radius: 30px;
     flex: 1 1 auto;
     min-height: calc(100vh - var(--header-height) - 40px);
     height: auto;
+    max-width: calc(100% - var(--menu-width) - 30px);
     margin-top: calc(var(--header-height) + 20px);
     margin-left: calc(var(--menu-width) + 20px);
     margin-right: 20px;
     margin-bottom: 20px;
-    padding-left: 80px;
-    padding-right: 80px;
-    padding-top: 60px;
+    padding: 50px;
     display: flex;
     flex-direction: column;
     transition: margin-left 0.3s ease, background-color 0.5s ease;
@@ -224,7 +243,7 @@ hr {
     line-height: 15px;
 }
 
-.dark-mode{
+.dark-mode {
     position: absolute;
     z-index: 15;
     transition: 0.2s;
@@ -232,36 +251,65 @@ hr {
     top: 50%;
     transform: translateY(-50%);
 }
+
 .dark-mode:hover {
     cursor: pointer;
     transform: scale(1.1) translateY(-50%);
     transition: 0.2s;
 }
+
 .fundo-toogle {
     background-color: white;
     border-radius: 15px;
-    width: 40px;
-    height: 25px;
+    width: 30px;
+    height: 18px;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
     display: flex;
     align-items: center;
-
 }
+
 .fundo-toogle .dark-mode-ativo {
     background-color: black;
 }
+
 .bolinha-toogle {
     background-color: var(--cor-botao-padrao);
     border-radius: 50%;
-    width: 22px;
-    height: 22px;
-    margin: 1.5px;
+    width: 17px;
+    height: 17px;
+    margin: 0.5px;
+}
+
+.logo-menu {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding: 10px;
+    border-radius: 10px;
+    gap: 10px;
+    /* background-color: rgba(47, 30, 0, 0.138); */
+}
+
+.logo-menu img {
+    width: auto;
+    height: 30px;
+}
+
+.logo-menu h2 {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--cor-texto-menu);
 }
 
 /* ===== RESPONSIVIDADE ===== */
 
 /* Tablets - 1024px e abaixo */
 @media (max-width: var(--bp-tablet)) {
+
     /* tablet/responsive tweaks; layout remains visually similar to desktop */
     :root {
         --header-height: 80px;
@@ -398,6 +446,7 @@ hr {
         --header-height: 60px;
         --menu-width: 140px;
     }
+
     header {
         height: var(--header-height);
     }

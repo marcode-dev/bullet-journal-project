@@ -13,78 +13,14 @@ let filtrosCores = ["amarelo", "azul", "laranja", "vermelho", "verde"];
 
 let tamanhoSelecionado = "null";
 
-//Filtros selecionados
-const aplicarFiltros = document.querySelector(".aplicar-filtros-notas");
-aplicarFiltros.addEventListener("click", (e) => {
-    e.preventDefault(); // evita que o botão dentro do form submeta a página
-    works = JSON.parse(localStorage.getItem("tarefas")) || [];
-    let idsNotas = works.filter(a => a.tipo == "nota")
-    const orderNotas = document.getElementById("ordenar-notas").value;
-    if (orderNotas == "recentes") {
-        idsNotas.sort((a, b) => b.idElemento - a.idElemento); // Ordena do mais recente para o mais antigo
-        console.log("Filtro aplicado: Notas mais recentes");
-    } else if (orderNotas == "antigos") {
-        idsNotas.sort((a, b) => a.idElemento - b.idElemento); // Ordena do mais antigo para o mais recente
-        console.log("Filtro aplicado: Notas mais antigas");
-    }
-
-    const orderData = document.getElementById("order-data").value;
-
-    const ano = idDia.slice(0, 4);
-    const mes = idDia.slice(4, 6) - 1;
-    const dia = idDia.slice(6, 8);
-
-    const data = new Date(ano, mes, dia);
-
-    if (orderData == "hoje") {
-        idsNotas = idsNotas.filter(a => a.idDia == idDia);
-        console.log("Filtro aplicado: Notas de hoje");
-    } else if (orderData == "semana") {
-        const ultimaSemana = new Date(data);
-        ultimaSemana.setDate(data.getDate() - 7);
-        idsNotas = idsNotas.filter(a => a.idDia >= ultimaSemana.toISOString().slice(0, 10).replace(/-/g, ""));
-        console.log("Filtro aplicado: Notas da última semana");
-    } else if (orderData == "mes") {
-        const ultimoMes = new Date(data);
-        ultimoMes.setMonth(data.getMonth() - 1);
-        idsNotas = idsNotas.filter(a => a.idDia >= ultimoMes.toISOString().slice(0, 10).replace(/-/g, ""));
-        console.log("Filtro aplicado: Notas do último mês");
-    }
-
-    const tamanhoNota = document.querySelector('input[name="tamanho-nota"]:checked');
-    if (tamanhoNota == null) {
-        console.log("Nenhum filtro de tamanho aplicado");
-    } else {
-        localStorage.setItem("tamanhoNota", tamanhoNota.value);
-        console.log("Filtro aplicado: Tamanho da nota - " + tamanhoNota.value);
-    }
-
-    let coresSelecionadas = [];
-    document.querySelectorAll('input[name="filtro-cor"]:checked').forEach((checkbox) => {
-        coresSelecionadas.push(checkbox.value);
-    });
-    if (coresSelecionadas.length > 0) {
-        if (coresSelecionadas.includes("todos")) {
-            coresSelecionadas = ["amarelo", "azul", "laranja", "vermelho", "verde"];
-        }
-        idsNotas = idsNotas.filter(a => coresSelecionadas.includes(a.cor));
-        console.log("Filtro aplicado: Cores - " + coresSelecionadas.join(", "));
-        localStorage.setItem("filtrosCores", JSON.stringify(coresSelecionadas));
-    } else {
-        // nenhum filtro selecionado: remover entrada para voltar ao padrão
-        localStorage.removeItem("filtrosCores");
-        console.log("Nenhum filtro de cor aplicado - armazenamento limpo");
-    }
-    criarNotas(idsNotas);
-    console.log("Notas Filtradas: ", idsNotas)
-});
+// O listener do botão Filtrar agora é gerenciado em filtrosNotas.js
 
 const mapaCores = {
-    amarelo: "#eee544",
-    azul: "#27b3d9",
-    laranja: "#fca028",
-    vermelho: "#f44072",
-    verde: "#90cf4c"
+    amarelo: "#F3E5AB",
+    azul: "#A0B2C6",
+    laranja: "#E8B490",
+    vermelho: "#D99696",
+    verde: "#B4C6A6"
 };
 
 let selectCor;
@@ -92,18 +28,10 @@ let editarNotas;
 let apagarNotas;
 
 export function detectarCor(cor) {
-    if (cor == "amarelo") { return "#eee544" }
-    else if (cor == "verde") { return "#90cf4c" }
-    else if (cor == "vermelho") { return "#f44072" }
-    else if (cor == "laranja") { return "#fca028" }
-    else if (cor == "azul") { return "#27b3d9" }
+    return mapaCores[cor];
 }
 export function detectarCorTexto(cor) {
-    if (cor == "amarelo") { return "texto-escuro" }
-    else if (cor == "verde") { return "texto-escuro" }
-    else if (cor == "vermelho") { return "texto-claro" }
-    else if (cor == "laranja") { return "texto-claro" }
-    else if (cor == "azul") { return "texto-claro" }
+    return "texto-escuro";
 }
 
 // Verificar se há notas já registradas
@@ -119,14 +47,14 @@ function semNotas() {
 // Criar post-its
 export function criarNotas(notes) {
     let works = JSON.parse(localStorage.getItem("tarefas")) || [];
-    let idsNotas = notes == (null || []) ? notes : works.filter(a => a.tipo == "nota")
+    let idsNotas = notes ? notes : works.filter(a => a.tipo == "nota");
     document.querySelectorAll(".campo-notas > div").forEach(a => { a.remove() })
     document.querySelectorAll(".sem-notas").forEach(a => a.remove())
     if (!idsNotas || idsNotas.length == 0) {
         semNotas();
         return;
     }
-    for (let i in idsNotas) {
+    for (let i = 0; i < idsNotas.length; i++) {
         const postIt = document.createElement("div")
         postIt.classList.add("post-it")
         postIt.dataset.idElemento = idsNotas[i].idElemento;
@@ -183,8 +111,18 @@ export function criarNotas(notes) {
         postIt.style.backgroundColor = detectarCor(idsNotas[i].cor);
         postIt.classList.add(detectarCorTexto(idsNotas[i].cor));
 
+        // Data de criação no canto inferior esquerdo (visível no hover)
+        const dataCriacao = document.createElement("span");
+        dataCriacao.classList.add("data-criacao-postit");
+        const rawId = idsNotas[i].idDia;
+        if (rawId && rawId.length === 8) {
+            const d = `${rawId.slice(6,8)}/${rawId.slice(4,6)}/${rawId.slice(0,4)}`;
+            dataCriacao.textContent = d;
+        }
+
         postIt.appendChild(conteudoNota);
         postIt.appendChild(acoes);
+        postIt.appendChild(dataCriacao);
         quadroNotas.appendChild(postIt);
 
         tamanhoSelecionado = localStorage.getItem("tamanhoNota") || "media";
